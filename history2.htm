@@ -1,0 +1,255 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<META http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9">
+	<META content="text/html; charset=ISO-8859-1" http-equiv="Content-Type">
+	<META name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<META name="apple-mobile-web-app-capable" content="yes">
+	 
+	<title>Historical</title>
+	 <!--[if IE]><script src="excanvas.js"></script><![endif]-->
+	<script type='text/javascript' src='evo_h.js'></script>
+	<link rel='stylesheet' type='text/css' href='main.css'>
+	<link rel='shortcut icon' href='favicon.ICO'>
+	<style>
+	.ui-datepicker-calendar {
+		display: none;
+		}
+	</style>	
+</head>
+<body>
+	<script type='text/javascript' >EVO_Image('imgLogo', 'base.PNG', '', '', '');</script>
+	<ul class="menu"> 
+		<li class="tabmenu tabmenu_off"><a href="index.htm">Data</a>  </li> 
+		<li class="tabmenu tabmenu_off"><a href="files.cgi">Logged Files</a>  </li> 
+		<li class="tabmenu tabmenu_off"><a href="history1.htm">Hystory 1</a>  </li> 
+		<li class="tabmenu tabmenu_on"><a  href="history2.htm">Hystory 2</a>  </li> 
+        <li class="tabmenu tabmenu_off"><a href="history3.htm">Hystory 3</a>  </li> 
+        <li class="tabmenu tabmenu_off"><a href="trends.htm">AI trends</a>  </li>  
+	</ul>
+	
+	<div class="menubottom">Hystory 2</div>
+	<tr>
+		<td> Register Temperature </td>
+		<td><script type='text/javascript'>EVO_Button(true,'b09022',1,'True',''); </script></td>
+		<td></td>
+	</tr> 	
+	
+	<!--<p class='title'>Dati - Historical</p>-->
+	
+	<form action='history.htm' method='get' id='form1' name='form1'>
+	<div class='pagebody'>
+
+		<!--<p class='sectiontitle'> Hystorical Rev.9 </p>	-->
+		
+		<!--  Revision history 
+		- Rev.03 Initial release alligned with datalogger Rev.03
+		- Rev.04 Added auto refresh and load automatically current CSV file
+		- Rev.07 Change header file from header.csv to heder.txt
+		-->
+		
+		<div id="dataContainer" style="border: 1px #232323 dotted;float:left; padding:10px; margin-bottom:10px;">
+			
+			<label for="data" style="color: #FF2323; font-weight: bold;" >Data</label>
+			<input type="text" id="data" name="data" readonly="readonly" class="date-picker" />
+			<label style="color: #FF2323; font-weight: bold;" >Hight</label>
+			<select id="comboHight" name="comboHight" > 
+				<option value="450">Default</OPTION>
+				<option value="450">Small</OPTION>
+				<option value="650">Mean</OPTION>
+				<option value="850">Big</OPTION> 
+			</select> 
+			<input type="button" id="LoadData" style="margin-left:5px;" name="Load data" value="Load Data" />
+			<input type="button" id="checkAll" style="margin-left:5px;" name="Check All" value="Check All" />
+			<input type="button" id="checkNone" style="margin-left:5px;" name="Uncheck All" value="Uncheck All" />
+			<input type="button" id="autoRefresh" style="margin-left:5px;" name="Auto Refresh is OFF" value="Auto Refresh is OFF" />
+		</div>
+		<div style="clear:both"></div>
+		<div id="GraphOption" style="border: 1px #232323 dotted;float:left; padding:10px; margin-bottom:10px;color: #232323; font-weight: bold;">
+		<div style="clear:both"></div>
+		</div>
+		
+		<div style="clear:both"></div>
+		
+		<div id="legend"></div>
+		<div id="graphdiv" style="width:auto;"></div>
+		<p>&nbsp;</p>
+		<!-- Alarms -->
+		<span id="t09025" style="display:none;"></span>
+	</div>
+	</div>
+	</form>
+	
+	<script type='text/javascript'>
+	EVO_CheckPassword('', 1);
+	EVO_PageInit(1000);
+	</script>
+	<script type='text/javascript'>
+		var now = new Date();
+		$(document).ready(function(){
+			var dates = $( "#data" ).datepicker({dateFormat: "My",
+										changeMonth: true,
+										changeYear: true,
+										firstDay: 1,
+										showAnim: "fade",
+										duration:'slow',
+										maxDate: now,
+										monthNames: ["January","February","March","April","May","Junius","July","August","September","October","November","Diciembre"],
+										monthNamesShort: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+										dayNames: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+										dayNamesMin: ["Su","Mo","Tu","We","Th","Fr","Sa"],
+										dayNamesShort: ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],
+										onSelect: function( selectedDate ) {
+											var option = this.id == "from" ? "minDate" : "maxDate",
+												instance = $( this ).data( "datepicker" ),
+												date = $.datepicker.parseDate(
+													instance.settings.dateFormat ||
+													$.datepicker._defaults.dateFormat,
+													selectedDate, instance.settings );
+											dates.not( this ).datepicker( "option", option, date );
+										},
+										onClose: function(dateText, inst) { 
+												var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+												var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+												$(this).datepicker('setDate', new Date(year, month, 1));
+										}
+									});
+		})
+	</script>
+	<script type='text/javascript'>
+		var onRefresh = 0;
+		var onRefreshTimer = null;
+		$(document).ready(function(){
+			$.ajaxSetup({ cache: false,async: false });
+			var arrayLineas = new Array();
+			var strNombres ="";
+			
+			// Select current data at start-up
+			if ($("#data").val() == ""){
+				$( "#data" ).datepicker('setDate', now);
+			}
+			
+			var arrayName = new Array();
+			var strFileName ="02" + $("#data").val() + ".CSV";
+			jQuery.get(strFileName, function(data) {					
+					arrayLineas = data.split('\n');
+					strNombres = arrayLineas[0];
+					arrayName = strNombres.split(',');
+					
+			});
+			$("#GraphOption").hide(); 
+			$("#graphdiv").height(0);
+			
+			for($i=2;$i<arrayName.length;$i++){
+				if ($i < 8) {
+					$("#GraphOption").append("<input type='checkbox' id='Probe"+$i+"' checked >"+arrayName[$i]+"</input>"); 
+				} else {
+					$("#GraphOption").append("<input type='checkbox' id='Probe"+$i+"' >"+arrayName[$i]+"</input>"); 
+				}
+			}
+			$("#GraphOption").show(); 
+			
+			$("#LoadData").click(function(){
+				
+				$("#graphdiv").height(0);
+				$("#GraphOption").hide();
+				var arrayVisibility = new Array();
+				for(var i=0;i<=arrayName.length-2;i++){
+					var Probe=i+1;
+					arrayVisibility[i] = $("#Probe"+Probe).is(':checked');
+				}				
+				$("#GraphOption").empty();
+
+				for(var i=0;i<=arrayName.length-2;i++){
+					var Probe=i+1;
+					var isChecked="";
+					if(arrayVisibility[i]==true){
+						isChecked="checked";
+					}
+					$("#GraphOption").append("<input type='checkbox' id='Probe"+Probe+"' "+isChecked+" >"+arrayName[Probe]+"</input>");
+					
+				}
+				$("#GraphOption").show();
+				
+				// Select current data at start-up
+				//if ($("#data").val() == ""){
+				//	$( "#data" ).datepicker('setDate', now);
+				//}
+				
+				var archivo = "02" + $("#data").val()+".CSV?"+Math.random();
+				$.ajax({
+							url:archivo,
+							type:'HEAD',
+							data: "",
+							async: false,
+							cache: false,
+							error:
+								function(){
+									$("#graphdiv").empty();
+									$("#legend").empty();
+									$("#GraphOption").hide();
+									alert("File not Found");																	
+								},
+							success:
+								
+								function(){
+									$("#graphdiv").height($("#comboHight").val());
+									g2 = new Dygraph(
+									document.getElementById("graphdiv"),
+									archivo, // path to CSV file
+									{legend: 'always',
+									labelsDiv: 'legend',
+									visibility: arrayVisibility,
+									animatedZooms: true}          // options
+									);
+								}
+						});
+			});
+			
+			// Load data at start-up
+			$("#LoadData").click();
+			
+			// select all probe
+			$("#checkAll").click(function(){
+				$("#GraphOption").empty();
+				for(var i=0;i<=arrayName.length-2;i++){
+					var Probe=i+1;
+					var isChecked="";
+					isChecked="checked";
+					$("#GraphOption").append("<input type='checkbox' id='Probe"+Probe+"' "+isChecked+" >"+arrayName[Probe]+"</input>");
+				}
+				$("#GraphOption").show();
+				$("#LoadData").click();
+			});
+			
+			// deselect all probe
+			$("#checkNone").click(function(){
+				$("#GraphOption").empty();
+				for(var i=0;i<=arrayName.length-2;i++){
+					var Probe=i+1;
+					$("#GraphOption").append("<input type='checkbox' id='Probe"+Probe+"' >"+arrayName[Probe]+"</input>");
+				}
+				$("#GraphOption").show();
+				$("#LoadData").click();
+			});
+			
+			// auto Refresh data, reload data every 10 minutes
+			$("#autoRefresh").click(function(){
+				var elem = document.getElementById("autoRefresh");
+				 if (onRefresh == 0) {
+					onRefresh = 1;
+					elem.value="Auto Refresh is ON (10 min)";
+					onRefreshTimer = setInterval(function() {
+						$("#LoadData").click();
+					}, 600000);
+				} else {
+					onRefresh = 0;
+					elem.value="Auto Refresh is OFF";
+					clearInterval(onRefreshTimer);
+				}
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<META http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9">
+	<META content="text/html; charset=ISO-8859-1" http-equiv="Content-Type">
+	<META name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<META name="apple-mobile-web-app-capable" content="yes">
+	 
+	<title>Real Time</title>
+
+	<script type='text/javascript' src='evo.js'></script>
+	<script type='text/javascript' src='trends.js'></script>
+	<link rel='stylesheet' type='text/css' href='main.css'>
+	<link rel='shortcut icon' href='favicon.ICO'>
+	
+</head>
+<body>
+	<script type='text/javascript' >EVO_Image('imgLogo', 'base.PNG', '', '', '');</script>
+	<ul class="menu"> 
+		<li class="tabmenu tabmenu_off"><a href="index.htm">Data</a>  </li> 
+		<li class="tabmenu tabmenu_off"><a href="files.cgi">Logged Files</a>  </li> 
+		<li class="tabmenu tabmenu_off"><a href="history1.htm">Hystory 1</a>  </li> 
+		<li class="tabmenu tabmenu_off"><a href="history2.htm">Hystory 2</a>  </li> 
+        <li class="tabmenu tabmenu_off"><a href="history3.htm">Hystory 3</a>  </li> 
+        <li class="tabmenu tabmenu_on"><a href="trends.htm">AI trends</a>  </li> 
+	</ul>
+	
+	<div class="menubottom">AI trends</div>
+
+	<p class='sectiontitle'> RealTime  </p>
+	
+	<td><script type='text/javascript'>EVO_Text(true,'t08336',10,10,1,0,'style="display:none;"')</script></td>
+	<td><script type='text/javascript'>EVO_Text(true,'t08337',10,10,1,0,'style="display:none;"')</script></td>
+	
+	<div id="div_g" style="width:auto;; height:300px;"></div>
+
+	<script type='text/javascript'>
+		EVO_CheckPassword('', 1);
+		EVO_PageInit(1000);
+	</script>
+	
+	<script type='text/javascript'>
+		$(document).ready(function () {
+		  var data = [];
+		  var t = new Date();
+		  
+		  /*for (var i = 10; i >= 0; i--) {
+			var x = new Date(t.getTime() - i * 1000);
+			data.push([x, Math.random()]);
+		  }
+		  */
+		  var g = new Dygraph(document.getElementById("div_g"), data,
+							  {
+								drawPoints: true,
+								showRoller: true,
+								//valueRange: [0.0, 1.2],
+								labels: ['Time', 'AI1', 'AI2']
+								//labels: ['Time', 'AI1']
+							  });
+		  
+		  // It sucks that these things aren't objects, and we need to store state in window.
+		  window.intervalId = setInterval(function() {
+			var x = new Date();  // current time
+			var y1 = 0;
+			var y2 = 0;
+			elem =   document.getElementById("t08336");	
+			y1 = elem.value;
+			//data.push([x, y1]);
+			elem =   document.getElementById("t08337");	
+			y2 = elem.value;
+			data.push([x, y1, y2]);
+			g.updateOptions( { 'file': data } );
+		  }, 1000);
+		  
+		}
+		);
+	</script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+html, body {
+	background-color: #d8dae0;
+	padding: 0px;
+	margin: 0px;
+}
+
+.title {
+	font: bold 30px Arial,sans-serif;
+	text-align: center;
+	color: #71787f;
+}
+
+.table {
+	width: 100%;
+	font: normal 14px Arial,sans-serif;
+	margin-bottom: 30px;
+	border-collapse: collapse;
+	border: 1px solid #b4b7bb;
+}
+
+.table th {
+	color: #4c536c;
+	text-align: left;
+}
+
+.table tr {
+	height: 40px;
+}
+
+.table td {
+	border-top: 1px solid #b4b7bb;
+	border-bottom: 1px solid #b4b7bb;
+	background-color: white;
+	padding: 5px;
+}
+
+.sectiontitle {
+	font: bold 20px Arial,sans-serif;
+	margin-bottom: 15px;
+}
+
+.pagebody {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+
+
+/* ----------------- gestione menu con tab ----------------- */
+li.tabmenu {
+	float: left;
+	display: block;
+	position: relative;
+}
+
+li.tabmenu > a {
+	display: block;
+	width: 140px;
+	height: 28px;
+	font: bold 13px Arial,sans-serif;
+	color: #002157;
+	padding-left: 15px;
+	padding-top: 5px;
+	margin-right: 5px;
+	border-top-left-radius: 10px 15px;
+	border-top-right-radius: 60px 40px;
+	text-decoration: none;
+}
+
+li.tabmenu > a[href="#"] {
+	cursor: default;
+}
+
+li.tabmenu_on > a {
+	background-color: #f8c8a0;
+}
+
+li.tabmenu_on:hover > a { 
+	color: white;
+}
+
+li.tabmenu_off > a {
+	background-color: #98999b;
+}
+
+li.tabmenu_off:hover > a { 
+	background-color: #bcbcbc; 
+	color: white;
+}
+
+ul.menu {
+	margin: 0px;
+	background-color: #01124a; /* colore di sfondo del tab */
+	border-bottom: 1px solid #f8c8a0;
+	padding-left: 10px;
+	padding-top: 7px;
+	height: 33px;
+}
+
+#imgLogo {
+	position: absolute;
+	top: 0px; 
+	right: 0px;
+}
+
+.menubottom {
+	background-color: #f8c8a0;
+	height: 27px;
+	border-bottom: 2px solid #eb9a59;
+	color: #9c4704;
+	font: bold 12px Verdana,sans-serif;
+	padding-left: 20px;
+	padding-top: 10px;
+}
+
+
+
+/* ----------------- gestione sottomenu a tendina ----------------- */
+ul.submenu {
+	display: none;
+	padding: 0px;
+	margin: 0px;
+	border: 1px solid #eb9a59;
+	background-color: #f8c8a0;
+}
+
+li.tabmenu:hover > ul.submenu {
+	display: block;
+	position: absolute;
+	width: 155px;
+	left: 0px;
+	border-top: 0;
+}
+
+ul.submenu  > li {
+	display: block;
+	position: relative;
+}
+
+ul.submenu > li > a {
+	display: block;
+	height: 20px;
+	padding: 5px;
+	color: #002157;
+	font: bold 13px Arial,sans-serif;
+	text-decoration: none;
+}
+
+ul.submenu > li > a[href="#"] {
+	cursor: default;
+}
+
+ul.submenu > li:hover > a {
+	background-color: #ebb68b;
+	color: white;
+}
+
+ul.submenu > li > ul.submenu {
+/*	display: none; */
+	display: block;
+	position: absolute;
+	left: 149px;
+	top: 15px;
+	width: 5px;
+	height: 5px;
+	overflow: hidden;
+}
+
+ul.submenu > li:hover > ul.submenu {
+	display: block;
+	position: absolute;
+	width: 155px;
+	left: 155px;
+	top: 0px;
+	height: auto;
+	overflow: visible;
+}
