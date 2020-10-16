@@ -1,5 +1,5 @@
 html, body {
-	background-color: #d8dae0;
+	background-color:white;
 	padding: 0px;
 	margin: 0px;
 }
@@ -11,11 +11,13 @@ html, body {
 }
 
 .table {
+	background-color: #EEE;
 	width: 100%;
 	font: normal 14px Arial,sans-serif;
 	margin-bottom: 30px;
-	border-collapse: collapse;
-	border: 1px solid #b4b7bb;
+	border-collapse: separate;
+	border: 2px solid black;
+	border-radius: 6px;
 }
 
 .table th {
@@ -28,9 +30,6 @@ html, body {
 }
 
 .table td {
-	border-top: 1px solid #b4b7bb;
-	border-bottom: 1px solid #b4b7bb;
-	background-color: white;
 	padding: 5px;
 }
 
