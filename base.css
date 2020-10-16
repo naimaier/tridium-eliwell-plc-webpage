@@ -1,5 +1,17 @@
+:root {
+	/* Color scheme British Palette
+	by https://flatuicolors.com/palette/gb */
+	--main-bg-color: white;
+	--secondary-bg-color: #dcdde1; /* hint of pensive */
+	--menu-main-color: #40739e; /* naval */
+	--menu-main-hover-color: #7f8fa6;
+	--menu-secondary-color: #e1b12c; /* nanohanacha gold */
+	--menu-secondary-hover-color: #fbc531;
+	--menu-font: 17px Arial,sans-serif;
+}
+
 html, body {
-	background-color:white;
+	background-color: var(--main-bg-color);
 	padding: 0px;
 	margin: 0px;
 }
@@ -11,7 +23,7 @@ html, body {
 }
 
 .table {
-	background-color: #EEE;
+	background-color: var(--secondary-bg-color);
 	width: 100%;
 	font: normal 14px Arial,sans-serif;
 	margin-bottom: 30px;
@@ -54,15 +66,12 @@ li.tabmenu {
 
 li.tabmenu > a {
 	display: block;
-	width: 140px;
-	height: 28px;
-	font: bold 13px Arial,sans-serif;
-	color: #002157;
-	padding-left: 15px;
-	padding-top: 5px;
-	margin-right: 5px;
-	border-top-left-radius: 10px 15px;
-	border-top-right-radius: 60px 40px;
+	width: 120px;
+	height: 40px;
+	font: var(--menu-font);
+	color: var(--main-bg-color);
+	padding-top: 20px;
+	padding-left: 20px;
 	text-decoration: none;
 }
 
@@ -71,7 +80,7 @@ li.tabmenu > a[href="#"] {
 }
 
 li.tabmenu_on > a {
-	background-color: #f8c8a0;
+	background-color: var(--menu-secondary-color);
 }
 
 li.tabmenu_on:hover > a { 
@@ -79,34 +88,33 @@ li.tabmenu_on:hover > a {
 }
 
 li.tabmenu_off > a {
-	background-color: #98999b;
+	background-color: var(--menu-main-color);
 }
 
 li.tabmenu_off:hover > a { 
-	background-color: #bcbcbc; 
+	background-color: var(--menu-main-hover-color); 
 	color: white;
 }
 
 ul.menu {
 	margin: 0px;
-	background-color: #01124a; /* colore di sfondo del tab */
-	border-bottom: 1px solid #f8c8a0;
-	padding-left: 10px;
-	padding-top: 7px;
-	height: 33px;
+	background-color: var(--menu-main-color); /* colore di sfondo del tab */
+	padding-left: 0px;
+	height: 60px;
 }
 
 #imgLogo {
+	background-color: var(--main-bg-color);
 	position: absolute;
 	top: 0px; 
 	right: 0px;
+	height: 60px;
 }
 
 .menubottom {
-	background-color: #f8c8a0;
+	background-color: var(--main-bg-color);
 	height: 27px;
-	border-bottom: 2px solid #eb9a59;
-	color: #9c4704;
+	color: var(--menu-secondary-color);
 	font: bold 12px Verdana,sans-serif;
 	padding-left: 20px;
 	padding-top: 10px;
@@ -119,14 +127,13 @@ ul.submenu {
 	display: none;
 	padding: 0px;
 	margin: 0px;
-	border: 1px solid #eb9a59;
-	background-color: #f8c8a0;
+	background-color: var(--menu-secondary-color);
 }
 
 li.tabmenu:hover > ul.submenu {
 	display: block;
 	position: absolute;
-	width: 155px;
+	width: 140px;
 	left: 0px;
 	border-top: 0;
 }
@@ -140,8 +147,8 @@ ul.submenu > li > a {
 	display: block;
 	height: 20px;
 	padding: 5px;
-	color: #002157;
-	font: bold 13px Arial,sans-serif;
+	color: var(--main-bg-color);
+	font: var(--menu-font);
 	text-decoration: none;
 }
 
@@ -150,7 +157,7 @@ ul.submenu > li > a[href="#"] {
 }
 
 ul.submenu > li:hover > a {
-	background-color: #ebb68b;
+	background-color: var(--menu-secondary-hover-color);
 	color: white;
 }
 
