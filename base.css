@@ -1,17 +1,17 @@
 :root {
-	/* Color scheme British Palette
-	by https://flatuicolors.com/palette/gb */
-	--main-bg-color: white;
-	--secondary-bg-color: #dcdde1; /* hint of pensive */
-	--menu-main-color: #40739e; /* naval */
-	--menu-main-hover-color: #7f8fa6;
-	--menu-secondary-color: #e1b12c; /* nanohanacha gold */
-	--menu-secondary-hover-color: #fbc531;
+	/* Color scheme
+	https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=2b353f */
+	--bg-color-main: white; 
+	--bg-color-light: #F5F5F6;
+	--bg-color-dark: #E1E2E1;
+	--color-main: #2b353f; /* Tridium color */
+	--color-light: #545f6a;
+	--color-dark: #010f19;
 	--menu-font: 17px Arial,sans-serif;
 }
 
 html, body {
-	background-color: var(--main-bg-color);
+	background-color: var(--bg-color-main);
 	padding: 0px;
 	margin: 0px;
 }
@@ -19,11 +19,11 @@ html, body {
 .title {
 	font: bold 30px Arial,sans-serif;
 	text-align: center;
-	color: #71787f;
+	color: var(--color-light);
 }
 
 .table {
-	background-color: var(--secondary-bg-color);
+	background-color: var(--bg-color-dark);
 	width: 100%;
 	font: normal 14px Arial,sans-serif;
 	margin-bottom: 30px;
@@ -33,7 +33,7 @@ html, body {
 }
 
 .table th {
-	color: #4c536c;
+	color: var(--color-light);
 	text-align: left;
 }
 
@@ -48,6 +48,7 @@ html, body {
 .sectiontitle {
 	font: bold 20px Arial,sans-serif;
 	margin-bottom: 15px;
+	color: var(--color-main);
 }
 
 .pagebody {
@@ -69,7 +70,7 @@ li.tabmenu > a {
 	width: 120px;
 	height: 40px;
 	font: var(--menu-font);
-	color: var(--main-bg-color);
+	color: var(--bg-color-main);
 	padding-top: 20px;
 	padding-left: 20px;
 	text-decoration: none;
@@ -80,7 +81,7 @@ li.tabmenu > a[href="#"] {
 }
 
 li.tabmenu_on > a {
-	background-color: var(--menu-secondary-color);
+	/* background-color: var(--menu-color-light) */;
 }
 
 li.tabmenu_on:hover > a { 
@@ -88,23 +89,23 @@ li.tabmenu_on:hover > a {
 }
 
 li.tabmenu_off > a {
-	background-color: var(--menu-main-color);
+	background-color: var(--color-main);
 }
 
 li.tabmenu_off:hover > a { 
-	background-color: var(--menu-main-hover-color); 
+	background-color: var(--color-light); 
 	color: white;
 }
 
 ul.menu {
 	margin: 0px;
-	background-color: var(--menu-main-color); /* colore di sfondo del tab */
+	background-color: var(--color-main); /* colore di sfondo del tab */
 	padding-left: 0px;
 	height: 60px;
 }
 
 #imgLogo {
-	background-color: var(--main-bg-color);
+	background-color: var(--bg-color-main);
 	position: absolute;
 	top: 0px; 
 	right: 0px;
@@ -112,9 +113,9 @@ ul.menu {
 }
 
 .menubottom {
-	background-color: var(--main-bg-color);
+	background-color: var(--bg-color-main);
 	height: 27px;
-	color: var(--menu-secondary-color);
+	color: var(--color-main);
 	font: bold 12px Verdana,sans-serif;
 	padding-left: 20px;
 	padding-top: 10px;
@@ -127,7 +128,7 @@ ul.submenu {
 	display: none;
 	padding: 0px;
 	margin: 0px;
-	background-color: var(--menu-secondary-color);
+	background-color: var(--color-main);
 }
 
 li.tabmenu:hover > ul.submenu {
@@ -147,7 +148,7 @@ ul.submenu > li > a {
 	display: block;
 	height: 20px;
 	padding: 5px;
-	color: var(--main-bg-color);
+	color: var(--bg-color-main);
 	font: var(--menu-font);
 	text-decoration: none;
 }
@@ -157,7 +158,7 @@ ul.submenu > li > a[href="#"] {
 }
 
 ul.submenu > li:hover > a {
-	background-color: var(--menu-secondary-hover-color);
+	background-color: var(--color-light);
 	color: white;
 }
 
