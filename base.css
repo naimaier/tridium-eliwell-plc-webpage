@@ -67,13 +67,13 @@ li.tabmenu {
 
 li.tabmenu > a {
 	display: block;
-	width: 120px;
+	width: 140px;
 	height: 40px;
 	font: var(--menu-font);
 	color: var(--bg-color-main);
 	padding-top: 20px;
-	padding-left: 20px;
 	text-decoration: none;
+	text-align: center;
 }
 
 li.tabmenu > a[href="#"] {
@@ -81,7 +81,7 @@ li.tabmenu > a[href="#"] {
 }
 
 li.tabmenu_on > a {
-	/* background-color: var(--menu-color-light) */;
+	/* background-color: var(--menu-color-light) */
 }
 
 li.tabmenu_on:hover > a { 
@@ -151,6 +151,7 @@ ul.submenu > li > a {
 	color: var(--bg-color-main);
 	font: var(--menu-font);
 	text-decoration: none;
+	text-align: center;
 }
 
 ul.submenu > li > a[href="#"] {
