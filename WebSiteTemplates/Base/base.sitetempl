@@ -79,7 +79,6 @@
 		<p class='sectiontitle'>%SECTION%</p>
 		<table class='table'>
 			<tr>
-				<th>Address</th>
 				<th>Name</th>
 				<th>Value</th>
 				<th>Um</th>
@@ -91,7 +90,6 @@
 <!-- single parameter record: uses placeholder ADDRESS, LABEL, CTRL, UM -->
 <param><![CDATA[
 			<tr>
-				<td>%ADDRESS%</td>
 				<td>%LABEL%</td>
 				<td>%CTRL%</td>
 				<td>%UM%</td>
