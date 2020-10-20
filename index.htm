@@ -16,18 +16,17 @@
 <body>
 
 	<ul class="menu" id="menu"> 
-		<li class="tabmenu tabmenu_icon icon">
+		<li class="tabmenu menu_button">
 			<a href="javascript:void(0);" onclick="responsiveMenu()">
 				<i class="fas fa-bars"></i>
 			</a>
 		</li>
 		<li class="tabmenu tabmenu_on"><a href="#">Data</a> 
-		<ul class="submenu">
-
-		<li><a href="page1.htm">ResetFile</a>  </li> 
-		<li><a href="page2.htm">AIValue</a>  </li> 
-		</ul>
- </li> 
+			<ul class="submenu">
+				<li><a href="page1.htm">ResetFile</a>  </li> 
+				<li><a href="page2.htm">AIValue</a>  </li> 
+			</ul>
+ 		</li> 
 		<li class="tabmenu tabmenu_off"><a href="files.cgi">Logged Files</a>  </li> 
 		<li class="tabmenu tabmenu_off"><a href="history1.htm">History01</a>  </li> 
 		<li class="tabmenu tabmenu_off"><a href="history2.htm">History02</a>  </li> 
@@ -406,6 +405,8 @@
 	EVO_CheckPassword('', 1);
 	EVO_Image('imgLogo', 'BASE.PNG', '', '', '');
 	EVO_PageInit(5000);
+	// Funcion triggered by the responsive menu icon that includes the css selector 
+	// that makes menu items to appear vertically
 	function responsiveMenu() {
 		var x = document.getElementById("menu");
 			if (x.className === "menu") {

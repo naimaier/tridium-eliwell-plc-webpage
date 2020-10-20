@@ -16,8 +16,11 @@ Show the link that should open and close the menu (.icon) */
 	.menu li:not(:first-child) {
 		display: none;
 	}
-	.menu li.icon {
+	.menu li.menu_button {
 	  	display: block;
+	}
+	.menu {
+		background-color: var(--bg-color-main) !important;
 	}
 }
 
@@ -70,6 +73,21 @@ html, body {
 
 
 /* ----------------- gestione menu con tab ----------------- */
+ul.menu {
+	margin: 0px;
+	background-color: var(--color-main); /* colore di sfondo del tab */
+	padding-left: 0px;
+	height: 60px;
+}
+
+/* The "responsive" class is added to the menu with JavaScript when the user clicks on the icon. 
+This class makes the menu look good on small screens (display the links vertically instead of horizontally) */
+ul.menu.responsive li {
+	float: none;
+	display: block;
+	text-align: left;
+}
+
 li.tabmenu {
 	float: left;
 	display: block;
@@ -108,30 +126,16 @@ li.tabmenu_off:hover > a {
 	color: white;
 }
 
-li.tabmenu_icon a{
+/* Menu button doesn't show on standard view (big displays) */
+li.menu_button {
+	display: none;
+}
+
+li.menu_button a{
 	background-color: var(--color-main);
 	padding-left: 10px;
 	padding-right: 10px;
 	width: 40px;
-}
-
-li.icon {
-	display: none;
-}
-
-ul.menu {
-	margin: 0px;
-	background-color: var(--color-main); /* colore di sfondo del tab */
-	padding-left: 0px;
-	height: 60px;
-}
-
-/* The "responsive" class is added to the menu with JavaScript when the user clicks on the icon. 
-This class makes the menu look good on small screens (display the links vertically instead of horizontally) */
-ul.menu.responsive li {
-	float: none;
-	display: block;
-	text-align: left;
 }
 
 #imgLogo {
