@@ -8,12 +8,19 @@
 	<title>Data Logger</title>
 	<script type='text/javascript' src='evo.js'></script>
 	<link rel='stylesheet' type='text/css' href='base.css'>
+	<!-- Font awesome JS -->
+	<script defer src="all.min.js"></script>
 	<link rel='shortcut icon' href='BASE.ICO'>
 	
 </head>
 <body>
 
-	<ul class="menu"> 
+	<ul class="menu" id="menu"> 
+		<li class="tabmenu tabmenu_icon icon">
+			<a href="javascript:void(0);" onclick="responsiveMenu()">
+				<i class="fas fa-bars"></i>
+			</a>
+		</li>
 		<li class="tabmenu tabmenu_on"><a href="#">Data</a> 
 		<ul class="submenu">
 
@@ -466,6 +473,14 @@
 	EVO_CheckPassword('', 1);
 	EVO_Image('imgLogo', 'BASE.PNG', '', '', '');
 	EVO_PageInit(5000);
+	function responsiveMenu() {
+		var x = document.getElementById("menu");
+			if (x.className === "menu") {
+				x.className += " responsive";
+			} else {
+				x.className = "menu";
+			}
+	}
 	</script>
 </body>
 </html>
