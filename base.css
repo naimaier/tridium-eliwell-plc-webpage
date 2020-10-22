@@ -172,6 +172,7 @@ ul.submenu {
 	margin: 0px;
 	background-color: var(--bg-color-light);
 	box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.2);
+	z-index: 15; /* so it stays on top of the AI trends (z-index: 10) */
 }
 
 /* Always display submenu when on responsive mode */
