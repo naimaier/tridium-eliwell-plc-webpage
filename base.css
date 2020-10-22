@@ -150,7 +150,6 @@ li.menu_button a {
 	top: 0px; 
 	right: 0px;
 	padding-left: 10px;
-	height: 61px; /* 1px more to hide a thin part of the menu that was showing */
 	z-index: 1; /* When menu is open it must cover the logo */
 }
 
