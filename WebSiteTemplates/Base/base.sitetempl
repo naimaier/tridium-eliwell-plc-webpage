@@ -11,6 +11,8 @@
 	<META name="apple-mobile-web-app-capable" content="yes">
 	<title>%TITLE%</title>
 	<script type='text/javascript' src='evo.js'></script>
+	<!-- Font awesome JS -->
+	<script defer src="all.min.js"></script>
 	<link rel='stylesheet' type='text/css' href='base.css'>
 	<link rel='shortcut icon' href='BASE.ICO'>
 	%EXTRAHEADER%
@@ -23,7 +25,10 @@
 
 <!-- header of navigation tabs: uses placeholder TITLE, FILENAME, PAGEPATH -->
 <tabheader><![CDATA[
-	<ul class="menu"> ]]>
+	<ul class="menu" id="menu">
+		<li class="tabmenu menu_button">
+			<a href="javascript:void(0);" onclick="responsiveMenu()"><i class="fas fa-bars"></i></a>
+		</li> ]]>
 </tabheader>
 
 <!-- tab active: uses placeholder CAPTION, LINK -->
@@ -115,6 +120,16 @@
 	EVO_CheckPassword('%PASSWORD%', 1);
 	EVO_Image('imgLogo', 'BASE.PNG', '', '', '');
 	EVO_PageInit(%REFRESH%);
+	// Funcion triggered by the responsive menu icon that includes the css selector 
+	// that makes menu items to appear vertically
+	function responsiveMenu() {
+		var x = document.getElementById("menu");
+			if (x.className === "menu") {
+				x.className += " responsive";
+			} else {
+				x.className = "menu";
+			}
+	}
 	</script>
 </body>
 </html>
