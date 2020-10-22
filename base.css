@@ -85,7 +85,8 @@ This class makes the menu look good on small screens (display the links vertical
 ul.menu.responsive li {
 	float: none;
 	display: block;
-	z-index: 2; /* When menu is open it must cover the logo */
+	z-index: 15; /* When menu is open it must cover the logo */
+	/* increased z-index to 15 so it stays on top of the AI trends (z-index: 10) */
 }
 
 /* Not first child so menu_button (which is padded) don't break the layout */

@@ -10,6 +10,9 @@
 	<title>Historical</title>
 	 <!--[if IE]><script src="excanvas.js"></script><![endif]-->
 	<script type='text/javascript' src='evo_h.js'></script>
+	<script type='text/javascript' src='base.js'></script>
+	<!-- Font awesome JS -->
+	<script defer src="all.min.js"></script>
 	<link rel='stylesheet' type='text/css' href='base.css'>
 	<link rel='shortcut icon' href='favicon.ICO'>
 	<style>
@@ -20,8 +23,18 @@
 </head>
 <body>
 	<script type='text/javascript' >EVO_Image('imgLogo', 'base.PNG', '', '', '');</script>
-	<ul class="menu"> 
-		<li class="tabmenu tabmenu_off"><a href="index.htm">Data</a>  </li> 
+	<ul class="menu" id="menu">
+		<li class="tabmenu menu_button">
+			<a href="javascript:void(0);" onclick="responsiveMenu()">
+				<i class="fas fa-bars"></i>
+			</a>
+		</li> 
+		<li class="tabmenu tabmenu_off"><a href="index.htm">Data</a>
+			<ul class="submenu">
+				<li><a href="page1.htm">ResetFile</a>  </li> 
+				<li><a href="page2.htm">AIValue</a>  </li> 
+			</ul>
+		</li> 
 		<li class="tabmenu tabmenu_off"><a href="files.cgi">Logged Files</a>  </li> 
 		<li class="tabmenu tabmenu_off"><a href="history1.htm">Hystory 1</a>  </li> 
 		<li class="tabmenu tabmenu_on"><a  href="history2.htm">Hystory 2</a>  </li> 

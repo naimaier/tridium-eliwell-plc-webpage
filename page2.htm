@@ -7,24 +7,32 @@
 	<META name="apple-mobile-web-app-capable" content="yes">
 	<title>Ai Value</title>
 	<script type='text/javascript' src='evo.js'></script>
+	<script type='text/javascript' src='base.js'></script>
+	<!-- Font awesome JS -->
+	<script defer src="all.min.js"></script>
 	<link rel='stylesheet' type='text/css' href='base.css'>
 	<link rel='shortcut icon' href='BASE.ICO'>
 	
 </head>
 <body>
 
-	<ul class="menu"> 
+	<ul class="menu" id="menu"> 
+		<li class="tabmenu menu_button">
+			<a href="javascript:void(0);" onclick="responsiveMenu()">
+				<i class="fas fa-bars"></i>
+			</a>
+		</li>
 		<li class="tabmenu tabmenu_on"><a href="index.htm">Data</a> 
-		<ul class="submenu">
-
-		<li><a href="page1.htm">ResetFile</a>  </li> 
-		<li><a href="page2.htm">AIValue</a>  </li> 
-		</ul>
- </li> 
+			<ul class="submenu">
+				<li><a href="page1.htm">ResetFile</a>  </li> 
+				<li><a href="page2.htm">AIValue</a>  </li> 
+			</ul>
+ 		</li> 
 		<li class="tabmenu tabmenu_off"><a href="files.cgi">Logged Files</a>  </li> 
 		<li class="tabmenu tabmenu_off"><a href="history1.htm">History01</a>  </li> 
 		<li class="tabmenu tabmenu_off"><a href="history2.htm">History02</a>  </li> 
 		<li class="tabmenu tabmenu_off"><a href="history3.htm">History03</a>  </li> 
+		<li class="tabmenu tabmenu_off"><a href="trends.htm">AI trends</a>  </li> 
 	</ul>
 	<div class="menubottom">Data &gt; AIValue</div>
 		
