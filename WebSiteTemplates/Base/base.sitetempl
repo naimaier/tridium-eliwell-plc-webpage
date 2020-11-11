@@ -11,6 +11,8 @@
 	<META name="apple-mobile-web-app-capable" content="yes">
 	<title>%TITLE%</title>
 	<script type='text/javascript' src='evo.js'></script>
+	<!-- Responsive menu js -->
+	<script type='text/javascript' src='base.js'></script>
 	<!-- Font awesome JS -->
 	<script defer src="all.min.js"></script>
 	<link rel='stylesheet' type='text/css' href='base.css'>
@@ -120,16 +122,6 @@
 	EVO_CheckPassword('%PASSWORD%', 1);
 	EVO_Image('imgLogo', 'BASE.PNG', '', '', '');
 	EVO_PageInit(%REFRESH%);
-	// Funcion triggered by the responsive menu icon that includes the css selector 
-	// that makes menu items to appear vertically
-	function responsiveMenu() {
-		var x = document.getElementById("menu");
-			if (x.className === "menu") {
-				x.className += " responsive";
-			} else {
-				x.className = "menu";
-			}
-	}
 	</script>
 </body>
 </html>
