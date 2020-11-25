@@ -11,15 +11,24 @@ t 	<link rel='shortcut icon' href='base.ico'>
 t </head>
 t <body>
 t 	
-t 	<ul class="menu"> 
-t		<li class="tabmenu tabmenu_off"><a href="index.htm">Data</a>  </li> 
-t		<li class="tabmenu tabmenu_on"><a href="files.cgi">Logged Files</a>  </li> 
-t		<li class="tabmenu tabmenu_off"><a href="history1.htm">Hystory 1</a>  </li> 
-t		<li class="tabmenu tabmenu_off"><a href="history2.htm">Hystory 2</a>  </li> 
-t       <li class="tabmenu tabmenu_off"><a href="history3.htm">Hystory 3</a>  </li>
-t       <li class="tabmenu tabmenu_off"><a href="trends.htm">AI trends</a>  </li> 
-t  		</li> 
-t 	</ul>
+t 	<ul class="menu" id="menu">
+		<li class="tabmenu menu_button">
+			<a href="javascript:void(0);" onclick="responsiveMenu()">
+				<i class="fas fa-bars"></i>
+			</a>
+		</li> 
+		<li class="tabmenu tabmenu_off"><a href="index.htm">Data</a>
+			<ul class="submenu">
+				<li><a href="page1.htm">ResetFile</a>  </li> 
+				<li><a href="page2.htm">AIValue</a>  </li> 
+			</ul>
+		</li> 
+		<li class="tabmenu tabmenu_off"><a href="files.cgi">Logged Files</a>  </li> 
+		<li class="tabmenu tabmenu_on"><a  href="history1.htm">Hystory 1</a>  </li> 
+		<li class="tabmenu tabmenu_off"><a href="history2.htm">Hystory 2</a>  </li> 
+        <li class="tabmenu tabmenu_off"><a href="history3.htm">Hystory 3</a>  </li> 
+        <li class="tabmenu tabmenu_off"><a href="trends.htm">AI trends</a>  </li> 
+	</ul>
 t 	
 t 	<div class="menubottom">Log Files</div>
 t 		
