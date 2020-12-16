@@ -142,7 +142,10 @@
 			
 			// Select current data at start-up
 			if ($("#data").val() == ""){
+				$( "#data" ).focus();
 				$( "#data" ).datepicker('setDate', now);
+				$( "#data" ).datepicker('hide');
+				$( "#data" ).blur();
 			}
 			
 			var arrayName = new Array();

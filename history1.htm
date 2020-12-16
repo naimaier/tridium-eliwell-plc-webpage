@@ -42,7 +42,7 @@
         <li class="tabmenu tabmenu_off"><a href="trends.htm">AI trends</a>  </li> 
 	</ul>
 	
-	<div class="menubottom">History 1</div>		
+	<div class="menubottom">History 1</div>
 	<tr>
 		<td> Register Temperature </td>
 		<td><script type='text/javascript'>EVO_Button(true,'b09021',1,'True',''); </script></td>
@@ -140,7 +140,10 @@
 			
 			// Select current data at start-up
 			if ($("#data").val() == ""){
+				$( "#data" ).focus();
 				$( "#data" ).datepicker('setDate', now);
+				$( "#data" ).datepicker('hide');
+				$( "#data" ).blur();
 			}
 			
 			var arrayName = new Array();
@@ -190,7 +193,7 @@
 				//	$( "#data" ).datepicker('setDate', now);
 				//}
 				
-				var archivo = "01" + $("#data").val()+".CSV"+Math.random();
+				var archivo = "01" + $("#data").val()+".CSV?"+Math.random();
 				$.ajax({
 							url:archivo,
 							type:'HEAD',
