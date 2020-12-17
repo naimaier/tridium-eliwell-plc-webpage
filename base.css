@@ -22,6 +22,11 @@ Show the link that should open and close the menu (.icon) */
 	.menu {
 		background-color: var(--bg-color-main) !important;
 	}
+	.title {
+		font-size: 25px !important;
+		margin-top: 15px;
+		margin-bottom: 20px;
+	}
 	/* Allow overflown content to be scrolled horizontally in responsive mode */
 	.hscroll {
 		overflow-x: auto;
@@ -40,10 +45,10 @@ Show the link that should open and close the menu (.icon) */
 	}
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (max-width: 600px) {
 	/* Br element will only break title in small screens */
 	.mobile-title-break {
-		display: none;
+		display: inherit !important;
 	}
 }
 
@@ -73,6 +78,11 @@ html, body {
 	font: bold 30px Arial,sans-serif;
 	text-align: center;
 	color: var(--color-light);
+}
+
+/* Br element will only break title in small screens */
+.mobile-title-break {
+	display: none;
 }
 
 .table {
