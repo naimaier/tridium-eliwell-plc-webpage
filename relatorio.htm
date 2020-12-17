@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+	<META name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<META name="apple-mobile-web-app-capable" content="yes">
+	<title>Data Logger</title>
+	<script type='text/javascript' src='evo_h.js'></script>
+	<script type='text/javascript' src='evo.js'></script>
+	<script type='text/javascript' src='base.js'></script>
+	<link rel='stylesheet' type='text/css' href='base.css'>
+	<!-- Font awesome JS -->
+	<script defer src="all.min.js"></script>
+	<link rel='shortcut icon' href='base.ico'>
+	
+</head>
+<body>
+	<script type='text/javascript'>EVO_Image('imgLogo', 'base.png', '', '', '');</script>
+	<ul class="menu" id="menu"> 
+		<li class="tabmenu menu_button">
+			<a href="javascript:void(0);" onclick="responsiveMenu()">
+				<i class="fas fa-bars"></i>
+			</a>
+		</li>
+		<li class="tabmenu tabmenu_off"><a href="index.htm">Data</a>
+			<ul class="submenu">
+				<li><a href="page1.htm">ResetFile</a>  </li> 
+				<li><a href="page2.htm">AIValue</a>  </li> 
+			</ul>
+		</li> 
+		<li class="tabmenu tabmenu_off"><a href="files.cgi">Logged Files</a>  </li> 
+		<li class="tabmenu tabmenu_off"><a href="history1.htm">History 1</a>  </li> 
+		<li class="tabmenu tabmenu_off"><a href="history2.htm">History 2</a>  </li> 
+		<li class="tabmenu tabmenu_off"><a href="history3.htm">History 3</a>  </li>
+        <li class="tabmenu tabmenu_off"><a href="trends.htm">AI trends</a>  </li> 
+        <li class="tabmenu tabmenu_on"><a href="relatorio.htm">Relatório</a></li>
+	</ul>
+	<div class="menubottom">Relatório</div>
+		
+	<p class='title'>Relatório de Produção <br class="mobile-title-break">(30 dias)</p>
+	
+	<form action='index.htm' method='get' id='form1' name='form1' onsubmit='return false'>
+	<div class="hscroll">
+	<div class="pagebody">
+
+		<table class="table">
+			<tr>
+                <th></th>
+				<th>Receita 1</th>
+				<th>Receita 2</th>
+                <th>Receita 3</th>
+                <th>Receita 4</th>
+                <th>Receita 5</th>
+			</tr> 
+			<tr>
+				<td>Tempo de Produção</td>
+				<td><input type="text" name="" id="" value="8000" readonly></td>
+				<td><input type="text" name="" id="" value="8000" readonly></td>
+				<td><input type="text" name="" id="" value="8000" readonly></td>
+				<td><input type="text" name="" id="" value="8000" readonly></td>
+				<td><input type="text" name="" id="" value="8000" readonly></td>
+            </tr>
+            <tr>
+				<td>Tempo de Ociosidade Esteira</td>
+				<td><input type="text" name="" id="" value="500" readonly></td>
+				<td><input type="text" name="" id="" value="500" readonly></td>
+				<td><input type="text" name="" id="" value="500" readonly></td>
+				<td><input type="text" name="" id="" value="500" readonly></td>
+				<td><input type="text" name="" id="" value="500" readonly></td>
+            </tr>
+            <tr>
+				<td>Degelo</td>
+				<td><input type="text" name="" id="" value="1000" readonly></td>
+				<td><input type="text" name="" id="" value="1000" readonly></td>
+				<td><input type="text" name="" id="" value="1000" readonly></td>
+				<td><input type="text" name="" id="" value="1000" readonly></td>
+				<td><input type="text" name="" id="" value="1000" readonly></td>
+            </tr>
+            <tr>
+				<td>Paradas por Processo</td>
+				<td><input type="text" name="" id="" value="2" readonly></td>
+				<td><input type="text" name="" id="" value="2" readonly></td>
+				<td><input type="text" name="" id="" value="2" readonly></td>
+				<td><input type="text" name="" id="" value="2" readonly></td>
+				<td><input type="text" name="" id="" value="2" readonly></td>
+            </tr>
+            <tr>
+				<td>Paradas por Alarme</td>
+				<td><input type="text" name="" id="" value="1" readonly></td>
+				<td><input type="text" name="" id="" value="1" readonly></td>
+				<td><input type="text" name="" id="" value="1" readonly></td>
+				<td><input type="text" name="" id="" value="1" readonly></td>
+				<td><input type="text" name="" id="" value="1" readonly></td>
+            </tr>
+            <tr>
+				<td>Leitura Balança (Kg/h)</td>
+				<td><input type="text" name="" id="" value="20000" readonly></td>
+				<td><input type="text" name="" id="" value="20000" readonly></td>
+				<td><input type="text" name="" id="" value="20000" readonly></td>
+				<td><input type="text" name="" id="" value="20000" readonly></td>
+				<td><input type="text" name="" id="" value="20000" readonly></td>
+            </tr>
+            <tr>
+				<td>Leitura Embaladora (Kg/h)</td>
+				<td><input type="text" name="" id="" value="20000" readonly></td>
+				<td><input type="text" name="" id="" value="20000" readonly></td>
+				<td><input type="text" name="" id="" value="20000" readonly></td>
+				<td><input type="text" name="" id="" value="20000" readonly></td>
+				<td><input type="text" name="" id="" value="20000" readonly></td>
+            </tr>
+        </table>
+        <p>Valores em MINUTOS</p>
+        <p id='report-date'></p>
+	</div>
+	</div>
+    </form>
+	<script type='text/javascript'>
+		EVO_CheckPassword('', 1);
+		EVO_PageInit(1000);
+	</script>
+	<script type="text/javascript">
+        $(document).ready(function(){
+			const date = new Date()
+			$('p#report-date').text(`Relatório gerado em ${date.getDate()}/${date.getMonth()}/${date.getFullYear()} às ${date.getHours()}:${date.getMinutes()}`)
+		});
+    </script>
+</body>
+</html>

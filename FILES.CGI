@@ -28,6 +28,7 @@ t		<li class="tabmenu tabmenu_off"><a href="history1.htm">History 1</a>  </li>
 t		<li class="tabmenu tabmenu_off"><a href="history2.htm">History 2</a>  </li> 
 t       <li class="tabmenu tabmenu_off"><a href="history3.htm">History 3</a>  </li> 
 t       <li class="tabmenu tabmenu_off"><a href="trends.htm">AI trends</a>  </li> 
+        <li class="tabmenu tabmenu_off"><a href="relatorio.htm">Relatório</a></li>
 t	</ul>
 t 	
 t 	<div class="menubottom">Log Files</div>
