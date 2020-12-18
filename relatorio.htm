@@ -15,7 +15,6 @@
 	
 </head>
 <body>
-	<script type='text/javascript'>EVO_Image('imgLogo', 'base.png', '', '', '');</script>
 	<ul class="menu" id="menu"> 
 		<li class="tabmenu menu_button">
 			<a href="javascript:void(0);" onclick="responsiveMenu()">
@@ -35,7 +34,20 @@
         <li class="tabmenu tabmenu_off"><a href="trends.htm">AI trends</a>  </li> 
         <li class="tabmenu tabmenu_on"><a href="relatorio.htm">Relatório</a></li>
 	</ul>
-	<div class="menubottom">Relatório</div>
+	<!--<div class="menubottom">Relatório</div>-->
+
+	<div id="logos-big-screen">
+		<img class="left-logo" src="engeultra.png" alt="">
+		<img class="center-logo" src="vibra.png" alt="">
+		<img class="right-logo" src="tridium-big.png" alt="">
+	</div>
+
+	<div id="logos-small-screen">
+		<img class="left-logo" src="engeultra.png" alt="">
+		<img class="center-logo" src="vibra.png" alt="">
+		<img class="right-logo" src="base.png" alt="">
+	</div>
+
 		
 	<p class='title'>Relatório de Produção <br class="mobile-title-break">(30 dias)</p>
 	
@@ -121,7 +133,21 @@
 	<script type="text/javascript">
         $(document).ready(function(){
 			const date = new Date()
-			$('p#report-date').text(`Relatório gerado em ${date.getDate()}/${date.getMonth()}/${date.getFullYear()} às ${date.getHours()}:${date.getMinutes()}`)
+			
+			let dd = date.getDate()
+			dd = `0${dd}`.slice(-2)
+
+			let mm = date.getMonth() + 1
+			mm = `0${mm}`.slice(-2)
+
+			let yyyy = date.getFullYear()
+
+			const fullDate = `${dd}/${mm}/${yyyy}`
+
+			let time = `0${date.getHours()}`.slice(-2)
+			time += ':' + `0${date.getMinutes()}`.slice(-2)
+
+			$('p#report-date').text(`Relatório gerado em ${fullDate} às ${time}`)
 		});
     </script>
 </body>
