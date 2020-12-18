@@ -199,6 +199,7 @@ li.tabmenu_off:hover > a {
 /* Menu button doesn't show on standard view (big displays) */
 li.menu_button {
 	display: none;
+	width: 100%;
 }
 
 li.menu_button a {
@@ -206,7 +207,7 @@ li.menu_button a {
 	text-align: left;
 	padding-left: 20px;
 	padding-right: 20px;
-	width: 15px; /*auto TESTING*/
+	width: auto; /*15px TESTING*/
 }
 
 #logos-big-screen {
@@ -234,16 +235,16 @@ li.menu_button a {
 #logos-small-screen > .left-logo {
 	margin-top: 5px;
 }
-
+/*
 #logos-small-screen > .center-logo {
 	position: absolute;
 	width: 150px;
 	margin: 0 auto;
-	top: 5px;
+	top: 10px;
 	text-align: center;
-	left: 55px; /* Excluding menu button size */
+	left: 0; /*55px Excluding menu button size 
 	right: 0;
-}
+}*/
 
 #imgLogo {
 	background-color: var(--bg-color-main);
