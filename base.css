@@ -24,7 +24,7 @@ Show the link that should open and close the menu (.icon) */
 		margin-right: 0px !important;
 	}
 	.title {
-		font-size: 25px !important;
+		font-size: 20px !important;
 		margin-top: 15px;
 		margin-bottom: 20px;
 	}
@@ -217,7 +217,6 @@ li.menu_button a {
 }
 
 #logos-small-screen {
-	height: 45px;
 	width: 100%;
 	display: none;
 	text-align: center;
@@ -229,22 +228,15 @@ li.menu_button a {
 
 .right-logo {
 	float: right;
-	height: 40px; /*TEMP*/
 }
 
 #logos-small-screen > .left-logo {
-	margin-top: 5px;
+	padding-top: 10px;
 }
-/*
+
 #logos-small-screen > .center-logo {
-	position: absolute;
-	width: 150px;
-	margin: 0 auto;
-	top: 10px;
-	text-align: center;
-	left: 0; /*55px Excluding menu button size 
-	right: 0;
-}*/
+	padding-top: 16px;
+}
 
 #imgLogo {
 	background-color: var(--bg-color-main);
