@@ -69,6 +69,10 @@ function coletar() {
         reportData.splice(reportData.length - 1, 1)
     }
 
+    for (i in reportData) {
+        formatDateFromLogRowObject(reportData[i])
+    }
+
     fillTable(reportData)
 }
 
@@ -169,4 +173,13 @@ function getDateFromLogRowObject(logRowObject) {
     date.setSeconds(splittedTime[2])
     
     return date
+}
+
+function formatDateFromLogRowObject(logRowObject) {
+    const splittedDate = logRowObject['Date'].split('-') // TODO weak
+    const dd = splittedDate[2]
+    const mm = splittedDate[1]
+    const yyyy = splittedDate[0]
+
+    logRowObject['Date'] = `${dd}/${mm}/${yyyy}`
 }
