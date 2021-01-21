@@ -87,11 +87,12 @@ function getFile(csvFile, reportData) {
         const headerIndex = 0
         const dataRows = data.split('\n') //TODO verificar o regex /\r?\n|\r/
         const headers = dataRows[headerIndex].split(',')
+        const rowsAmount = dataRows.length
         
         // Return if dataRows have less than (header row + at least 1 data row)
-        if (dataRows.length < headerIndex + 2) return
+        if (rowsAmount < headerIndex + 2) return
 
-        for (let i = headerIndex + 1; i < dataRows.length; i++) {
+        for (let i = headerIndex + 1; i < rowsAmount; i++) {
             // Break if string is empty
             if (!dataRows[i]) continue
 
