@@ -52,7 +52,7 @@ function coletar() {
         // Define file name
         month = date.getMonth()
         let year = date.getFullYear().toString().slice(-2)
-        let fileName = `01${monthName[month]}${year}.csv`
+        let fileName = `01${monthName[month]}${year}.CSV`
         
         getFile(fileName, reportData)
     }
