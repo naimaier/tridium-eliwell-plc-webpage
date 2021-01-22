@@ -12,38 +12,38 @@ window.onload = () => {
 function coletar() {
     let reportData = []
     const monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-
+    
     const startDate = Date.parse(document.querySelector('[data-start-date]').value)
     const endDate = Date.parse(document.querySelector('[data-end-date]').value)
     let startTime = document.querySelector('[data-start-time]').value
     let endTime = document.querySelector('[data-end-time]').value
-    //TODO adicionar 'todas as datas'?
     
-
+    
     if (!startTime) {
         startTime = '00:00'
     }
-
+    
     if (!endTime) {
         endTime = '23:59'
     }
-
+    
     const splittedStartTime = startTime.split(':')
     startDate.setHours(splittedStartTime[0])
     startDate.setMinutes(splittedStartTime[1])
-
+    
     const splittedEndTime = endTime.split(':')
     endDate.setHours(splittedEndTime[0])
     endDate.setMinutes(splittedEndTime[1])
-
+    
     if (startDate > endDate) {
-        clearTable()
         alert('O início da coleta deve ser antes do fim da coleta!')
         return
     }
-
+    
     console.log(`Start: ${startDate}`)
     console.log(`End: ${endDate}`)
+    clearTable()
+    console.time('Tempo total de execução')
 
     for (let date = new Date(startDate), month; date <= endDate; date.setDate(date.getDate() + 1)) {
         // To get only one file per month we skip one loop when the month was already checked
@@ -69,14 +69,18 @@ function coletar() {
         reportData.splice(reportData.length - 1, 1)
     }
 
+    console.time('Formatando data')
     for (i in reportData) {
         formatDateFromLogRowObject(reportData[i])
     }
+    console.timeEnd('Formatando data')
 
     fillTable(reportData)
+    console.timeEnd('Tempo total de execução')
 }
 
 function getFile(csvFile, reportData) {
+    console.time('Lendo csv')
     $.ajax({
         url: csvFile,
         async: false,
@@ -104,12 +108,13 @@ function getFile(csvFile, reportData) {
             reportData.push(dataRow)
         }
     })
+    console.timeEnd('Lendo csv')
 }
 
 function fillTable(reportData) {
     const table = document.querySelector('[data-table]')
 
-    clearTable()
+    console.time('Preenchendo tabela')
 
     // Return if no data was found
     if ($.isEmptyObject(reportData)) {
@@ -127,14 +132,13 @@ function fillTable(reportData) {
 
     reportData.forEach(dataRow => {
         let tableRow = document.createElement('tr')
-
         for (prop in dataRow) {
             tableRow.innerHTML += `<td><input type="text" value="${dataRow[prop]}" readonly></td>`
         }
         
         table.appendChild(tableRow)
     })
-
+    console.timeEnd('Preenchendo tabela')
     addReportDate()
 }
 
