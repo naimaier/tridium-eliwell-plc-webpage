@@ -1,3 +1,5 @@
+var reportData = []
+
 window.onload = () => {
     let today = new Date()
     const dd = `0${today.getDate()}`.slice(-2)
@@ -10,7 +12,7 @@ window.onload = () => {
 }
 
 function coletar() {
-    let reportData = []
+    reportData = []
     const monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     
     const startDate = Date.parse(document.querySelector('[data-start-date]').value)
@@ -75,7 +77,8 @@ function coletar() {
     }
     console.timeEnd('Formatando data')
 
-    fillTable(reportData)
+    displayTablePage(1)
+
     console.timeEnd('Tempo total de execução')
 }
 
@@ -111,10 +114,13 @@ function getFile(csvFile, reportData) {
     console.timeEnd('Lendo csv')
 }
 
-function fillTable(reportData) {
+function displayTablePage(pageNumber) {
     const table = document.querySelector('[data-table]')
-
+    const maxTableRows = 30
+    const maxNavigatorSize = 5 // Must be an odd number
     console.time('Preenchendo tabela')
+    
+    clearTable()
 
     // Return if no data was found
     if ($.isEmptyObject(reportData)) {
@@ -124,22 +130,113 @@ function fillTable(reportData) {
 
     // TODO verificar se todos os objetos tem as mesmas chaves
     // TODO retirar espacos em branco?
+    addTableHeaders(table)
+
+    const totalPages = Math.ceil(reportData.length / maxTableRows)
+    
+    if (totalPages > 1) {
+        addTableNavigator(pageNumber, totalPages, maxNavigatorSize)
+    }
+
+    addTableContent(table, pageNumber, maxTableRows)
+
+    console.timeEnd('Preenchendo tabela')
+    addReportDate()
+}
+
+function clearTable() {
+    const table = document.querySelector('[data-table]')
+    table.innerHTML = ''
+    const reportDateParagraph = document.querySelector('[data-report-date]')
+    reportDateParagraph.innerHTML = ''
+}
+
+function addTableHeaders(table) {
     let headers = document.createElement('tr')
     for (prop in reportData[0]) {
         headers.innerHTML += `<th>${prop}</th>`
     }
     table.appendChild(headers)
+}
 
-    reportData.forEach(dataRow => {
+function addTableContent(table, pageNumber, maxTableRows) {
+    const firstItem = (pageNumber - 1) * maxTableRows
+    let lastItem = (pageNumber * maxTableRows) - 1
+    
+    if (lastItem > (reportData.length - 1)) {
+        lastItem = reportData.length - 1
+    }
+    
+    for (let i = firstItem; i <= lastItem; i++) {
         let tableRow = document.createElement('tr')
-        for (prop in dataRow) {
-            tableRow.innerHTML += `<td><input type="text" value="${dataRow[prop]}" readonly></td>`
+
+        for (prop in reportData[i]) {
+            tableRow.innerHTML += `<td><input type="text" value="${reportData[i][prop]}" readonly></td>`
         }
-        
         table.appendChild(tableRow)
-    })
-    console.timeEnd('Preenchendo tabela')
-    addReportDate()
+    }
+}
+
+function addTableNavigator(currentPage, totalPages, maxNavigatorSize) {
+    const pagesToDisplay = (totalPages > maxNavigatorSize) ? maxNavigatorSize : totalPages
+    const pageNumberOffset = parseInt(pagesToDisplay / 2)
+
+    // Defining first and last navigation buttons
+    let firstIndex
+    let lastIndex
+
+    if ((currentPage - pageNumberOffset) < 1) {
+        firstIndex = 1
+        lastIndex = pagesToDisplay
+    } else if ((currentPage + pageNumberOffset) > totalPages) {
+        lastIndex = totalPages
+        firstIndex = totalPages - (pagesToDisplay - 1)
+    } else {
+        firstIndex = currentPage - pageNumberOffset
+        lastIndex = firstIndex + (pagesToDisplay - 1)
+    }
+
+    addNavigationButtons(firstIndex, lastIndex)
+}
+
+function addNavigationButtons(firstIndex, lastIndex) {
+    const navigationElement = document.querySelector('[data-pagination]')
+    navigationElement.innerHTML = ''
+
+    const btnFirstPage = createIndexButton('<<', 1)
+    const btnPrevPage = createIndexButton('<', currentPage - 1)
+    if (currentPage == 1) {
+        btnFirstPage.disabled = true
+        btnPrevPage.disabled = true
+    }
+    navigationElement.appendChild(btnFirstPage)
+    navigationElement.appendChild(btnPrevPage)
+
+    for (let i = firstIndex; i <= lastIndex; i++) {
+        let btn = createIndexButton(i, i)
+
+        if (i == currentPage) {
+            btn.disabled = true
+        }
+        navigationElement.appendChild(btn)
+    }
+
+    const btnNextPage = createIndexButton('>', currentPage + 1)
+    const btnLastPage = createIndexButton('>>', totalPages)
+    if (currentPage == lastIndex) {
+        btnNextPage.disabled = true
+        btnLastPage.disabled = true
+    }
+    navigationElement.appendChild(btnNextPage)
+    navigationElement.appendChild(btnLastPage)
+}
+
+function createIndexButton(text, targetPage) {
+    const pageButton = document.createElement('button')
+    pageButton.innerHTML = text
+    pageButton.classList.add('btn-table-nav')
+    pageButton.onclick = () => displayTablePage(targetPage)
+    return pageButton
 }
 
 // Add current date at the end of the report
@@ -161,13 +258,6 @@ function addReportDate() {
 
     const reportDateParagraph = document.querySelector('[data-report-date]')
     reportDateParagraph.innerText = `Relatório gerado em ${fullDate} às ${time}`
-}
-
-function clearTable() {
-    const table = document.querySelector('[data-table]')
-    table.innerHTML = ''
-    const reportDateParagraph = document.querySelector('[data-report-date]')
-    reportDateParagraph.innerHTML = ''
 }
 
 function getDateFromLogRowObject(logRowObject) {

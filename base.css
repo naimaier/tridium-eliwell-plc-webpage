@@ -120,6 +120,12 @@ html, body {
 	border: none;
 }
 
+.btn-table-nav {
+	margin-right: 5px;
+	margin-bottom: 5px;
+	min-width: 40px;
+}
+
 .sectiontitle {
 	font: bold 20px Arial,sans-serif;
 	margin-bottom: 15px;
