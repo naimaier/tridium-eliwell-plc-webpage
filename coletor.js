@@ -196,10 +196,10 @@ function addTableNavigator(currentPage, totalPages, maxNavigatorSize) {
         lastIndex = firstIndex + (pagesToDisplay - 1)
     }
 
-    addNavigationButtons(firstIndex, lastIndex)
+    addNavigationButtons(firstIndex, lastIndex, currentPage, totalPages)
 }
 
-function addNavigationButtons(firstIndex, lastIndex) {
+function addNavigationButtons(firstIndex, lastIndex, currentPage, totalPages) {
     const navigationElement = document.querySelector('[data-pagination]')
     navigationElement.innerHTML = ''
 
