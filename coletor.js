@@ -1,6 +1,10 @@
 var reportData = []
 
 window.onload = () => {
+    resetDateSpanInputs()
+}
+
+function resetDateSpanInputs() {
     let today = new Date()
     const dd = `0${today.getDate()}`.slice(-2)
     const mm = `0${today.getMonth() + 1}`.slice(-2)
@@ -12,30 +16,8 @@ window.onload = () => {
 }
 
 function coletar() {
-    reportData = []
-    const monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    
-    const startDate = Date.parse(document.querySelector('[data-start-date]').value)
-    const endDate = Date.parse(document.querySelector('[data-end-date]').value)
-    let startTime = document.querySelector('[data-start-time]').value
-    let endTime = document.querySelector('[data-end-time]').value
-    
-    
-    if (!startTime) {
-        startTime = '00:00'
-    }
-    
-    if (!endTime) {
-        endTime = '23:59'
-    }
-    
-    const splittedStartTime = startTime.split(':')
-    startDate.setHours(splittedStartTime[0])
-    startDate.setMinutes(splittedStartTime[1])
-    
-    const splittedEndTime = endTime.split(':')
-    endDate.setHours(splittedEndTime[0])
-    endDate.setMinutes(splittedEndTime[1])
+    const startDate = getStartDateFromInput()
+    const endDate = getEndDateFromInput()
     
     if (startDate > endDate) {
         alert('O início da coleta deve ser antes do fim da coleta!')
@@ -44,8 +26,57 @@ function coletar() {
     
     console.log(`Start: ${startDate}`)
     console.log(`End: ${endDate}`)
-    clearTable()
+    
     console.time('Tempo total de execução')
+    
+    reportData = []
+    clearTable()
+
+    parseLogs(startDate, endDate)
+
+    console.time('Formatando data')
+    for (i in reportData) {
+        formatDateFromLogRowObject(reportData[i])
+    }
+    console.timeEnd('Formatando data')
+
+    displayTablePage(1)
+
+    console.timeEnd('Tempo total de execução')
+}
+
+function getStartDateFromInput() {
+    const startDate = Date.parse(document.querySelector('[data-start-date]').value)
+    let startTime = document.querySelector('[data-start-time]').value
+    
+    if (!startTime) {
+        startTime = '00:00'
+    }
+    
+    const splittedStartTime = startTime.split(':')
+    startDate.setHours(splittedStartTime[0])
+    startDate.setMinutes(splittedStartTime[1])
+
+    return startDate
+}
+
+function getEndDateFromInput() {
+    const endDate = Date.parse(document.querySelector('[data-end-date]').value)
+    let endTime = document.querySelector('[data-end-time]').value
+
+    if (!endTime) {
+        endTime = '23:59'
+    }
+
+    const splittedEndTime = endTime.split(':')
+    endDate.setHours(splittedEndTime[0])
+    endDate.setMinutes(splittedEndTime[1])
+
+    return endDate
+}
+
+function parseLogs(startDate, endDate) {
+    const monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
     for (let date = new Date(startDate), month; date <= endDate; date.setDate(date.getDate() + 1)) {
         // To get only one file per month we skip one loop when the month was already checked
@@ -56,7 +87,7 @@ function coletar() {
         let year = date.getFullYear().toString().slice(-2)
         let fileName = `01${monthName[month]}${year}.CSV`
         
-        getFile(fileName, reportData)
+        searchAndParseFile(fileName)
     }
 
     // Remove entries before selected start date
@@ -70,19 +101,9 @@ function coletar() {
      getDateFromLogRowObject(reportData[reportData.length - 1]) > endDate) {
         reportData.splice(reportData.length - 1, 1)
     }
-
-    console.time('Formatando data')
-    for (i in reportData) {
-        formatDateFromLogRowObject(reportData[i])
-    }
-    console.timeEnd('Formatando data')
-
-    displayTablePage(1)
-
-    console.timeEnd('Tempo total de execução')
 }
 
-function getFile(csvFile, reportData) {
+function searchAndParseFile(csvFile) {
     console.time('Lendo csv')
     $.ajax({
         url: csvFile,
