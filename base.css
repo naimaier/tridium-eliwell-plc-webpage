@@ -10,7 +10,7 @@
 	--menu-font: 17px Arial,sans-serif;
 }
 
-/* When the screen is less than 900 pixels wide, hide all links, except for the first one: the menu icon. 
+/* When the screen is less than (max-width) pixels wide, hide all links, except for the first one: the menu icon. 
 Show the link that should open and close the menu (.icon) */
 @media screen and (max-width: 1000px) {
 	.menu li:not(:first-child) {
@@ -48,6 +48,12 @@ Show the link that should open and close the menu (.icon) */
 		display: none;
 	}
 	#logos-small-screen {
+		display: inline-block !important;
+	}
+	#table-nav-big-screen {
+		display: none;
+	}
+	#table-nav-small-screen {
 		display: inline-block !important;
 	}
 }
@@ -245,14 +251,6 @@ li.menu_button a {
 
 .right-logo {
 	float: right;
-}
-
-#logos-small-screen > .left-logo {
-	padding-top: 10px;
-}
-
-#logos-small-screen > .center-logo {
-	padding-top: 16px;
 }
 
 #imgLogo {
