@@ -121,9 +121,20 @@ html, body {
 }
 
 .btn-table-nav {
-	margin-right: 5px;
 	margin-bottom: 5px;
 	min-width: 40px;
+	height: 40px;
+	background-color: inherit;
+	border: none;
+	outline: none;
+}
+
+.btn-table-nav[disabled]:hover {
+	background-color: inherit;
+}
+
+.btn-table-nav:hover {
+	background-color: var(--bg-color-light);
 }
 
 .sectiontitle {

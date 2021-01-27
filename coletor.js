@@ -138,7 +138,7 @@ function searchAndParseFile(csvFile) {
 function displayTablePage(pageNumber) {
     const table = document.querySelector('[data-table]')
     const maxTableRows = 30
-    const maxNavigatorSize = 5 // Must be an odd number
+    const maxNavigatorSize = 7 // Must be an odd number
     console.time('Preenchendo tabela')
     
     clearTable()
@@ -202,7 +202,8 @@ function addTableNavigator(currentPage, totalPages, maxNavigatorSize) {
     const pagesToDisplay = (totalPages > maxNavigatorSize) ? maxNavigatorSize : totalPages
     const pageNumberOffset = parseInt(pagesToDisplay / 2)
 
-    // Defining first and last navigation buttons
+    let indexes = {}
+    
     let firstIndex
     let lastIndex
 
@@ -217,46 +218,66 @@ function addTableNavigator(currentPage, totalPages, maxNavigatorSize) {
         lastIndex = firstIndex + (pagesToDisplay - 1)
     }
 
-    addNavigationButtons(firstIndex, lastIndex, currentPage, totalPages)
+    // add page numbers (options) to be displayed
+    indexes['pages'] = []
+
+    for (let i = firstIndex; i <= lastIndex; i++) {
+        indexes['pages'].push(i)
+    }
+
+    // defining 'previous' and 'next' buttons
+    indexes['<'] = currentPage > 1 ? (currentPage - 1) : false
+    indexes['>'] = currentPage < totalPages ? (currentPage + 1) : false
+
+    // always dislay first and last elements
+    if (indexes['pages'][0] != 1) {
+        indexes['pages'][0] = 1
+        indexes['pages'][1] = '...'
+    }
+
+    if (indexes['pages'][indexes['pages'].length - 1] != totalPages) {
+        indexes['pages'][indexes['pages'].length - 1] = totalPages
+        indexes['pages'][indexes['pages'].length - 2] = '...'
+    }
+
+    addNavigationButtons(firstIndex, lastIndex, currentPage, totalPages, indexes)
 }
 
-function addNavigationButtons(firstIndex, lastIndex, currentPage, totalPages) {
+function addNavigationButtons(firstIndex, lastIndex, currentPage, totalPages, indexes) {
     const navigationElement = document.querySelector('[data-pagination]')
     navigationElement.innerHTML = ''
 
-    const btnFirstPage = createIndexButton('<<', 1)
-    const btnPrevPage = createIndexButton('<', currentPage - 1)
-    if (currentPage == 1) {
-        btnFirstPage.disabled = true
-        btnPrevPage.disabled = true
-    }
-    navigationElement.appendChild(btnFirstPage)
-    navigationElement.appendChild(btnPrevPage)
+    // creating previous button
+    const btnPrev = createTableNavButton('<', indexes['<'])
+    navigationElement.appendChild(btnPrev)
 
-    for (let i = firstIndex; i <= lastIndex; i++) {
-        let btn = createIndexButton(i, i)
-
-        if (i == currentPage) {
-            btn.disabled = true
+    // creating page number buttons
+    for (i in indexes['pages']) {
+        let btn
+        if (indexes['pages'][i] == '...') {
+            btn = createTableNavButton(indexes['pages'][i], false)
+        } else if (currentPage == indexes['pages'][i]) {
+            btn = createTableNavButton(indexes['pages'][i], false)
+        } else {
+            btn = createTableNavButton(indexes['pages'][i], indexes['pages'][i])
         }
         navigationElement.appendChild(btn)
     }
 
-    const btnNextPage = createIndexButton('>', currentPage + 1)
-    const btnLastPage = createIndexButton('>>', totalPages)
-    if (currentPage == lastIndex) {
-        btnNextPage.disabled = true
-        btnLastPage.disabled = true
-    }
-    navigationElement.appendChild(btnNextPage)
-    navigationElement.appendChild(btnLastPage)
+    // creating next button
+    const btnNext = createTableNavButton('>', indexes['>'])
+    navigationElement.appendChild(btnNext)
 }
 
-function createIndexButton(text, targetPage) {
+function createTableNavButton(text, targetPage) {
     const pageButton = document.createElement('button')
     pageButton.innerHTML = text
     pageButton.classList.add('btn-table-nav')
-    pageButton.onclick = () => displayTablePage(targetPage)
+    if (targetPage) {
+        pageButton.onclick = () => displayTablePage(targetPage)
+    } else {
+        pageButton.disabled = true
+    }
     return pageButton
 }
 
