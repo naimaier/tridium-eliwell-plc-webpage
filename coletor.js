@@ -278,7 +278,7 @@ function addNavigationButtons(currentPage, indexes) {
     navigationElement.appendChild(btnNextMob)
 
     let pageCount = document.createElement('p')
-    pageCount.innerHTML = `${currentPage} / ${indexes['pages'][indexes['pages'].length - 1]}`
+    pageCount.innerHTML = `  ${currentPage} / ${indexes['pages'][indexes['pages'].length - 1]}`
     pageCount.classList.add('table-nav-mobile')
     navigationElement.appendChild(pageCount)
 }

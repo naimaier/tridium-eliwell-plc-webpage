@@ -50,17 +50,16 @@ Show the link that should open and close the menu (.icon) */
 	#logos-small-screen {
 		display: inline-block !important;
 	}
-	#table-nav-big-screen {
-		display: none;
-	}
-	#table-nav-small-screen {
-		display: inline-block !important;
-	}
 	.table-nav-mobile {
 		display: inline !important;
+		height: 60px !important;
+		width: 60px !important;
 	}
 	.btn-table-nav {
 		display: none;
+	}
+	#btn-coletar {
+		width: 100% !important;
 	}
 }
 
@@ -132,8 +131,18 @@ html, body {
 	border: none;
 }
 
+#btn-coletar {
+	width: 150px;
+	height: 40px;
+	color: white;
+	background-color: var(--color-light);
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
 .table-nav-mobile {
 	display: none;
+	font-size: 1.25em;
 	min-width: 40px;
 	min-height: 40px;
 }
