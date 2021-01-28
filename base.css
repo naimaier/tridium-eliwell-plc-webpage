@@ -56,6 +56,12 @@ Show the link that should open and close the menu (.icon) */
 	#table-nav-small-screen {
 		display: inline-block !important;
 	}
+	.table-nav-mobile {
+		display: inline !important;
+	}
+	.btn-table-nav {
+		display: none;
+	}
 }
 
 @media screen and (max-width: 600px) {
@@ -124,6 +130,12 @@ html, body {
 .table input[readonly] {
 	background-color: var(--bg-color-dark);
 	border: none;
+}
+
+.table-nav-mobile {
+	display: none;
+	min-width: 40px;
+	min-height: 40px;
 }
 
 .btn-table-nav {

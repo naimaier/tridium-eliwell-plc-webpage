@@ -240,11 +240,11 @@ function addTableNavigator(currentPage, totalPages, maxNavigatorSize) {
         indexes['pages'][indexes['pages'].length - 2] = '...'
     }
 
-    addNavigationButtons(firstIndex, lastIndex, currentPage, totalPages, indexes)
+    addNavigationButtons(currentPage, indexes)
 }
 
-function addNavigationButtons(firstIndex, lastIndex, currentPage, totalPages, indexes) {
-    const navigationElement = document.querySelector('[data-pagination]')
+function addNavigationButtons(currentPage, indexes) {
+    const navigationElement = document.querySelector('[data-table-nav-container]')
     navigationElement.innerHTML = ''
 
     // creating previous button
@@ -267,6 +267,20 @@ function addNavigationButtons(firstIndex, lastIndex, currentPage, totalPages, in
     // creating next button
     const btnNext = createTableNavButton('>', indexes['>'])
     navigationElement.appendChild(btnNext)
+
+    // Mobile navigation
+    const btnPrevMob = createTableNavButton('<', indexes['<'])
+    btnPrevMob.classList.add('table-nav-mobile')
+    navigationElement.appendChild(btnPrevMob)
+
+    const btnNextMob = createTableNavButton('>', indexes['>'])
+    btnNextMob.classList.add('table-nav-mobile')
+    navigationElement.appendChild(btnNextMob)
+
+    let pageCount = document.createElement('p')
+    pageCount.innerHTML = `${currentPage} / ${indexes['pages'][indexes['pages'].length - 1]}`
+    pageCount.classList.add('table-nav-mobile')
+    navigationElement.appendChild(pageCount)
 }
 
 function createTableNavButton(text, targetPage) {
