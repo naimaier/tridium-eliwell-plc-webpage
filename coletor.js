@@ -155,9 +155,7 @@ function displayTablePage(pageNumber) {
 
     const totalPages = Math.ceil(reportData.length / maxTableRows)
     
-    if (totalPages > 1) {
-        addTableNavigator(pageNumber, totalPages, maxNavigatorSize)
-    }
+    addTableNavigator(pageNumber, totalPages, maxNavigatorSize)
 
     addTableContent(table, pageNumber, maxTableRows)
 
@@ -199,6 +197,14 @@ function addTableContent(table, pageNumber, maxTableRows) {
 }
 
 function addTableNavigator(currentPage, totalPages, maxNavigatorSize) {
+    const navigationElement = document.querySelector('[data-table-nav-container]')
+    navigationElement.innerHTML = ''
+
+    // If there's only one page no navigation is needed
+    if (totalPages == 1) {
+        return
+    }
+
     const pagesToDisplay = (totalPages > maxNavigatorSize) ? maxNavigatorSize : totalPages
     const pageNumberOffset = parseInt(pagesToDisplay / 2)
 
@@ -240,12 +246,10 @@ function addTableNavigator(currentPage, totalPages, maxNavigatorSize) {
         indexes['pages'][indexes['pages'].length - 2] = '...'
     }
 
-    addNavigationButtons(currentPage, indexes)
+    addNavigationButtons(currentPage, indexes, navigationElement)
 }
 
-function addNavigationButtons(currentPage, indexes) {
-    const navigationElement = document.querySelector('[data-table-nav-container]')
-    navigationElement.innerHTML = ''
+function addNavigationButtons(currentPage, indexes, navigationElement) {
 
     // creating previous button
     const btnPrev = createTableNavButton('<', indexes['<'])
