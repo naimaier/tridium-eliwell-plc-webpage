@@ -113,7 +113,7 @@ html, body {
 	border-collapse: separate;
 	border: 2px solid black;
 	border-radius: 6px;
-	padding: 2px;
+	padding: 5px;
 }
 
 .table th {
