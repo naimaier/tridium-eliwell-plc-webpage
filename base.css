@@ -1,3 +1,4 @@
+/* ------------- GENERAL ------------ */
 :root {
 	/* Color scheme
 	https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=2b353f */
@@ -10,88 +11,124 @@
 	--menu-font: 17px Arial,sans-serif;
 }
 
-/* When the screen is less than (max-width) pixels wide, hide all links, except for the first one: the menu icon. 
-Show the link that should open and close the menu (.icon) */
-@media screen and (max-width: 1000px) {
-	.menu li:not(:first-child) {
-		display: none;
-	}
-	.menu li.menu_button {
-	  	display: block;
-	}
-	ul.menu {
-		background-color: var(--bg-color-main) !important;
-		margin-right: 0px !important;
-	}
-	.title {
-		font-size: 20px !important;
-		margin-top: 15px;
-		margin-bottom: 20px;
-	}
-	/* Allow overflown content to be scrolled horizontally in responsive mode */
-	.hscroll {
-		overflow-x: auto;
-	}
-	/* Needed for the padding-right of the scroll element to work properly */
-	.hscroll > .pagebody {
-		display: inline-block;
-	}
-	/* Fixing input width to the width of the data displayed */
-	.table td input {
-		width: 100%;
-	}
-	/* Allow table headers to be displayed without wrapping content */
-	.table th {
-		white-space: nowrap;
-	}
-	#logos-big-screen {
-		display: none;
-	}
-	#logos-small-screen {
-		display: inline-block !important;
-	}
-	.table-nav-mobile {
-		display: inline !important;
-		height: 60px !important;
-		width: 60px !important;
-	}
-	.btn-table-nav {
-		display: none;
-	}
-	#btn-coletar {
-		width: 100% !important;
-	}
-}
-
-@media screen and (max-width: 600px) {
-	/* Br element will only break title in small screens */
-	.mobile-title-break {
-		display: inherit !important;
-	}
-}
-
-/* Format page for printing */
-@media print {
-	.menu {
-		display: none;
-	}
-	.menubottom {
-		display: none;
-	}
-	.table {
-		background-color: white;
-	}
-	.table td {
-		white-space: nowrap;
-	}
-}
-
-html, body {
+.container {
 	background-color: var(--bg-color-main);
+	/* Talvez colocar aqui as margens
+	mas depende de como ficam os logos
+
 	padding: 0px;
 	margin: 0px;
 	max-width: 1920px;
-	margin: auto;
+	margin: auto; */
+}
+
+/* ----------------- gestione menu con tab ----------------- */
+.header {
+	background-color: var(--color-main);
+	height: 60px;
+}
+
+.header__menu-item {
+	display: block;
+	float: left;
+	position: relative;
+}
+
+.header__menu-item > a {
+	display: block;
+	width: 120px;
+	height: 40px;
+	font: var(--menu-font);
+	background-color: var(--color-main);
+	color: var(--bg-color-main);
+	padding-top: 20px;
+	text-decoration: none;
+	text-align: center;
+}
+
+.header__menu-item > a[href="#"] {
+	cursor: default;
+}
+
+.header__menu-item.active > a {
+	background-color: var(--color-light)
+}
+
+/* Menu button doesn't show on standard view (big displays) */
+.header__menu-button {
+	display: none;
+}
+
+.header__menu-button > a {
+	text-align: left;
+	padding-left: 20px;
+	padding-right: 20px;
+	width: auto;
+}
+
+
+/* ----------------- gestione sottomenu a tendina ----------------- */
+.header__submenu {
+	display: none;
+	background-color: var(--bg-color-light);
+	box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.2);
+	z-index: 15; /* so it stays on top of the AI trends (z-index: 10) */
+}
+
+/* Activate the submenu when hover (when not in responsive mode) */
+.header:not(.responsive) .header__menu-item:hover > .header__submenu {
+	display: block;
+	position: absolute;
+	width: 140px;
+}
+
+.header__submenu-item > a {
+	display: block;
+	height: 40px;
+	padding-top: 20px;
+	color: var(--color-main);
+	font: var(--menu-font);
+	text-decoration: none;
+	text-align: center;
+}
+
+.header__submenu-item > a[href="#"] {
+	cursor: default;
+}
+
+.header__submenu-item:hover > a {
+	background-color: var(--bg-color-dark);
+	color: var(--color-main);
+}
+
+/*----------------*/
+#logos-big-screen {
+	width: 100%;
+	text-align: center;
+	margin-top: 5px;
+}
+
+#logos-small-screen {
+	width: 100%;
+	display: none;
+	text-align: center;
+}
+
+.left-logo {
+	float: left;
+}
+
+.right-logo {
+	float: right;
+}
+
+#imgLogo {
+	background-color: var(--bg-color-main);
+	position: absolute;
+	top: 0px; 
+	right: 0px;
+	padding-left: 10px;
+	z-index: 1; /* When menu is open it must cover the logo */
 }
 
 .title {
@@ -178,190 +215,92 @@ html, body {
 	padding-right: 20px;
 }
 
+/* When the screen is less than (max-width) pixels wide, hide all links, except for the first one: the menu icon. 
+Show the link that should open and close the menu (.icon) */
+@media screen and (max-width: 1000px) {
+	.header__menu-item {
+		display: none;
+	}
 
+	.header__menu-button {
+	  	display: block;
+	}
 
-/* ----------------- gestione menu con tab ----------------- */
-ul.menu {
-	margin: 0px;
-/*	margin-top: 25px;
-	margin-left: 150px;
-	margin-right: 160px; /* space for the logo */
-	background-color: var(--color-main); /* colore di sfondo del tab */
-	padding-left: 0px;
-	height: 60px;
+	/* The "responsive" class is added to the menu with JavaScript when the user clicks on the icon. 
+	This class makes the menu look good on small screens (display the links vertically instead of horizontally) */
+	.responsive .header__menu-item {
+		float: none;
+		display: block;
+		z-index: 15; /* When menu is open it must cover the logo */
+		/* increased z-index to 15 so it stays on top of the AI trends (z-index: 10) */
+	}
+
+	/* Except menu_button, that is padded and will break the layout */
+	.responsive .header__menu-item:not(.header__menu-button) > a {
+		width: 100%;
+	}
+
+	/* Always display submenu when on responsive mode */
+	.responsive .header__submenu {
+		display: block;
+	}
+
+	.title {
+		font-size: 20px;
+		margin-top: 15px;
+		margin-bottom: 20px;
+	}
+	/* Allow overflown content to be scrolled horizontally in responsive mode */
+	.hscroll {
+		overflow-x: auto;
+	}
+	/* Needed for the padding-right of the scroll element to work properly */
+	.hscroll > .pagebody {
+		display: inline-block;
+	}
+	/* Fixing input width to the width of the data displayed */
+	.table td input {
+		width: 100%;
+	}
+	/* Allow table headers to be displayed without wrapping content */
+	.table th {
+		white-space: nowrap;
+	}
+	#logos-big-screen {
+		display: none;
+	}
+	#logos-small-screen {
+		display: inline-block;
+	}
+	.table-nav-mobile {
+		display: inline;
+		height: 60px;
+		width: 60px;
+	}
+	.btn-table-nav {
+		display: none;
+	}
+	#btn-coletar {
+		width: 100%;
+	}
 }
 
-/* The "responsive" class is added to the menu with JavaScript when the user clicks on the icon. 
-This class makes the menu look good on small screens (display the links vertically instead of horizontally) */
-ul.menu.responsive li {
-	float: none;
-	display: block;
-	z-index: 15; /* When menu is open it must cover the logo */
-	/* increased z-index to 15 so it stays on top of the AI trends (z-index: 10) */
+@media screen and (max-width: 600px) {
+	/* Br element will only break title in small screens */
+	.mobile-title-break {
+		display: inherit;
+	}
 }
 
-/* Not first child so menu_button (which is padded) don't break the layout */
-ul.menu.responsive li:not(:first-child) a {
-	width: 100%;
-}
-
-li.tabmenu {
-	float: left;
-	display: block;
-	position: relative;
-}
-
-li.tabmenu > a {
-	display: block;
-	width: 120px;
-	height: 40px;
-	font: var(--menu-font);
-	color: var(--bg-color-main);
-	padding-top: 20px;
-	text-decoration: none;
-	text-align: center;
-}
-
-li.tabmenu > a[href="#"] {
-	cursor: default;
-}
-
-li.tabmenu_on > a {
-	background-color: var(--color-light)
-}
-
-li.tabmenu_on:hover > a { 
-	color: white;
-}
-
-li.tabmenu_off > a {
-	background-color: var(--color-main);
-}
-
-li.tabmenu_off:hover > a { 
-	/* background-color: var(--color-light); 
-	color: white; */
-}
-
-/* Menu button doesn't show on standard view (big displays) */
-li.menu_button {
-	display: none;
-	width: 100%;
-}
-
-li.menu_button a {
-	background-color: var(--color-main);
-	text-align: left;
-	padding-left: 20px;
-	padding-right: 20px;
-	width: auto; /*15px TESTING*/
-}
-
-#logos-big-screen {
-	width: 100%;
-	text-align: center;
-	margin-top: 5px;
-}
-
-#logos-small-screen {
-	width: 100%;
-	display: none;
-	text-align: center;
-}
-
-.left-logo {
-	float: left;
-}
-
-.right-logo {
-	float: right;
-}
-
-#imgLogo {
-	background-color: var(--bg-color-main);
-	position: absolute;
-	top: 0px; 
-	right: 0px;
-	padding-left: 10px;
-	z-index: 1; /* When menu is open it must cover the logo */
-}
-
-.menubottom {
-	background-color: var(--bg-color-main);
-	height: 27px;
-	color: var(--color-main);
-	font: bold 12px Verdana,sans-serif;
-	padding-left: 20px;
-	padding-top: 10px;
-}
-
-
-
-/* ----------------- gestione sottomenu a tendina ----------------- */
-ul.submenu {
-	display: none;
-	padding: 0px;
-	margin: 0px;
-	background-color: var(--bg-color-light);
-	box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.2);
-	z-index: 15; /* so it stays on top of the AI trends (z-index: 10) */
-}
-
-/* Always display submenu when on responsive mode */
-ul.menu.responsive ul.submenu {
-	display: block;
-}
-
-/* Create the not responsive version of the submenu */
-ul.menu:not(.responsive) li.tabmenu:hover > ul.submenu {
-	display: block;
-	position: absolute;
-	width: 140px;
-	left: 0px;
-	border-top: 0;
-}
-
-ul.submenu  > li {
-	display: block;
-	position: relative;
-}
-
-ul.submenu > li > a {
-	display: block;
-	height: 40px;
-	padding-top: 20px;
-	color: var(--color-main);
-	font: var(--menu-font);
-	text-decoration: none;
-	text-align: center;
-}
-
-ul.submenu > li > a[href="#"] {
-	cursor: default;
-}
-
-ul.submenu > li:hover > a {
-	background-color: var(--bg-color-dark);
-	color: var(--color-main);
-}
-
-ul.submenu > li > ul.submenu {
-/*	display: none; */
-	display: block;
-	position: absolute;
-	left: 149px;
-	top: 15px;
-	width: 5px;
-	height: 5px;
-	overflow: hidden;
-}
-
-ul.submenu > li:hover > ul.submenu {
-	display: block;
-	position: absolute;
-	width: 155px;
-	left: 155px;
-	top: 0px;
-	height: auto;
-	overflow: visible;
+/* Format page for printing */
+@media print {
+	.header {
+		display: none;
+	}
+	.table {
+		background-color: white;
+	}
+	.table td {
+		white-space: nowrap;
+	}
 }
