@@ -3,11 +3,11 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
 	<META name="viewport" content="width=device-width, initial-scale=1.0">
-	<META name="apple-mobile-web-app-capable" content="yes">
 	<title>Data Logger</title>
 	<script type='text/javascript' src='evo_h.js'></script>
 	<script type='text/javascript' src='evo.js'></script>
 	<script type='text/javascript' src='base.js'></script>
+	<link rel="stylesheet" href="reset.css">
 	<link rel='stylesheet' type='text/css' href='base.css'>
 	<!-- Font awesome JS -->
 	<script defer src="all.min.js"></script>
@@ -15,26 +15,30 @@
 	
 </head>
 <body>
-	<ul class="menu" id="menu"> 
-		<li class="tabmenu menu_button">
-			<a href="javascript:void(0);" onclick="responsiveMenu()">
-				<i class="fas fa-bars"></i>
-			</a>
-		</li>
-		<li class="tabmenu tabmenu_off"><a href="index.htm">Data</a>
-			<ul class="submenu">
-				<li><a href="page1.htm">ResetFile</a>  </li> 
-				<li><a href="page2.htm">AIValue</a>  </li> 
+	<header class="header container">
+		<nav data-menu>
+			<ul> 
+				<li class="header__menu-item header__menu-button">
+					<a href="javascript:void(0);" onclick="responsiveMenu()">
+						<i class="fas fa-bars"></i>
+					</a>
+				</li>
+				<li class="header__menu-item"><a href="index.htm">Data</a> 
+					<ul class="header__submenu">
+						<li class="header__submenu-item"><a href="page1.htm">ResetFile</a></li> 
+						<li class="header__submenu-item"><a href="page2.htm">AIValue</a></li> 
+					</ul>
+				 </li> 
+				<li class="header__menu-item"><a href="files.cgi">Logged Files</a>  </li> 
+				<li class="header__menu-item"><a href="history1.htm">History 1</a>  </li> 
+				<li class="header__menu-item"><a href="history2.htm">History 2</a>  </li> 
+				<li class="header__menu-item"><a href="history3.htm">History 3</a>  </li>
+				<li class="header__menu-item"><a href="trends.htm">AI trends</a>  </li> 
+				<li class="header__menu-item"><a href="relatorio.htm">Relatório</a></li>
+				<li class="header__menu-item active"><a href="coletor.htm">Coletor</a></li>
 			</ul>
-		</li> 
-		<li class="tabmenu tabmenu_off"><a href="files.cgi">Logged Files</a>  </li> 
-		<li class="tabmenu tabmenu_off"><a href="history1.htm">History 1</a>  </li> 
-		<li class="tabmenu tabmenu_off"><a href="history2.htm">History 2</a>  </li> 
-		<li class="tabmenu tabmenu_off"><a href="history3.htm">History 3</a>  </li>
-        <li class="tabmenu tabmenu_off"><a href="trends.htm">AI trends</a>  </li>
-		<li class="tabmenu tabmenu_off"><a href="relatorio.htm">Relatório</a></li>
-		<li class="tabmenu tabmenu_on"><a href="coletor.htm">Coletor</a></li>
-	</ul>
+		</nav>
+	</header>
 
 	<div id="logos-big-screen">
 		<img class="left-logo" src="engeultra-big.png" width="150" height="40" alt="Logotipo Engeultra">
