@@ -40,96 +40,99 @@
 		</nav>
 	</header>
 
-	<div id="logos-big-screen">
-		<img class="left-logo" src="engeultra-big.png" width="150" height="40" alt="Logotipo Engeultra">
-		<img class="center-logo" src="vibra-big.png" width="150" height="40" alt="Logotipo Vibra">
-		<img class="right-logo" src="tridium-big.png" width="150" height="40" alt="Logotipo Tridium">
-	</div>
-
-	<div id="logos-small-screen">
-		<img class="left-logo" src="engeultra-small.png" width="110" height="35" alt="Logotipo Engeultra">
-		<img class="center-logo" src="vibra-small.png" width="110" height="35" alt="Logotipo Vibra">
-		<img class="right-logo" src="tridium-small.png" width="110" height="35" alt="Logotipo Tridium">
-	</div>
-
+	<main>
+		<section class="container">
+			<div id="logos__big-screen">
+				<img class="logos__left-logo" src="engeultra-big.png" width="150" height="40" alt="Logotipo Engeultra">
+				<img class="logos__center-logo" src="vibra-big.png" width="150" height="40" alt="Logotipo Vibra">
+				<img class="logos__right-logo" src="tridium-big.png" width="150" height="40" alt="Logotipo Tridium">
+			</div>
 		
-	<p class='title'>Relatório de Produção <br class="mobile-title-break">(30 dias)</p>
-	
-	<form action='index.htm' method='get' id='form1' name='form1' onsubmit='return false'>
-	<div class="hscroll">
-	<div class="pagebody">
+			<div id="logos__small-screen">
+				<img class="logos__left-logo" src="engeultra-small.png" width="110" height="35" alt="Logotipo Engeultra">
+				<img class="logos__center-logo" src="vibra-small.png" width="110" height="35" alt="Logotipo Vibra">
+				<img class="logos__right-logo" src="tridium-small.png" width="110" height="35" alt="Logotipo Tridium">
+			</div>
+		</section>
+		
+		<section class="content container">
 
-		<table class="table">
-			<tr>
-                <th></th>
-				<th>Receita 1</th>
-				<th>Receita 2</th>
-                <th>Receita 3</th>
-                <th>Receita 4</th>
-                <th>Receita 5</th>
-			</tr> 
-			<tr>
-				<td>Tempo de Produção</td>
-				<td><input type="text" name="" id="" value="8000" readonly></td>
-				<td><input type="text" name="" id="" value="8000" readonly></td>
-				<td><input type="text" name="" id="" value="8000" readonly></td>
-				<td><input type="text" name="" id="" value="8000" readonly></td>
-				<td><input type="text" name="" id="" value="8000" readonly></td>
-            </tr>
-            <tr>
-				<td>Tempo de Ociosidade Esteira</td>
-				<td><input type="text" name="" id="" value="500" readonly></td>
-				<td><input type="text" name="" id="" value="500" readonly></td>
-				<td><input type="text" name="" id="" value="500" readonly></td>
-				<td><input type="text" name="" id="" value="500" readonly></td>
-				<td><input type="text" name="" id="" value="500" readonly></td>
-            </tr>
-            <tr>
-				<td>Degelo</td>
-				<td><input type="text" name="" id="" value="1000" readonly></td>
-				<td><input type="text" name="" id="" value="1000" readonly></td>
-				<td><input type="text" name="" id="" value="1000" readonly></td>
-				<td><input type="text" name="" id="" value="1000" readonly></td>
-				<td><input type="text" name="" id="" value="1000" readonly></td>
-            </tr>
-            <tr>
-				<td>Paradas por Processo</td>
-				<td><input type="text" name="" id="" value="2" readonly></td>
-				<td><input type="text" name="" id="" value="2" readonly></td>
-				<td><input type="text" name="" id="" value="2" readonly></td>
-				<td><input type="text" name="" id="" value="2" readonly></td>
-				<td><input type="text" name="" id="" value="2" readonly></td>
-            </tr>
-            <tr>
-				<td>Paradas por Alarme</td>
-				<td><input type="text" name="" id="" value="1" readonly></td>
-				<td><input type="text" name="" id="" value="1" readonly></td>
-				<td><input type="text" name="" id="" value="1" readonly></td>
-				<td><input type="text" name="" id="" value="1" readonly></td>
-				<td><input type="text" name="" id="" value="1" readonly></td>
-            </tr>
-            <tr>
-				<td>Leitura Balança (Kg/h)</td>
-				<td><input type="text" name="" id="" value="20000" readonly></td>
-				<td><input type="text" name="" id="" value="20000" readonly></td>
-				<td><input type="text" name="" id="" value="20000" readonly></td>
-				<td><input type="text" name="" id="" value="20000" readonly></td>
-				<td><input type="text" name="" id="" value="20000" readonly></td>
-            </tr>
-            <tr>
-				<td>Leitura Embaladora (Kg/h)</td>
-				<td><input type="text" name="" id="" value="20000" readonly></td>
-				<td><input type="text" name="" id="" value="20000" readonly></td>
-				<td><input type="text" name="" id="" value="20000" readonly></td>
-				<td><input type="text" name="" id="" value="20000" readonly></td>
-				<td><input type="text" name="" id="" value="20000" readonly></td>
-            </tr>
-        </table>
-        <p>Valores em MINUTOS</p>
-        <p id='report-date'></p>
-	</div>
-	</div>
-    </form>
+			<p class='content__page-title'>Relatório de Produção <br class="content__mobile-title-break">(30 dias)</p>
+		
+			<form action='index.htm' method='get' id='form1' name='form1' onsubmit='return false'>
+				<div class="hscroll">	
+					<table class="table">
+						<tr>
+							<th></th>
+							<th>Receita 1</th>
+							<th>Receita 2</th>
+							<th>Receita 3</th>
+							<th>Receita 4</th>
+							<th>Receita 5</th>
+						</tr> 
+						<tr>
+							<td>Tempo de Produção</td>
+							<td><input type="text" name="" id="" value="8000" readonly></td>
+							<td><input type="text" name="" id="" value="8000" readonly></td>
+							<td><input type="text" name="" id="" value="8000" readonly></td>
+							<td><input type="text" name="" id="" value="8000" readonly></td>
+							<td><input type="text" name="" id="" value="8000" readonly></td>
+						</tr>
+						<tr>
+							<td>Tempo de Ociosidade Esteira</td>
+							<td><input type="text" name="" id="" value="500" readonly></td>
+							<td><input type="text" name="" id="" value="500" readonly></td>
+							<td><input type="text" name="" id="" value="500" readonly></td>
+							<td><input type="text" name="" id="" value="500" readonly></td>
+							<td><input type="text" name="" id="" value="500" readonly></td>
+						</tr>
+						<tr>
+							<td>Degelo</td>
+							<td><input type="text" name="" id="" value="1000" readonly></td>
+							<td><input type="text" name="" id="" value="1000" readonly></td>
+							<td><input type="text" name="" id="" value="1000" readonly></td>
+							<td><input type="text" name="" id="" value="1000" readonly></td>
+							<td><input type="text" name="" id="" value="1000" readonly></td>
+						</tr>
+						<tr>
+							<td>Paradas por Processo</td>
+							<td><input type="text" name="" id="" value="2" readonly></td>
+							<td><input type="text" name="" id="" value="2" readonly></td>
+							<td><input type="text" name="" id="" value="2" readonly></td>
+							<td><input type="text" name="" id="" value="2" readonly></td>
+							<td><input type="text" name="" id="" value="2" readonly></td>
+						</tr>
+						<tr>
+							<td>Paradas por Alarme</td>
+							<td><input type="text" name="" id="" value="1" readonly></td>
+							<td><input type="text" name="" id="" value="1" readonly></td>
+							<td><input type="text" name="" id="" value="1" readonly></td>
+							<td><input type="text" name="" id="" value="1" readonly></td>
+							<td><input type="text" name="" id="" value="1" readonly></td>
+						</tr>
+						<tr>
+							<td>Leitura Balança (Kg/h)</td>
+							<td><input type="text" name="" id="" value="20000" readonly></td>
+							<td><input type="text" name="" id="" value="20000" readonly></td>
+							<td><input type="text" name="" id="" value="20000" readonly></td>
+							<td><input type="text" name="" id="" value="20000" readonly></td>
+							<td><input type="text" name="" id="" value="20000" readonly></td>
+						</tr>
+						<tr>
+							<td>Leitura Embaladora (Kg/h)</td>
+							<td><input type="text" name="" id="" value="20000" readonly></td>
+							<td><input type="text" name="" id="" value="20000" readonly></td>
+							<td><input type="text" name="" id="" value="20000" readonly></td>
+							<td><input type="text" name="" id="" value="20000" readonly></td>
+							<td><input type="text" name="" id="" value="20000" readonly></td>
+						</tr>
+					</table>
+					<p>Valores em MINUTOS</p>
+					<p id='report-date'></p>
+				</div>
+			</form>
+		</section>
+	</main>
 	<script type='text/javascript'>
 		EVO_CheckPassword('', 1);
 		EVO_PageInit(1000);

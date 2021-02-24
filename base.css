@@ -18,7 +18,7 @@
 	margin: auto;
 }
 
-/* ----------------- gestione menu con tab ----------------- */
+/* ------------- HEADER ------------ */
 .header {
 	background-color: var(--color-main);
 	height: 60px;
@@ -62,8 +62,6 @@
 	width: auto;
 }
 
-
-/* ----------------- gestione sottomenu a tendina ----------------- */
 .header__submenu {
 	display: none;
 	background-color: var(--bg-color-light);
@@ -97,7 +95,7 @@
 	color: var(--color-main);
 }
 
-/*----------------*/
+/* ------------- LOGOS ------------ */
 #logos__big-screen {
 	width: 100%;
 	text-align: center;
@@ -118,14 +116,28 @@
 	float: right;
 }
 
-.title {
+/* ------------- MAIN ------------ */
+.content {
+	margin-top: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.content__page-title {
 	font: bold 30px Arial,sans-serif;
-	text-align: center;
 	color: var(--color-light);
+	margin-bottom: 15px;
+	text-align: center;
+}
+
+.content__section-title {
+	font: bold 20px Arial,sans-serif;
+	color: var(--color-main);
+	margin-bottom: 15px;
 }
 
 /* Br element will only break title in small screens */
-.mobile-title-break {
+.content__mobile-title-break {
 	display: none;
 }
 
@@ -191,17 +203,6 @@
 	background-color: var(--bg-color-light);
 }
 
-.sectiontitle {
-	font: bold 20px Arial,sans-serif;
-	margin-bottom: 15px;
-	color: var(--color-main);
-}
-
-.pagebody {
-	padding-left: 20px;
-	padding-right: 20px;
-}
-
 /* When the screen is less than (max-width) pixels wide, hide all links, except for the first one: the menu icon. 
 Show the link that should open and close the menu (.icon) */
 @media screen and (max-width: 1000px) {
@@ -239,11 +240,12 @@ Show the link that should open and close the menu (.icon) */
 		display: inline-block;
 	}
 
-	.title {
+	.content__title {
 		font-size: 20px;
 		margin-top: 15px;
 		margin-bottom: 20px;
 	}
+
 	/* Allow overflown content to be scrolled horizontally in responsive mode */
 	.hscroll {
 		overflow-x: auto;
@@ -276,7 +278,7 @@ Show the link that should open and close the menu (.icon) */
 
 @media screen and (max-width: 600px) {
 	/* Br element will only break title in small screens */
-	.mobile-title-break {
+	.content__mobile-title-break {
 		display: inherit;
 	}
 }

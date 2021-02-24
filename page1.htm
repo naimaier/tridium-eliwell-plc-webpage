@@ -12,7 +12,6 @@
 	<link rel="stylesheet" href="reset.css">
 	<link rel='stylesheet' type='text/css' href='base.css'>
 	<link rel='shortcut icon' href='base.ico'>
-	
 </head>
 <body>
 	<header class="header container">
@@ -40,53 +39,58 @@
 		</nav>
 	</header>
 	
-	<div id="logos-big-screen">
-		<img class="left-logo" src="engeultra-big.png" width="150" height="40" alt="Logotipo Engeultra">
-		<img class="center-logo" src="vibra-big.png" width="150" height="40" alt="Logotipo Vibra">
-		<img class="right-logo" src="tridium-big.png" width="150" height="40" alt="Logotipo Tridium">
-	</div>
-
-	<div id="logos-small-screen">
-		<img class="left-logo" src="engeultra-small.png" width="110" height="35" alt="Logotipo Engeultra">
-		<img class="center-logo" src="vibra-small.png" width="110" height="35" alt="Logotipo Vibra">
-		<img class="right-logo" src="tridium-small.png" width="110" height="35" alt="Logotipo Tridium">
-	</div>
+	<main>
+		<section class="container">
+			<div id="logos__big-screen">
+				<img class="logos__left-logo" src="engeultra-big.png" width="150" height="40" alt="Logotipo Engeultra">
+				<img class="logos__center-logo" src="vibra-big.png" width="150" height="40" alt="Logotipo Vibra">
+				<img class="logos__right-logo" src="tridium-big.png" width="150" height="40" alt="Logotipo Tridium">
+			</div>
 		
-	<p class='title'>ResetFile</p>
-	
-	<form action='page1.htm' method='get' id='form1' name='form1' onsubmit='return false'>
-	<div class='pagebody'>
+			<div id="logos__small-screen">
+				<img class="logos__left-logo" src="engeultra-small.png" width="110" height="35" alt="Logotipo Engeultra">
+				<img class="logos__center-logo" src="vibra-small.png" width="110" height="35" alt="Logotipo Vibra">
+				<img class="logos__right-logo" src="tridium-small.png" width="110" height="35" alt="Logotipo Tridium">
+			</div>
+		</section>
+		
+		<section class="content container">
 
-		<p class='sectiontitle'></p>
-		<table class='table'>
-			<tr>
-				<th>Name</th>
-				<th>Value</th>
-				<th>Um</th>
-			</tr> 
-			<tr>
-				<td>ResetFile01</td>
-				<td><script type='text/javascript'>EVO_Button(true,'b09024',1,'True',''); </script></td>
-				<td></td>
-			</tr> 
-			<tr>
-				<td>ResetFile02</td>
-				<td><script type='text/javascript'>EVO_Button(true,'b09025',1,'True',''); </script></td>
-				<td></td>
-			</tr> 
-			<tr>
-				<td>ResetFile03</td>
-				<td><script type='text/javascript'>EVO_Button(true,'b09026',1,'True',''); </script></td>
-				<td></td>
-			</tr> 
-		</table>
-
-	</div>
-	</form>
+			<p class='content__page-title'>ResetFile</p>
+			
+			<form action='page1.htm' method='get' id='form1' name='form1' onsubmit='return false'>
 	
+				<p class='content__section-title'></p>
+
+				<table class='table'>
+					<tr>
+						<th>Name</th>
+						<th>Value</th>
+						<th>Um</th>
+					</tr> 
+					<tr>
+						<td>ResetFile01</td>
+						<td><script type='text/javascript'>EVO_Button(true,'b09024',1,'True',''); </script></td>
+						<td></td>
+					</tr> 
+					<tr>
+						<td>ResetFile02</td>
+						<td><script type='text/javascript'>EVO_Button(true,'b09025',1,'True',''); </script></td>
+						<td></td>
+					</tr> 
+					<tr>
+						<td>ResetFile03</td>
+						<td><script type='text/javascript'>EVO_Button(true,'b09026',1,'True',''); </script></td>
+						<td></td>
+					</tr> 
+				</table>
+			</form>
+		</section>
+	</main>
+		
 	<script type='text/javascript'>
-	EVO_CheckPassword('9PX2', 1);
-	EVO_PageInit(1000);
+		EVO_CheckPassword('9PX2', 1); 
+		EVO_PageInit(1000);
 	</script>
 </body>
 </html>

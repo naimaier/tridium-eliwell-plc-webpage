@@ -40,44 +40,45 @@
 		</nav>
 	</header>
 
-	<div id="logos-big-screen">
-		<img class="left-logo" src="engeultra-big.png" width="150" height="40" alt="Logotipo Engeultra">
-		<img class="center-logo" src="vibra-big.png" width="150" height="40" alt="Logotipo Vibra">
-		<img class="right-logo" src="tridium-big.png" width="150" height="40" alt="Logotipo Tridium">
-	</div>
-
-	<div id="logos-small-screen">
-		<img class="left-logo" src="engeultra-small.png" width="110" height="35" alt="Logotipo Engeultra">
-		<img class="center-logo" src="vibra-small.png" width="110" height="35" alt="Logotipo Vibra">
-		<img class="right-logo" src="tridium-small.png" width="110" height="35" alt="Logotipo Tridium">
-	</div>
-
+	<main>
+		<section class="container">
+			<div id="logos__big-screen">
+				<img class="logos__left-logo" src="engeultra-big.png" width="150" height="40" alt="Logotipo Engeultra">
+				<img class="logos__center-logo" src="vibra-big.png" width="150" height="40" alt="Logotipo Vibra">
+				<img class="logos__right-logo" src="tridium-big.png" width="150" height="40" alt="Logotipo Tridium">
+			</div>
 		
-	<p class='title'>Coletor <br class="mobile-title-break"></p>
-
+			<div id="logos__small-screen">
+				<img class="logos__left-logo" src="engeultra-small.png" width="110" height="35" alt="Logotipo Engeultra">
+				<img class="logos__center-logo" src="vibra-small.png" width="110" height="35" alt="Logotipo Vibra">
+				<img class="logos__right-logo" src="tridium-small.png" width="110" height="35" alt="Logotipo Tridium">
+			</div>
+		</section>
 	
-	<div class="pagebody">
-		<table>
-			<tr>
-				<td>Início da coleta: </td>
-				<td><input type="date" data-start-date></td>
-				<td><input type="time" data-start-time></td>
-			</tr>
-			<tr>
-				<td>Fim da coleta: </td>
-				<td><input type="date" data-end-date></td>
-				<td><input type="time" data-end-time></td>
-			</tr>
-		</table>
-		<button id="btn-coletar" onclick="coletar()">Coletar</button>
-		
-		<div data-table-nav-container></div>
-		<div class="hscroll">
-			<table class="table" data-table></table>
-		</div>
-		<p data-report-date></p>
-	</div>
-
+		<section class="content container">
+			<p class='content__page-title'>Coletor <br class="mobile-title-break"></p>
+				<table>
+					<tr>
+						<td>Início da coleta: </td>
+						<td><input type="date" data-start-date></td>
+						<td><input type="time" data-start-time></td>
+					</tr>
+					<tr>
+						<td>Fim da coleta: </td>
+						<td><input type="date" data-end-date></td>
+						<td><input type="time" data-end-time></td>
+					</tr>
+				</table>
+				<button id="btn-coletar" onclick="coletar()">Coletar</button>
+				
+				<div data-table-nav-container></div>
+				<div class="hscroll">
+					<table class="table" data-table></table>
+				</div>
+				<p data-report-date></p>
+		</section>
+	</main>
+	
 	<script type='text/javascript'>
 		EVO_CheckPassword('', 1);
 	</script>

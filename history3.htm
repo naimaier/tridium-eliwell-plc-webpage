@@ -48,70 +48,72 @@
 		</nav>
 	</header>
 	
-	<div id="logos-big-screen">
-		<img class="left-logo" src="engeultra-big.png" width="150" height="40" alt="Logotipo Engeultra">
-		<img class="center-logo" src="vibra-big.png" width="150" height="40" alt="Logotipo Vibra">
-		<img class="right-logo" src="tridium-big.png" width="150" height="40" alt="Logotipo Tridium">
-	</div>
-
-	<div id="logos-small-screen">
-		<img class="left-logo" src="engeultra-small.png" width="110" height="35" alt="Logotipo Engeultra">
-		<img class="center-logo" src="vibra-small.png" width="110" height="35" alt="Logotipo Vibra">
-		<img class="right-logo" src="tridium-small.png" width="110" height="35" alt="Logotipo Tridium">
-	</div>
-	
-	<table style="padding-left: 20px; padding-right: 20px;">
-		<tr>
-			<td> Register Temperature </td>
-			<td><script type='text/javascript'>EVO_Button(true,'b09023',1,'True',''); </script></td>
-			<td></td>
-		</tr> 	
-	</table>
-	
-	<!--<p class='title'>Dati - Historical</p>-->
-	
-	<form action='history.htm' method='get' id='form1' name='form1'>
-	<div class='pagebody'>
-
-		<!--<p class='sectiontitle'> Hystorical Rev.9 </p>	-->
+	<main>
+		<section class="container">
+			<div id="logos__big-screen">
+				<img class="logos__left-logo" src="engeultra-big.png" width="150" height="40" alt="Logotipo Engeultra">
+				<img class="logos__center-logo" src="vibra-big.png" width="150" height="40" alt="Logotipo Vibra">
+				<img class="logos__right-logo" src="tridium-big.png" width="150" height="40" alt="Logotipo Tridium">
+			</div>
 		
-		<!--  Revision history 
-		- Rev.03 Initial release alligned with datalogger Rev.03
-		- Rev.04 Added auto refresh and load automatically current CSV file
-		- Rev.07 Change header file from header.csv to heder.txt
-		-->
+			<div id="logos__small-screen">
+				<img class="logos__left-logo" src="engeultra-small.png" width="110" height="35" alt="Logotipo Engeultra">
+				<img class="logos__center-logo" src="vibra-small.png" width="110" height="35" alt="Logotipo Vibra">
+				<img class="logos__right-logo" src="tridium-small.png" width="110" height="35" alt="Logotipo Tridium">
+			</div>
+		</section>
 		
-		<div id="dataContainer" style="border: 1px #232323 dotted;float:left; padding:10px; margin-bottom:10px;">
+		<section class="content container">
+			<table style="padding-left: 20px; padding-right: 20px;">
+				<tr>
+					<td> Register Temperature </td>
+					<td><script type='text/javascript'>EVO_Button(true,'b09023',1,'True',''); </script></td>
+					<td></td>
+				</tr> 	
+			</table>
 			
-			<label for="data" style="color: #2b353f; font-weight: bold;" >Date</label>
-			<input type="text" id="data" name="data" readonly="readonly" class="date-picker" />
-			<label style="color: #2b353f; font-weight: bold;" >Height</label>
-			<select id="comboHight" name="comboHight" > 
-				<option value="450">Default</OPTION>
-				<option value="450">Small</OPTION>
-				<option value="650">Mean</OPTION>
-				<option value="850">Big</OPTION> 
-			</select> 
-			<input type="button" id="LoadData" style="margin-left:5px;" name="Load data" value="Load Data" />
-			<input type="button" id="checkAll" style="margin-left:5px;" name="Check All" value="Check All" />
-			<input type="button" id="checkNone" style="margin-left:5px;" name="Uncheck All" value="Uncheck All" />
-			<input type="button" id="autoRefresh" style="margin-left:5px;" name="Auto Refresh is OFF" value="Auto Refresh is OFF" />
-		</div>
-		<div style="clear:both"></div>
-		<div id="GraphOption" style="border: 1px #232323 dotted;float:left; padding:10px; margin-bottom:10px;color: #232323; font-weight: bold;">
-		<div style="clear:both"></div>
-		</div>
-		
-		<div style="clear:both"></div>
-		
-		<div id="legend"></div>
-		<div id="graphdiv" style="width:auto;"></div>
-		<p>&nbsp;</p>
-		<!-- Alarms -->
-		<span id="t09025" style="display:none;"></span>
-	</div>
-	</div>
-	</form>
+			<form action='history.htm' method='get' id='form1' name='form1'>
+
+				<!--<p class='sectiontitle'> Hystorical Rev.9 </p>	-->
+				
+				<!--  Revision history 
+					- Rev.03 Initial release alligned with datalogger Rev.03
+					- Rev.04 Added auto refresh and load automatically current CSV file
+					- Rev.07 Change header file from header.csv to heder.txt
+				-->
+				
+				<div id="dataContainer" style="border: 1px #232323 dotted;float:left; padding:10px; margin-bottom:10px;">
+					<label for="data" style="color: #2b353f; font-weight: bold;" >Date</label>
+					<input type="text" id="data" name="data" readonly="readonly" class="date-picker" />
+					<label style="color: #2b353f; font-weight: bold;" >Height</label>
+					<select id="comboHight" name="comboHight" > 
+						<option value="450">Default</OPTION>
+						<option value="450">Small</OPTION>
+						<option value="650">Mean</OPTION>
+						<option value="850">Big</OPTION> 
+					</select> 
+					<input type="button" id="LoadData" style="margin-left:5px;" name="Load data" value="Load Data" />
+					<input type="button" id="checkAll" style="margin-left:5px;" name="Check All" value="Check All" />
+					<input type="button" id="checkNone" style="margin-left:5px;" name="Uncheck All" value="Uncheck All" />
+					<input type="button" id="autoRefresh" style="margin-left:5px;" name="Auto Refresh is OFF" value="Auto Refresh is OFF" />
+				</div>
+
+				<div style="clear:both"></div>
+
+				<div id="GraphOption" style="border: 1px #232323 dotted;float:left; padding:10px; margin-bottom:10px;color: #232323; font-weight: bold;">
+					<div style="clear:both"></div>
+				</div>
+								
+				<div style="clear:both"></div>
+				
+				<div id="legend"></div>
+				<div id="graphdiv" style="width:auto;"></div>
+				<p>&nbsp;</p>
+				<!-- Alarms -->
+				<span id="t09025" style="display:none;"></span>
+			</form>
+		</section>	
+	</main>
 	
 	<script type='text/javascript'>
 	EVO_CheckPassword('', 1);

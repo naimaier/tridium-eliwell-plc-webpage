@@ -35,28 +35,40 @@ t			</ul>
 t		</nav>
 t	</header>
 t 	
+t   <main>
+t 		<section class="container">
+t			<div id="logos__big-screen">
+t				<img class="logos__left-logo" src="engeultra-big.png" width="150" height="40" alt="Logotipo Engeultra">
+t				<img class="logos__center-logo" src="vibra-big.png" width="150" height="40" alt="Logotipo Vibra">
+t				<img class="logos__right-logo" src="tridium-big.png" width="150" height="40" alt="Logotipo Tridium">
+t			</div>
+t		
+t			<div id="logos__small-screen">
+t				<img class="logos__left-logo" src="engeultra-small.png" width="110" height="35" alt="Logotipo Engeultra">
+t				<img class="logos__center-logo" src="vibra-small.png" width="110" height="35" alt="Logotipo Vibra">
+t				<img class="logos__right-logo" src="tridium-small.png" width="110" height="35" alt="Logotipo Tridium">
+t			</div>
+t		</section>
+t
+t 		<section class="content container">
+t 	        <p class='content__page-title'>Evolution Data Logger</p>
 t 	
-t 		
-t 	<p class='title'>Evolution Data Logger</p>
-t 	
-t 	<div class='pagebody'>
-t 
-t 		<p class='sectiontitle'></p>
-t 		<table class='table'>
-t 			<tr>
-t 				<th>File name</th>
-t 				<th>Size [byte]</th>
-t 			</tr> 
+t 		    <p class='content__section-title'></p>
+t 		    <table class='table'>
+t 			    <tr>
+t 				    <th>File name</th>
+t 				    <th>Size [byte]</th>
+t 			    </tr> 
 c l								
 t 			
-t 		</table>
-t 
-t 	</div>
+t 		    </table>
+t       </section>
+t   </main>
 t 	
 t 	<script type='text/javascript'>
-t 	EVO_CheckPassword('', 1);
-t 	EVO_Image('imgLogo', 'BASE.PNG', '', '', '');
-t 	EVO_PageInit(0);
+t 	    EVO_CheckPassword('', 1);
+t 	    EVO_Image('imgLogo', 'BASE.PNG', '', '', '');
+t 	    EVO_PageInit(0);
 t 	</script>
 t </body>
 t </html>
