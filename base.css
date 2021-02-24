@@ -13,13 +13,9 @@
 
 .container {
 	background-color: var(--bg-color-main);
-	/* Talvez colocar aqui as margens
-	mas depende de como ficam os logos
 
-	padding: 0px;
-	margin: 0px;
 	max-width: 1920px;
-	margin: auto; */
+	margin: auto;
 }
 
 /* ----------------- gestione menu con tab ----------------- */
@@ -102,33 +98,24 @@
 }
 
 /*----------------*/
-#logos-big-screen {
+#logos__big-screen {
 	width: 100%;
 	text-align: center;
 	margin-top: 5px;
 }
 
-#logos-small-screen {
+#logos__small-screen {
 	width: 100%;
 	display: none;
 	text-align: center;
 }
 
-.left-logo {
+.logos__left-logo {
 	float: left;
 }
 
-.right-logo {
+.logos__right-logo {
 	float: right;
-}
-
-#imgLogo {
-	background-color: var(--bg-color-main);
-	position: absolute;
-	top: 0px; 
-	right: 0px;
-	padding-left: 10px;
-	z-index: 1; /* When menu is open it must cover the logo */
 }
 
 .title {
@@ -245,6 +232,13 @@ Show the link that should open and close the menu (.icon) */
 		display: block;
 	}
 
+	#logos__big-screen {
+		display: none;
+	}
+	#logos__small-screen {
+		display: inline-block;
+	}
+
 	.title {
 		font-size: 20px;
 		margin-top: 15px;
@@ -266,12 +260,7 @@ Show the link that should open and close the menu (.icon) */
 	.table th {
 		white-space: nowrap;
 	}
-	#logos-big-screen {
-		display: none;
-	}
-	#logos-small-screen {
-		display: inline-block;
-	}
+	
 	.table-nav-mobile {
 		display: inline;
 		height: 60px;
