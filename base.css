@@ -141,7 +141,7 @@
 	display: none;
 }
 
-.table {
+.content__table {
 	background-color: var(--bg-color-dark);
 	width: 100%;
 	font: normal 14px Arial,sans-serif;
@@ -152,25 +152,27 @@
 	padding: 5px;
 }
 
-.table th {
+.content__table th {
 	color: var(--color-light);
 	text-align: left;
+	padding-top: 5px;
+	font-weight: bold;
 }
 
-.table tr {
+.content__table tr {
 	height: 40px;
 }
 
-.table td {
+.content__table td {
 	padding: 5px;
 }
 
-.table input[readonly] {
+.content__table input[readonly] {
 	background-color: var(--bg-color-dark);
 	border: none;
 }
 
-#btn-coletar {
+#collector__button {
 	width: 150px;
 	height: 40px;
 	color: white;
@@ -179,14 +181,7 @@
 	margin-bottom: 10px;
 }
 
-.table-nav-mobile {
-	display: none;
-	font-size: 1.25em;
-	min-width: 40px;
-	min-height: 40px;
-}
-
-.btn-table-nav {
+.collector__table-nav-button {
 	margin-bottom: 5px;
 	min-width: 40px;
 	height: 40px;
@@ -195,12 +190,19 @@
 	outline: none;
 }
 
-.btn-table-nav[disabled]:hover {
+.collector__table-nav-button[disabled]:hover {
 	background-color: inherit;
 }
 
-.btn-table-nav:hover {
+.collector__table-nav-button:hover {
 	background-color: var(--bg-color-light);
+}
+
+.collector__table-nav-button--mobile {
+	display: none;
+	font-size: 1.25em;
+	min-width: 40px;
+	min-height: 40px;
 }
 
 /* When the screen is less than (max-width) pixels wide, hide all links, except for the first one: the menu icon. 
@@ -246,33 +248,33 @@ Show the link that should open and close the menu (.icon) */
 		margin-bottom: 20px;
 	}
 
-	/* Allow overflown content to be scrolled horizontally in responsive mode */
-	.hscroll {
-		overflow-x: auto;
-	}
-	/* Needed for the padding-right of the scroll element to work properly */
-	.hscroll > .pagebody {
-		display: inline-block;
-	}
 	/* Fixing input width to the width of the data displayed */
-	.table td input {
+	.content__table td input {
 		width: 100%;
 	}
+
 	/* Allow table headers to be displayed without wrapping content */
-	.table th {
+	.content__table th {
 		white-space: nowrap;
 	}
+
+	#collector__button {
+		width: 100%;
+	}
 	
-	.table-nav-mobile {
+	.collector__table-nav-button {
+		display: none;
+	}
+
+	.collector__table-nav-button--mobile {
 		display: inline;
 		height: 60px;
 		width: 60px;
 	}
-	.btn-table-nav {
-		display: none;
-	}
-	#btn-coletar {
-		width: 100%;
+
+	/* Allow overflown content to be scrolled horizontally in responsive mode */
+	.hscroll {
+		overflow-x: auto;
 	}
 }
 
@@ -288,10 +290,10 @@ Show the link that should open and close the menu (.icon) */
 	.header {
 		display: none;
 	}
-	.table {
+	.content__table {
 		background-color: white;
 	}
-	.table td {
+	.content__table td {
 		white-space: nowrap;
 	}
 }

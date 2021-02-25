@@ -274,23 +274,23 @@ function addNavigationButtons(currentPage, indexes, navigationElement) {
 
     // Mobile navigation
     const btnPrevMob = createTableNavButton('<', indexes['<'])
-    btnPrevMob.classList.add('table-nav-mobile')
+    btnPrevMob.classList.add('collector__table-nav-button--mobile')
     navigationElement.appendChild(btnPrevMob)
 
     const btnNextMob = createTableNavButton('>', indexes['>'])
-    btnNextMob.classList.add('table-nav-mobile')
+    btnNextMob.classList.add('collector__table-nav-button--mobile')
     navigationElement.appendChild(btnNextMob)
 
     let pageCount = document.createElement('p')
     pageCount.innerHTML = `  ${currentPage} / ${indexes['pages'][indexes['pages'].length - 1]}`
-    pageCount.classList.add('table-nav-mobile')
+    pageCount.classList.add('collector__table-nav-button--mobile')
     navigationElement.appendChild(pageCount)
 }
 
 function createTableNavButton(text, targetPage) {
     const pageButton = document.createElement('button')
     pageButton.innerHTML = text
-    pageButton.classList.add('btn-table-nav')
+    pageButton.classList.add('collector__table-nav-button')
     if (targetPage) {
         pageButton.onclick = () => displayTablePage(targetPage)
     } else {
