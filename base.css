@@ -172,6 +172,10 @@
 	border: none;
 }
 
+.collector__input-table td {
+	padding: 2px;
+}
+
 #collector__button {
 	width: 150px;
 	height: 40px;
@@ -295,5 +299,8 @@ Show the link that should open and close the menu (.icon) */
 	}
 	.content__table td {
 		white-space: nowrap;
+	}
+	#collector__button {
+		display: none;
 	}
 }
