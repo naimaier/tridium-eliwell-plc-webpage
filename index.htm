@@ -1,9 +1,10 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
 	<META name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Data Logger</title>
+	<script type='text/javascript' src='evo_h.js'></script>
 	<script type='text/javascript' src='evo.js'></script>
 	<script type='text/javascript' src='base.js'></script>
 	<link rel="stylesheet" href="reset.css">
@@ -22,23 +23,18 @@
 						<i class="fas fa-bars"></i>
 					</a>
 				</li>
-				<li class="header__menu-item active"><a href="#">Data</a> 
+				<li class="header__menu-item active"><a href="index.htm">Relatório</a></li>
+				<li class="header__menu-item"><a href="data.htm">Data</a> 
 					<ul class="header__submenu">
 						<li class="header__submenu-item"><a href="page1.htm">ResetFile</a></li> 
 						<li class="header__submenu-item"><a href="page2.htm">AIValue</a></li> 
 					</ul>
-				 </li> 
-				<li class="header__menu-item"><a href="files.cgi">Logged Files</a>  </li> 
-				<li class="header__menu-item"><a href="history1.htm">History 1</a>  </li> 
-				<li class="header__menu-item"><a href="history2.htm">History 2</a>  </li> 
-				<li class="header__menu-item"><a href="history3.htm">History 3</a>  </li>
-				<li class="header__menu-item"><a href="trends.htm">AI trends</a>  </li> 
-				<li class="header__menu-item"><a href="relatorio.htm">Relatório</a></li>
+				 </li>
 				<li class="header__menu-item"><a href="coletor.htm">Coletor</a></li>
 			</ul>
 		</nav>
 	</header>
-	
+
 	<main>
 		<section class="container">
 			<div id="logos__big-screen">
@@ -53,377 +49,108 @@
 				<img class="logos__right-logo" src="tridium-small.png" width="110" height="35" alt="Logotipo Tridium">
 			</div>
 		</section>
-
+		
 		<section class="content container">
-			<p class='content__page-title'>Data Logger</p>
-	
+
+			<p class='content__page-title'>Relatório de Produção <br class="content__mobile-title-break">(30 dias)</p>
+		
 			<form action='index.htm' method='get' id='form1' name='form1' onsubmit='return false'>
-
-				<p class='content__section-title'>Info</p>
-				<table class='content__table'>
-					<tr>
-						<th>Name</th>
-						<th>Value</th>
-						<th>Um</th>
-					</tr> 
-					<tr>
-						<td>Logger Version</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t08988',10,10,0,0,'')</script></td>
-						<td></td>
-					</tr> 
-				</table>
-
-				<p class='content__section-title'>Log Data</p>
-				<table class='content__table'>
-					<tr>
-						<th>Name</th>
-						<th>Value</th>
-						<th>Um</th>
-					</tr> 
-					<tr>
-						<td>Analog Input 1</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t08960',10,10,1,1,' readonly')</script></td>
-						<td>&deg;C</td>
-					</tr> 
-					<tr>
-						<td>Analog Input 2</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t08961',10,10,1,1,' readonly')</script></td>
-						<td>&deg;C</td>
-					</tr> 
-					<tr>
-						<td>Analog Input 3</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t08962',10,10,1,1,' readonly')</script></td>
-						<td>&deg;C</td>
-					</tr> 
-					<tr>
-						<td>Analog Input 4</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t08963',10,10,1,1,' readonly')</script></td>
-						<td>&deg;C</td>
-					</tr> 
-					<tr>
-						<td>Analog Input 5</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t08964',10,10,1,1,' readonly')</script></td>
-						<td>&deg;C</td>
-					</tr> 
-					<tr>
-						<td>Analog Input 6</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t08965',10,10,1,1,' readonly')</script></td>
-						<td>&deg;C</td>
-					</tr> 
-					<tr>
-						<td>Analog Input 6</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t08966',10,10,1,1,' readonly')</script></td>
-						<td>&deg;C</td>
-					</tr> 
-					<tr>
-						<td>Analog Input 6</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t08967',10,10,1,1,' readonly')</script></td>
-						<td>&deg;C</td>
-					</tr> 
-					<tr>
-						<td>Analog Input 6</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t08968',10,10,1,1,' readonly')</script></td>
-						<td>&deg;C</td>
-					</tr> 
-					<tr>
-						<td>Analog Input 6</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t08969',10,10,1,1,' readonly')</script></td>
-						<td>&deg;C</td>
-					</tr> 
-					<tr>
-						<td>Analog Input 6</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t08970',10,10,1,1,' readonly')</script></td>
-						<td>&deg;C</td>
-					</tr> 
-					<tr>
-						<td>Analog Input 6</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t08971',10,10,1,1,' readonly')</script></td>
-						<td>&deg;C</td>
-					</tr> 
-				</table>
-
-				<p class='content__section-title'>Logger Command</p>
-				<table class='content__table'>
-					<tr>
-						<th>Name</th>
-						<th>Value</th>
-						<th>Um</th>
-					</tr> 
-					<tr>
-						<td>Enable Log</td>
-						<td><script type='text/javascript'>EVO_Select(true,'s16384',{0:'False', 1:'True'},'')</script></td>
-						<td></td>
-					</tr> 
-					<tr>
-						<td>Log sycle (min)</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t16385',10,10,2,0,'')</script></td>
-						<td>Sec</td>
-					</tr> 
-				</table>
-
-				<p class='content__section-title'>Logger Status</p>
-				<table class='content__table'>
-					<tr>
-						<th>Name</th>
-						<th>Value</th>
-						<th>Um</th>
-					</tr> 
-					<tr>
-						<td>Loggin Error</td>
-						<td><script type='text/javascript'>EVO_Radio(true,'r08987',0,'False',' disabled'); EVO_Radio(true,'r08987',1,'True',' disabled'); </script></td>
-						<td></td>
-					</tr> 
-				</table>
-
-				<p class='content__section-title'>Logger Clock:</p>
-				<table class='content__table'>
-					<tr>
-						<th>Name</th>
-						<th>Value</th>
-						<th>Um</th>
-					</tr> 
-					<tr>
-						<td>Day:</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t08977',10,10,1,0,'')</script></td>
-						<td></td>
-					</tr> 
-					<tr>
-						<td>Month:</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t08978',10,10,1,0,'')</script></td>
-						<td></td>
-					</tr> 
-					<tr>
-						<td>Year:</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t08979',10,10,1,0,'')</script></td>
-						<td></td>
-					</tr> 
-					<tr>
-						<td>Hour:</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t08975',10,10,1,0,'')</script></td>
-						<td></td>
-					</tr> 
-					<tr>
-						<td>Minutes:</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t08974',10,10,1,0,'')</script></td>
-						<td></td>
-					</tr> 
-					<tr>
-						<td>Update command</td>
-						<td><script type='text/javascript'>EVO_Select(true,'s08980',{0:'Current Clock', 1:'Update Clock', 2:'Change Clock Values'},'')</script></td>
-						<td></td>
-					</tr> 
-				</table>
-
-				<p class='content__section-title'>AI Config</p>
-				<table class='content__table'>
-					<tr>
-						<th>Name</th>
-						<th>Value</th>
-						<th>Um</th>
-					</tr> 
-					<tr>
-						<td>Cfg_AI1</td>
-						<td><script type='text/javascript'>EVO_Select(true,'s15726',{0:'0=NTC(NK103)', 1:'1=DI', 2:'2=NTC(103AT)', 3:'3=4÷20mA', 4:'4=0÷10V', 5:'5=0÷5V(Ratiometric)', 6:'6=PT1000', 7:'7=hO(NTC)', 8:'8=daO(PT1000)', 9:'9=PTC', 10:'10=0÷5V', 11:'11=0÷20mA'},'')</script></td>
-						<td>num</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMin_AI1</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t15736',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMax_AI1</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t15737',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>Cfg_AI2</td>
-						<td><script type='text/javascript'>EVO_Select(true,'s15727',{0:'0=NTC(NK103)', 1:'1=DI', 2:'2=NTC(103AT)', 3:'3=4÷20mA', 4:'4=0÷10V', 5:'5=0÷5V(Ratiometric)', 6:'6=PT1000', 7:'7=hO(NTC)', 8:'8=daO(PT1000)', 9:'9=PTC', 10:'10=0÷5V', 11:'11=0÷20mA'},'')</script></td>
-						<td>num</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMin_AI2</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t15738',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMax_AI2</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t15739',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>Cfg_AI3</td>
-						<td><script type='text/javascript'>EVO_Select(true,'s15728',{0:'0=NTC(NK103)', 1:'1=DI', 2:'2=NTC(103AT)', 3:'3=4÷20mA', 4:'4=0÷10V', 5:'5=0÷5V(Ratiometric)', 6:'6=PT1000', 7:'7=hO(NTC)', 8:'8=daO(PT1000)', 9:'9=PTC', 10:'10=0÷5V', 11:'11=0÷20mA'},'')</script></td>
-						<td>num</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMin_AI3</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t15740',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMax_AI3</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t15741',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>Cfg_AI4</td>
-						<td><script type='text/javascript'>EVO_Select(true,'s15729',{0:'0=NTC(NK103)', 1:'1=DI', 2:'2=NTC(103AT)', 3:'3=4÷20mA', 4:'4=0÷10V', 5:'5=0÷5V(Ratiometric)', 6:'6=PT1000', 7:'7=hO(NTC)', 8:'8=daO(PT1000)', 9:'9=PTC', 10:'10=0÷5V', 11:'11=0÷20mA'},'')</script></td>
-						<td>num</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMin_AI4</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t15742',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMax_AI4</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t15743',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>Cfg_AI5</td>
-						<td><script type='text/javascript'>EVO_Select(true,'s15730',{0:'0=NTC(NK103)', 1:'1=DI', 2:'2=NTC(103AT)', 3:'3=4÷20mA', 4:'4=0÷10V', 5:'5=0÷5V(Ratiometric)', 6:'6=PT1000', 7:'7=hO(NTC)', 8:'8=daO(PT1000)', 9:'9=PTC', 10:'10=0÷5V', 11:'11=0÷20mA'},'')</script></td>
-						<td>num</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMin_AI5</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t15744',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMax_AI5</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t15745',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>Cfg_AI6</td>
-						<td><script type='text/javascript'>EVO_Select(true,'s15731',{0:'0=NTC(NK103)', 1:'1=DI', 2:'2=NTC(103AT)', 3:'3=4÷20mA', 4:'4=0÷10V', 5:'5=0÷5V(Ratiometric)', 6:'6=PT1000', 7:'7=hO(NTC)', 8:'8=daO(PT1000)', 9:'9=PTC', 10:'10=0÷5V', 11:'11=0÷20mA'},'')</script></td>
-						<td>num</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMin_AI6</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t15746',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMax_AI6</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t15747',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>Cfg_AI7</td>
-						<td><script type='text/javascript'>EVO_Select(true,'s16100',{0:'0=NTC(NK103)', 1:'1=DI', 2:'2=NTC(103AT)', 3:'3=4÷20mA', 4:'4=0÷10V', 5:'5=0÷5V(Ratiometric)', 6:'6=PT1000', 7:'7=hO(NTC)', 8:'8=daO(PT1000)', 9:'9=PTC', 10:'10=0÷5V', 11:'11=0÷20mA'},'')</script></td>
-						<td>num</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMin_AI7</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t16106',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMax_AI7</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t16107',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>Cfg_AI8</td>
-						<td><script type='text/javascript'>EVO_Select(true,'s16101',{0:'0=NTC(NK103)', 1:'1=DI', 2:'2=NTC(103AT)', 3:'3=4÷20mA', 4:'4=0÷10V', 5:'5=0÷5V(Ratiometric)', 6:'6=PT1000', 7:'7=hO(NTC)', 8:'8=daO(PT1000)', 9:'9=PTC', 10:'10=0÷5V', 11:'11=0÷20mA'},'')</script></td>
-						<td>num</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMin_AI8</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t16108',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMax_AI8</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t16109',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>Cfg_AI9</td>
-						<td><script type='text/javascript'>EVO_Select(true,'s16102',{0:'0=NTC(NK103)', 1:'1=DI', 2:'2=NTC(103AT)', 3:'3=4÷20mA', 4:'4=0÷10V', 5:'5=0÷5V(Ratiometric)', 6:'6=PT1000', 7:'7=hO(NTC)', 8:'8=daO(PT1000)', 9:'9=PTC', 10:'10=0÷5V', 11:'11=0÷20mA'},'')</script></td>
-						<td>num</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMin_AI9</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t16110',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMax_AI9</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t16111',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>Cfg_AI10</td>
-						<td><script type='text/javascript'>EVO_Select(true,'s16103',{0:'0=NTC(NK103)', 1:'1=DI', 2:'2=NTC(103AT)', 3:'3=4÷20mA', 4:'4=0÷10V', 5:'5=0÷5V(Ratiometric)', 6:'6=PT1000', 7:'7=hO(NTC)', 8:'8=daO(PT1000)', 9:'9=PTC', 10:'10=0÷5V', 11:'11=0÷20mA'},'')</script></td>
-						<td>num</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMin_AI10</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t16112',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMax_AI10</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t16113',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>Cfg_AI11</td>
-						<td><script type='text/javascript'>EVO_Select(true,'s16104',{0:'0=NTC(NK103)', 1:'1=DI', 2:'2=NTC(103AT)', 3:'3=4÷20mA', 4:'4=0÷10V', 5:'5=0÷5V(Ratiometric)', 6:'6=PT1000', 7:'7=hO(NTC)', 8:'8=daO(PT1000)', 9:'9=PTC', 10:'10=0÷5V', 11:'11=0÷20mA'},'')</script></td>
-						<td>num</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMin_AI11</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t16114',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMax_AI11</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t16115',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>Cfg_AI12</td>
-						<td><script type='text/javascript'>EVO_Select(true,'s16105',{0:'0=NTC(NK103)', 1:'1=DI', 2:'2=NTC(103AT)', 3:'3=4÷20mA', 4:'4=0÷10V', 5:'5=0÷5V(Ratiometric)', 6:'6=PT1000', 7:'7=hO(NTC)', 8:'8=daO(PT1000)', 9:'9=PTC', 10:'10=0÷5V', 11:'11=0÷20mA'},'')</script></td>
-						<td>num</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMin_AI12</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t16116',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>FullScaleMax_AI12</td>
-						<td><script type='text/javascript'>EVO_Text(true,'t16117',10,10,1,0,'')</script></td>
-						<td>digit</td>
-					</tr> 
-					<tr>
-						<td>ackTemperature01</td>
-						<td><script type='text/javascript'>EVO_Button(true,'b09021',1,'True',''); </script></td>
-						<td></td>
-					</tr> 
-					<tr>
-						<td>ackTemperature02</td>
-						<td><script type='text/javascript'>EVO_Button(true,'b09022',1,'True',''); </script></td>
-						<td></td>
-					</tr> 
-					<tr>
-						<td>ackTemperature03</td>
-						<td><script type='text/javascript'>EVO_Button(true,'b09023',1,'True',''); </script></td>
-						<td></td>
-					</tr> 
-				</table>
+				<div class="hscroll">	
+					<table class="content__table">
+						<tr>
+							<th></th>
+							<th>Receita 1</th>
+							<th>Receita 2</th>
+							<th>Receita 3</th>
+							<th>Receita 4</th>
+							<th>Receita 5</th>
+						</tr> 
+						<tr>
+							<td>Tempo de Produção</td>
+							<td><input type="text" name="" id="" value="8000" readonly></td>
+							<td><input type="text" name="" id="" value="8000" readonly></td>
+							<td><input type="text" name="" id="" value="8000" readonly></td>
+							<td><input type="text" name="" id="" value="8000" readonly></td>
+							<td><input type="text" name="" id="" value="8000" readonly></td>
+						</tr>
+						<tr>
+							<td>Tempo de Ociosidade Esteira</td>
+							<td><input type="text" name="" id="" value="500" readonly></td>
+							<td><input type="text" name="" id="" value="500" readonly></td>
+							<td><input type="text" name="" id="" value="500" readonly></td>
+							<td><input type="text" name="" id="" value="500" readonly></td>
+							<td><input type="text" name="" id="" value="500" readonly></td>
+						</tr>
+						<tr>
+							<td>Degelo</td>
+							<td><input type="text" name="" id="" value="1000" readonly></td>
+							<td><input type="text" name="" id="" value="1000" readonly></td>
+							<td><input type="text" name="" id="" value="1000" readonly></td>
+							<td><input type="text" name="" id="" value="1000" readonly></td>
+							<td><input type="text" name="" id="" value="1000" readonly></td>
+						</tr>
+						<tr>
+							<td>Paradas por Processo</td>
+							<td><input type="text" name="" id="" value="2" readonly></td>
+							<td><input type="text" name="" id="" value="2" readonly></td>
+							<td><input type="text" name="" id="" value="2" readonly></td>
+							<td><input type="text" name="" id="" value="2" readonly></td>
+							<td><input type="text" name="" id="" value="2" readonly></td>
+						</tr>
+						<tr>
+							<td>Paradas por Alarme</td>
+							<td><input type="text" name="" id="" value="1" readonly></td>
+							<td><input type="text" name="" id="" value="1" readonly></td>
+							<td><input type="text" name="" id="" value="1" readonly></td>
+							<td><input type="text" name="" id="" value="1" readonly></td>
+							<td><input type="text" name="" id="" value="1" readonly></td>
+						</tr>
+						<tr>
+							<td>Leitura Balança (Kg/h)</td>
+							<td><input type="text" name="" id="" value="20000" readonly></td>
+							<td><input type="text" name="" id="" value="20000" readonly></td>
+							<td><input type="text" name="" id="" value="20000" readonly></td>
+							<td><input type="text" name="" id="" value="20000" readonly></td>
+							<td><input type="text" name="" id="" value="20000" readonly></td>
+						</tr>
+						<tr>
+							<td>Leitura Embaladora (Kg/h)</td>
+							<td><input type="text" name="" id="" value="20000" readonly></td>
+							<td><input type="text" name="" id="" value="20000" readonly></td>
+							<td><input type="text" name="" id="" value="20000" readonly></td>
+							<td><input type="text" name="" id="" value="20000" readonly></td>
+							<td><input type="text" name="" id="" value="20000" readonly></td>
+						</tr>
+					</table>
+					<p>Valores em MINUTOS</p>
+					<p id='report-date'></p>
+				</div>
 			</form>
 		</section>
 	</main>
-		
 	<script type='text/javascript'>
-	EVO_CheckPassword('', 1);
-	EVO_PageInit(5000);
+		EVO_CheckPassword('', 1);
+		EVO_PageInit(1000);
 	</script>
+	<script type="text/javascript">
+        $(document).ready(function(){
+			const date = new Date()
+			
+			let dd = date.getDate()
+			dd = `0${dd}`.slice(-2)
+
+			let mm = date.getMonth() + 1
+			mm = `0${mm}`.slice(-2)
+
+			let yyyy = date.getFullYear()
+
+			const fullDate = `${dd}/${mm}/${yyyy}`
+
+			let time = `0${date.getHours()}`.slice(-2)
+			time += ':' + `0${date.getMinutes()}`.slice(-2)
+
+			$('p#report-date').text(`Relatório gerado em ${fullDate} às ${time}`)
+		});
+    </script>
 </body>
 </html>
