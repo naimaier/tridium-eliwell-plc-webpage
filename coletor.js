@@ -1,5 +1,16 @@
 var reportData = []
 
+// Log file configuration
+const delimiter = ';'
+const fileExtension = 'TXT'
+
+// Log file content configuration
+const headerRowIndex = 1
+const dateColumnIndex = 0
+const dateColumnLabel = 'Data'
+const timeColumnIndex = 1
+const timeColumnLabel = 'Hora'
+
 window.onload = () => {
     resetDateSpanInputs()
 }
@@ -78,14 +89,13 @@ function getEndDateFromInput() {
 function parseLogs(startDate, endDate) {
     const monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
-    for (let date = new Date(startDate), month; date <= endDate; date.setDate(date.getDate() + 1)) {
-        // To get only one file per month we skip one loop when the month was already checked
-        if (month == date.getMonth()) continue
-        
+    for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
+
         // Define file name
-        month = date.getMonth()
+        let day = `0${date.getDate()}`.slice(-2)
+        let month = date.getMonth()
         let year = date.getFullYear().toString().slice(-2)
-        let fileName = `01${monthName[month]}${year}.CSV`
+        let fileName = `${day}${monthName[month]}${year}.${fileExtension}`
         
         searchAndParseFile(fileName)
     }
@@ -112,19 +122,22 @@ function searchAndParseFile(csvFile) {
         dataType: 'text'
     }).done(data => {
         // TODO callback?
-        const headerIndex = 0
         const dataRows = data.split('\n') //TODO verificar o regex /\r?\n|\r/
-        const headers = dataRows[headerIndex].split(',')
+        const headers = dataRows[headerRowIndex].split(delimiter)
         const rowsAmount = dataRows.length
         
+        // Including default column names
+        headers[dateColumnIndex] = dateColumnLabel
+        headers[timeColumnIndex] = timeColumnLabel
+        
         // Return if dataRows have less than (header row + at least 1 data row)
-        if (rowsAmount < headerIndex + 2) return
+        if (rowsAmount < headerRowIndex + 2) return
 
-        for (let i = headerIndex + 1; i < rowsAmount; i++) {
-            // Break if string is empty
+        for (let i = headerRowIndex + 1; i < rowsAmount; i++) {
+            // Skip loop if string is empty
             if (!dataRows[i]) continue
 
-            const dataColumns = dataRows[i].split(',')
+            const dataColumns = dataRows[i].split(delimiter)
             let dataRow = {}
             for (column in dataColumns) {
                 dataRow[headers[column]] = dataColumns[column]
@@ -321,8 +334,8 @@ function addReportDate() {
 }
 
 function getDateFromLogRowObject(logRowObject) {
-    let date = new Date.parse(logRowObject['Date']) // TODO weak
-    let splittedTime = logRowObject[' Time'].split(':') //TODO weak
+    let date = new Date.parse(logRowObject[dateColumnLabel])
+    let splittedTime = logRowObject[timeColumnLabel].split(':')
     date.setHours(splittedTime[0])
     date.setMinutes(splittedTime[1])
     date.setSeconds(splittedTime[2])
@@ -331,10 +344,10 @@ function getDateFromLogRowObject(logRowObject) {
 }
 
 function formatDateFromLogRowObject(logRowObject) {
-    const splittedDate = logRowObject['Date'].split('-') // TODO weak
+    const splittedDate = logRowObject[dateColumnLabel].split('-')
     const dd = splittedDate[2]
     const mm = splittedDate[1]
     const yyyy = splittedDate[0]
 
-    logRowObject['Date'] = `${dd}/${mm}/${yyyy}`
+    logRowObject[dateColumnLabel] = `${dd}/${mm}/${yyyy}`
 }
