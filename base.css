@@ -176,7 +176,7 @@
 	padding: 2px;
 }
 
-#collector__button {
+.collector__button {
 	width: 150px;
 	height: 40px;
 	color: white;

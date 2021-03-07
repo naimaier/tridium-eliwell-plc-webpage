@@ -12,7 +12,19 @@
 	<!-- Font awesome JS -->
 	<script defer src="all.min.js"></script>
 	<link rel='shortcut icon' href='base.ico'>
-	
+
+	<!-- JS for xlsx generation -->
+	<script src="xls/dependencies/FileSaver.min.js"></script>
+	<script src="xls/dependencies/jszip.min.js"></script>
+	<!-- Template logos -->
+	<script src="xls/template/images/image1.js"></script>
+	<script src="xls/template/images/image2.js"></script>
+	<script src="xls/template/images/image3.js"></script>
+	<!-- Template variables -->
+	<script src="xls/template/templates.js"></script>
+	<script src="xls/template/sheet.js"></script>
+	<!-- Export functions -->
+	<script src="xls/export.js"></script>
 </head>
 <body>
 	<header class="header container">
@@ -64,7 +76,8 @@
 						<td><input type="time" data-end-time></td>
 					</tr>
 				</table>
-				<button id="collector__button" onclick="coletar()">Coletar</button>
+				<button class="collector__button" onclick="coletar()">Coletar</button>
+				<button class="collector__button" onclick="exportXls()">Exportar</button>
 				
 				<div data-table-nav-container></div>
 				<div class="hscroll">
