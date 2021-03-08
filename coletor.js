@@ -87,7 +87,7 @@ function getEndDateFromInput() {
 }
 
 function parseLogs(startDate, endDate) {
-    const monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    const monthName = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
 
     for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
 
