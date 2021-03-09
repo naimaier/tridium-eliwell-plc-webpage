@@ -42,3 +42,48 @@ const drawing1 = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 const worksheets_rels = `<?xml version="1.0" encoding="UTF-8"?>
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/drawing" Target="../drawings/drawing1.xml"/>
 </Relationships>`
+
+/* SHEET */
+function createSheetHeader(totalRows, totalColumns, alphabet) {
+    const lastColumn = alphabet[totalColumns-1]
+    const lastRow = totalRows
+
+    return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+    <worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
+    xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+    <sheetPr filterMode="false">
+        <pageSetUpPr fitToPage="false"/>
+    </sheetPr>
+    <dimension ref="A1:${lastColumn}${lastRow}"/>
+    <sheetViews>
+        <sheetView showFormulas="false" showGridLines="true" showRowColHeaders="true" showZeros="true" rightToLeft="false" tabSelected="true" showOutlineSymbols="true" defaultGridColor="true" view="normal" topLeftCell="A1" colorId="64" zoomScale="100" zoomScaleNormal="100" zoomScalePageLayoutView="100" workbookViewId="0">
+            <pane xSplit="0" ySplit="3" topLeftCell="V4" activePane="bottomLeft" state="frozen"/>
+            <selection pane="topLeft" activeCell="A1" activeCellId="0" sqref="A1"/>
+            <selection pane="bottomLeft" activeCell="A1" activeCellId="0" sqref="A1"/>
+        </sheetView>
+    </sheetViews>
+    <sheetFormatPr defaultColWidth="9.0546875" defaultRowHeight="12.75" zeroHeight="false" outlineLevelRow="0" outlineLevelCol="0"></sheetFormatPr>
+    <cols>
+        <col collapsed="false" customWidth="true" hidden="false" outlineLevel="0" max="8" min="1" style="0" width="19.12"/>
+    </cols>
+    <sheetData>`
+}
+
+function createSheetFooter(totalColumns, alphabet) {
+    const lastColumn = alphabet[totalColumns - 1]
+
+    return `</sheetData>
+    <mergeCells count="4">
+        <mergeCell ref="A1:${lastColumn}1"/>
+        <mergeCell ref="A2:${lastColumn}2"/>
+    </mergeCells>
+    <printOptions headings="false" gridLines="false" gridLinesSet="true" horizontalCentered="false" verticalCentered="false"/>
+    <pageMargins left="0.6" right="0.6" top="0.984027777777778" bottom="0.984027777777778" header="0.511805555555555" footer="0.511805555555555"/>
+    <pageSetup paperSize="9" scale="100" firstPageNumber="0" fitToWidth="1" fitToHeight="1" pageOrder="downThenOver" orientation="landscape" blackAndWhite="false" draft="false" cellComments="none" useFirstPageNumber="false" horizontalDpi="300" verticalDpi="300" copies="1"/>
+    <headerFooter differentFirst="false" differentOddEven="false">
+        <oddHeader></oddHeader>
+        <oddFooter></oddFooter>
+    </headerFooter>
+    <drawing r:id="rId1"/>
+    </worksheet>`
+}

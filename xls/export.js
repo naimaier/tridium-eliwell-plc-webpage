@@ -1,5 +1,6 @@
 function exportXls() {
     let zip = new JSZip()
+    const xls = new XlsBuilder()
 
     // ROOT
     zip.file("[Content_Types].xml", contentTypes)
@@ -13,25 +14,31 @@ function exportXls() {
 
     // XL
     let xl = zip.folder("xl")
-    xl.file("sharedStrings.xml", sharedStrings)
-    xl.file("styles.xml", styles)
-    xl.file("workbook.xml", workbook)
 
+    
     xl.file("_rels/workbook.xml.rels", rels_workbook)
-
+    
     let drawings = xl.folder("drawings")
     drawings.file("_rels/drawing1.xml.rels", drawings_rels)
     drawings.file("drawing1.xml", drawing1)
-
     // MEDIA
     xl.file(`media/image1.png`, image1, { base64: true })
     xl.file(`media/image2.png`, image2, { base64: true })
     xl.file(`media/image3.png`, image3, { base64: true })
-
+    
     let worksheets = xl.folder("worksheets")
     worksheets.file("_rels/sheet1.xml.rels", worksheets_rels)
-    worksheets.file("sheet1.xml", sheet1)
+    //worksheets.file("sheet1.xml", sheet1)
+    worksheets.file("sheet1.xml", xls.buildSheet())
+    
+    //drawings.file("drawing1.xml", createDrawing())
+    //Root
+    //xl.file("sharedStrings.xml", sharedStrings)
+    xl.file("sharedStrings.xml", xls.buildSharedStrings())
+    xl.file("styles.xml", styles)
+    xl.file("workbook.xml", workbook)
 
+    // Download
     zip.generateAsync({type:"blob"})
     .then(function(content) {
         saveAs(content, "example.xlsx")
