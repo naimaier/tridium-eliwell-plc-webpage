@@ -20,7 +20,7 @@ function exportXls() {
     
     let drawings = xl.folder("drawings")
     drawings.file("_rels/drawing1.xml.rels", drawings_rels)
-    drawings.file("drawing1.xml", drawing1)
+    
     // MEDIA
     xl.file(`media/image1.png`, image1, { base64: true })
     xl.file(`media/image2.png`, image2, { base64: true })
@@ -28,12 +28,12 @@ function exportXls() {
     
     let worksheets = xl.folder("worksheets")
     worksheets.file("_rels/sheet1.xml.rels", worksheets_rels)
-    //worksheets.file("sheet1.xml", sheet1)
+
     worksheets.file("sheet1.xml", xls.buildSheet())
     
-    //drawings.file("drawing1.xml", createDrawing())
+    drawings.file("drawing1.xml", xls.buildDrawing())
+
     //Root
-    //xl.file("sharedStrings.xml", sharedStrings)
     xl.file("sharedStrings.xml", xls.buildSharedStrings())
     xl.file("styles.xml", styles)
     xl.file("workbook.xml", workbook)
