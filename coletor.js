@@ -121,9 +121,14 @@ function searchAndParseFile(csvFile) {
         cache: false,
         dataType: 'text'
     }).done(data => {
-        // TODO callback?
-        const dataRows = data.split('\n') //TODO verificar o regex /\r?\n|\r/
-        const headers = dataRows[headerRowIndex].split(delimiter)
+
+        // Split text by all forms of new line (carriage return, line feed...)
+        const dataRows = data.split(/\r?\n|\r/)
+
+        // Get headers by splitting the header row by the delimiter
+        // and trimming (getting rid of whitespaces at the start and end of string)
+        let headers = dataRows[headerRowIndex].split(delimiter).map(string => {return string.trim()})
+        console.log(headers)
         const rowsAmount = dataRows.length
         
         // Including default column names
@@ -140,7 +145,7 @@ function searchAndParseFile(csvFile) {
             const dataColumns = dataRows[i].split(delimiter)
             let dataRow = {}
             for (column in dataColumns) {
-                dataRow[headers[column]] = dataColumns[column]
+                dataRow[headers[column]] = dataColumns[column].trim()
             }
             reportData.push(dataRow)
         }
