@@ -67,7 +67,7 @@ function createSheetFooter(totalColumns, alphabet) {
     const lastColumn = alphabet[totalColumns - 1]
 
     return `</sheetData>
-    <mergeCells count="4">
+    <mergeCells count="2">
         <mergeCell ref="A1:${lastColumn}1"/>
         <mergeCell ref="A2:${lastColumn}2"/>
     </mergeCells>

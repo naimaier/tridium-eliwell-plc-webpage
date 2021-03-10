@@ -4,12 +4,12 @@ class XlsBuilder {
         // TODO We assume all elements have the same number of keys
         this.headers = Object.keys(reportData[1])
         
-        this.totalColumns = this.headers.length
         // precisa ter ao menos uma coluna
-        this.totalRows = reportData.length
+        this.totalInputColumns = this.headers.length
+        this.totalInputRows = reportData.length
         //TODO weak?
         this.alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-        this.currentRow = 1
+        this.currentRow = 0
 
         // Document strings
         this.stringList = []
@@ -25,7 +25,7 @@ class XlsBuilder {
     }
     
     buildSheet() {
-        if (this.totalRows <= 0) {
+        if (this.totalInputRows <= 0) {
             //TODO
             return false
         }
@@ -40,9 +40,9 @@ class XlsBuilder {
             sheetData += this.createRow(reportData[row])
         }
         //ver
-        let sheet = createSheetHeader(this.totalRows, this.totalColumns, this.alphabet)
+        let sheet = createSheetHeader(this.currentRow, this.totalInputColumns, this.alphabet)
         sheet += sheetData
-        sheet += createSheetFooter(this.totalColumns, this.alphabet)
+        sheet += createSheetFooter(this.totalInputColumns, this.alphabet)
     
         return sheet
     }
@@ -64,20 +64,20 @@ class XlsBuilder {
 
     buildDrawing() {
         const firstLogoColumn = 0
-        const lastLogoColumn = this.totalColumns - 1
+        const lastLogoColumn = this.totalInputColumns - 1
         const middleLogoStartColumn = Math.floor(lastLogoColumn/2)
         const middleLogoEndColumn = Math.ceil(lastLogoColumn/2)
 
         const offsetFactor = 1180170
 
         const firstXOffset = 0
-        const middleXOffset = Math.ceil(this.totalColumns/2) * offsetFactor//4704840
-        const lastXOffset = this.totalColumns * offsetFactor//9441360
+        const middleXOffset = Math.ceil(this.totalInputColumns/2) * offsetFactor
+        const lastXOffset = this.totalInputColumns * offsetFactor
 
         let middleFromOffset = 0
         let middleToOffset = 1348560
 
-        if (this.totalColumns % 2 == 0) {
+        if (this.totalInputColumns % 2 == 0) {
             middleFromOffset = 658800
             middleToOffset = 658440
         }
@@ -201,62 +201,66 @@ class XlsBuilder {
     }
 
     createLogoCells() {
+        this.increaseRowCount()
+
         let code = `<row r="${this.currentRow}" customFormat="false" ht="45" hidden="false" customHeight="true" outlineLevel="0" collapsed="false">`
 
-        for (let i = 0; i < this.totalColumns; i++) {
+        for (let i = 0; i < this.totalInputColumns; i++) {
             code += `<c r="${this.alphabet[i]}${this.currentRow}" s="1"/>`
         }
 
         code += `</row>`
-        this.increaseRowCount()
 
         return code
     }
 
     createTitleCells() {
+        this.increaseRowCount()
+
         let code = `<row r="${this.currentRow}" customFormat="false" ht="45" hidden="false" customHeight="true" outlineLevel="0" collapsed="false">`
 
         let stringNumber = this.includeString('PLANILHA DE CONTROLE')
         code += `<c r="A${this.currentRow}" s="1" t="s"><v>${stringNumber}</v></c>`
 
-        for (let i = 1; i < this.totalColumns; i++) {
+        for (let i = 1; i < this.totalInputColumns; i++) {
             code += `<c r="${this.alphabet[i]}${this.currentRow}" s="1"/>`
         }
 
         code += `</row>`
-        this.increaseRowCount()
 
         return code
     }
 
     createHeaderCells() {
+        this.increaseRowCount()
+
         let code = `<row r="${this.currentRow}" customFormat="false" ht="45" hidden="false" customHeight="true" outlineLevel="0" collapsed="false">`
         
         let stringNumber
 
-        for (let i = 0; i < this.totalColumns; i++) {
+        for (let i = 0; i < this.totalInputColumns; i++) {
             stringNumber = this.includeString(this.headers[i])
             code += `<c r="${this.alphabet[i]}${this.currentRow}" s="3" t="s"><v>${stringNumber}</v></c>`
         }
 
         code += `</row>`
-        this.increaseRowCount()
 
         return code
     }
     
     createRow(row) {
+        this.increaseRowCount()
+
         let code = `<row r="${this.currentRow}" customFormat="false" ht="15" hidden="false" customHeight="true" outlineLevel="0" collapsed="false">`
         
         let stringNumber
         
-        for (let i = 0; i < this.totalColumns; i++) {
+        for (let i = 0; i < this.totalInputColumns; i++) {
             stringNumber = this.includeString(row[this.headers[i]])
             code += `<c r="${this.alphabet[i]}${this.currentRow}" s="5" t="s"><v>${stringNumber}</v></c>`
         }
 
         code += `</row>`
-        this.increaseRowCount()
 
         return code
     }
