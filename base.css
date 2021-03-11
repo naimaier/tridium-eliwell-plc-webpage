@@ -155,7 +155,7 @@
 .content__table th {
 	color: var(--color-light);
 	text-align: left;
-	padding-top: 5px;
+	padding: 5px;
 	font-weight: bold;
 }
 
@@ -172,7 +172,12 @@
 	border: none;
 }
 
+.collector__input-table {
+	width: 25%;
+}
+
 .collector__input-table td {
+	width: 100%;
 	padding: 2px;
 }
 
@@ -263,6 +268,14 @@ Show the link that should open and close the menu (.icon) */
 	}
 
 	#collector__button {
+		width: 100%;
+	}
+
+	.collector__input-table {
+		width: 100%;
+	}
+
+	.collector__input-table td {
 		width: 100%;
 	}
 	
