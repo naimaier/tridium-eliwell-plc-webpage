@@ -169,6 +169,7 @@
 }
 
 .content__table input[readonly] {
+	width: 100%;
 	background-color: var(--bg-color-dark);
 	border: none;
 }
@@ -257,10 +258,10 @@ Show the link that should open and close the menu (.icon) */
 		margin-bottom: 20px;
 	}
 
-	/* Fixing input width to the width of the data displayed */
+	/* Fixing input width to the width of the data displayed
 	.content__table td input {
 		width: 100%;
-	}
+	} */
 
 	/* Allow table headers to be displayed without wrapping content */
 	.content__table th {

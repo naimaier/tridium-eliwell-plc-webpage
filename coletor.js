@@ -171,8 +171,6 @@ function displayTablePage(pageNumber) {
         return
     }
 
-    // TODO verificar se todos os objetos tem as mesmas chaves
-    // TODO retirar espacos em branco?
     addTableHeaders(table)
 
     const totalPages = Math.ceil(reportData.length / maxTableRows)
@@ -212,7 +210,7 @@ function addTableContent(table, pageNumber, maxTableRows) {
         let tableRow = document.createElement('tr')
 
         for (prop in reportData[i]) {
-            tableRow.innerHTML += `<td><input type="text" value="${reportData[i][prop]}" readonly></td>`
+            tableRow.innerHTML += `<td>${reportData[i][prop]}</td>`
         }
         table.appendChild(tableRow)
     }
