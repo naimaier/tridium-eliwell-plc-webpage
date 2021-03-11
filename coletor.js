@@ -165,6 +165,8 @@ function displayTablePage(pageNumber) {
     
     clearTable()
 
+    table.removeAttribute('hidden')
+
     // Return if no data was found
     if ($.isEmptyObject(reportData)) {
         table.innerHTML = '<tr><td>Nenhum registro encontrado</td></tr>'
@@ -188,6 +190,8 @@ function clearTable() {
     table.innerHTML = ''
     const reportDateParagraph = document.querySelector('[data-report-date]')
     reportDateParagraph.innerHTML = ''
+
+    table.setAttribute('hidden', true)
 }
 
 function addTableHeaders(table) {
