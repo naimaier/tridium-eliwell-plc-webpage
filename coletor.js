@@ -119,9 +119,13 @@ function searchAndParseFile(csvFile) {
         url: csvFile,
         async: false,
         cache: false,
+        // Getting the right Charset
+        contentType: 'Content-type: text/plain; charset=ISO-8859-1',
+        beforeSend: function(jqXHR) {
+            jqXHR.overrideMimeType('text/html;charset=ISO-8859-1')
+        },
         dataType: 'text'
     }).done(data => {
-
         // Split text by all forms of new line (carriage return, line feed...)
         const dataRows = data.split(/\r?\n|\r/)
 
