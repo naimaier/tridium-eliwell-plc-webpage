@@ -58,7 +58,7 @@ function createSheetHeader(totalRows, totalColumns, alphabet) {
     </sheetViews>
     <sheetFormatPr defaultColWidth="9.0546875" defaultRowHeight="12.75" zeroHeight="false" outlineLevelRow="0" outlineLevelCol="0"></sheetFormatPr>
     <cols>
-        <col collapsed="false" customWidth="true" hidden="false" outlineLevel="0" max="8" min="1" style="0" width="19.12"/>
+        <col collapsed="false" customWidth="true" hidden="false" outlineLevel="0" max="${totalColumns}" min="1" style="0" width="19.12"/>
     </cols>
     <sheetData>`
 }
