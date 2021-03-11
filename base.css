@@ -70,7 +70,7 @@
 }
 
 /* Activate the submenu when hover (when not in responsive mode) */
-.header:not(.responsive) .header__menu-item:hover > .header__submenu {
+.header nav:not(.responsive) .header__menu-item:hover > .header__submenu {
 	display: block;
 	position: absolute;
 	width: 140px;
