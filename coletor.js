@@ -52,7 +52,7 @@ function coletar() {
     console.time('Formatando data')
 
     for (let row = 0; row < collectedData.rowCount; row++) {
-        formatDateFromLogRowObject(collectedData.content[row])
+        collectedData.content[row][dateColumnIndex] = formatDate(collectedData.content[row][dateColumnIndex])
     }
     console.timeEnd('Formatando data')
 
@@ -108,6 +108,7 @@ function parseLogs(startDate, endDate) {
         searchAndParseFile(fileName)
     }
 
+    console.time('Removing before and after')
     // Remove entries before selected start date
     while (collectedData.content.length > 0 &&
      getDateFromLogRowObject(collectedData.content[0]) < startDate) {
@@ -119,6 +120,7 @@ function parseLogs(startDate, endDate) {
      getDateFromLogRowObject(collectedData.content[collectedData.content.length - 1]) > endDate) {
         collectedData.content.splice(collectedData.content.length - 1, 1)
     }
+    console.timeEnd('Removing before and after')
 
     collectedData.rowCount = collectedData.content.length
 }
@@ -369,7 +371,13 @@ function addReportDate() {
 }
 
 function getDateFromLogRowObject(logRowObject) {
-    let date = new Date.parse(logRowObject[dateColumnIndex])
+    let date = new Date()
+    let splittedDate = logRowObject[dateColumnIndex].split('-')
+
+    date.setDate(splittedDate[2])
+    date.setMonth(splittedDate[1] - 1)
+    date.setFullYear(splittedDate[0])
+
     let splittedTime = logRowObject[timeColumnIndex].split(':')
     date.setHours(splittedTime[0])
     date.setMinutes(splittedTime[1])
@@ -378,13 +386,13 @@ function getDateFromLogRowObject(logRowObject) {
     return date
 }
 
-function formatDateFromLogRowObject(logRowObject) {
-    const splittedDate = logRowObject[dateColumnIndex].split('-')
+function formatDate(date) {
+    const splittedDate = date.split('-')
     const dd = splittedDate[2]
     const mm = splittedDate[1]
     const yyyy = splittedDate[0]
 
-    logRowObject[dateColumnIndex] = `${dd}/${mm}/${yyyy}`
+    return `${dd}/${mm}/${yyyy}`
 }
 
 function manageExportButton() {
