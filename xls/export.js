@@ -7,6 +7,9 @@ function exportXls() {
         alert(e.message)
         return
     }
+
+    // Disable export button while exporting data
+    disableExportButton(true)
     
     let zip = new JSZip()
     // ROOT
@@ -50,4 +53,7 @@ function exportXls() {
     .then(function(content) {
         saveAs(content, "example.xlsx")
     })
+
+    // Enable export button back again (if data is avaliable)
+    manageExportButton()
 }

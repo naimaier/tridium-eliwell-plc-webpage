@@ -191,6 +191,12 @@
 	margin-top: 8px;
 }
 
+.collector__button:disabled {
+	background-color: lightgray;
+	color: gray;
+	border-color: gray;
+}
+
 .collector__table-nav-button {
 	margin-bottom: 5px;
 	min-width: 40px;

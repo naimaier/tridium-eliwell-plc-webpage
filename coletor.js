@@ -13,6 +13,7 @@ const timeColumnLabel = 'Hora'
 
 window.onload = () => {
     resetDateSpanInputs()
+    manageExportButton()
 }
 
 function resetDateSpanInputs() {
@@ -53,6 +54,7 @@ function coletar() {
 
     displayTablePage(1)
 
+    manageExportButton()
     console.timeEnd('Tempo total de execução')
 }
 
@@ -361,4 +363,14 @@ function formatDateFromLogRowObject(logRowObject) {
     const yyyy = splittedDate[0]
 
     logRowObject[dateColumnLabel] = `${dd}/${mm}/${yyyy}`
+}
+
+function manageExportButton() {
+    let disable = !reportData.length > 0
+    disableExportButton(disable)
+}
+
+function disableExportButton(disable) {
+    const exportBtn = document.querySelector('[data-export-button]')
+    exportBtn.disabled = disable
 }
