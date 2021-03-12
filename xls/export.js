@@ -2,7 +2,7 @@ function exportXls() {
     let xls
     
     try {
-        xls = new XlsBuilder(reportData)
+        xls = new XlsBuilder(collectedData.content)
     } catch (e) {
         alert(e.message)
         return

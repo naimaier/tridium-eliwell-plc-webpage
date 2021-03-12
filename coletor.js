@@ -1,4 +1,6 @@
-var reportData = []
+var collectedData = new Object()
+collectedData.headers = []
+collectedData.content = []
 
 // Log file configuration
 const delimiter = ';'
@@ -41,14 +43,14 @@ function coletar() {
     
     console.time('Tempo total de execução')
     
-    reportData = []
+    collectedData.content = []
     clearTable()
 
     parseLogs(startDate, endDate)
 
     console.time('Formatando data')
-    for (i in reportData) {
-        formatDateFromLogRowObject(reportData[i])
+    for (i in collectedData.content) {
+        formatDateFromLogRowObject(collectedData.content[i])
     }
     console.timeEnd('Formatando data')
 
@@ -103,15 +105,15 @@ function parseLogs(startDate, endDate) {
     }
 
     // Remove entries before selected start date
-    while (!$.isEmptyObject(reportData) &&
-     getDateFromLogRowObject(reportData[0]) < startDate) {
-        reportData.splice(0, 1)
+    while (!$.isEmptyObject(collectedData.content) &&
+     getDateFromLogRowObject(collectedData.content[0]) < startDate) {
+        collectedData.content.splice(0, 1)
     }
 
     // Remove entries after selected end date
-    while (!$.isEmptyObject(reportData) &&
-     getDateFromLogRowObject(reportData[reportData.length - 1]) > endDate) {
-        reportData.splice(reportData.length - 1, 1)
+    while (!$.isEmptyObject(collectedData.content) &&
+     getDateFromLogRowObject(collectedData.content[collectedData.content.length - 1]) > endDate) {
+        collectedData.content.splice(collectedData.content.length - 1, 1)
     }
 }
 
@@ -153,7 +155,7 @@ function searchAndParseFile(csvFile) {
             for (column in dataColumns) {
                 dataRow[headers[column]] = dataColumns[column].trim()
             }
-            reportData.push(dataRow)
+            collectedData.content.push(dataRow)
         }
     })
     console.timeEnd('Lendo csv')
@@ -170,14 +172,14 @@ function displayTablePage(pageNumber) {
     table.removeAttribute('hidden')
 
     // Return if no data was found
-    if ($.isEmptyObject(reportData)) {
+    if ($.isEmptyObject(collectedData.content)) {
         table.innerHTML = '<tr><td>Nenhum registro encontrado</td></tr>'
         return
     }
 
     addTableHeaders(table)
 
-    const totalPages = Math.ceil(reportData.length / maxTableRows)
+    const totalPages = Math.ceil(collectedData.content.length / maxTableRows)
     
     addTableNavigator(pageNumber, totalPages, maxNavigatorSize)
 
@@ -198,7 +200,7 @@ function clearTable() {
 
 function addTableHeaders(table) {
     let headers = document.createElement('tr')
-    for (prop in reportData[0]) {
+    for (prop in collectedData.content[0]) {
         headers.innerHTML += `<th>${prop}</th>`
     }
     table.appendChild(headers)
@@ -208,15 +210,15 @@ function addTableContent(table, pageNumber, maxTableRows) {
     const firstItem = (pageNumber - 1) * maxTableRows
     let lastItem = (pageNumber * maxTableRows) - 1
     
-    if (lastItem > (reportData.length - 1)) {
-        lastItem = reportData.length - 1
+    if (lastItem > (collectedData.content.length - 1)) {
+        lastItem = collectedData.content.length - 1
     }
     
     for (let i = firstItem; i <= lastItem; i++) {
         let tableRow = document.createElement('tr')
 
-        for (prop in reportData[i]) {
-            tableRow.innerHTML += `<td>${reportData[i][prop]}</td>`
+        for (prop in collectedData.content[i]) {
+            tableRow.innerHTML += `<td>${collectedData.content[i][prop]}</td>`
         }
         table.appendChild(tableRow)
     }
@@ -366,7 +368,7 @@ function formatDateFromLogRowObject(logRowObject) {
 }
 
 function manageExportButton() {
-    let disable = !reportData.length > 0
+    let disable = !collectedData.content.length > 0
     disableExportButton(disable)
 }
 
