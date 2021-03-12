@@ -1,6 +1,7 @@
 var collectedData = new Object()
 collectedData.headers = []
 collectedData.content = []
+collectedData.rowCount = 0
 
 // Log file configuration
 const delimiter = ';'
@@ -43,18 +44,21 @@ function coletar() {
     
     console.time('Tempo total de execução')
     
-    collectedData.content = []
+    clearContent()
     clearTable()
 
     parseLogs(startDate, endDate)
 
     console.time('Formatando data')
-    for (i in collectedData.content) {
-        formatDateFromLogRowObject(collectedData.content[i])
+
+    for (let row = 0; row < collectedData.rowCount; row++) {
+        formatDateFromLogRowObject(collectedData.content[row])
     }
     console.timeEnd('Formatando data')
 
+    console.time('Preenchendo a tabela')
     displayTablePage(1)
+    console.timeEnd('Preenchendo a tabela')
 
     manageExportButton()
     console.timeEnd('Tempo total de execução')
@@ -105,16 +109,18 @@ function parseLogs(startDate, endDate) {
     }
 
     // Remove entries before selected start date
-    while (!$.isEmptyObject(collectedData.content) &&
+    while (collectedData.content.length > 0 &&
      getDateFromLogRowObject(collectedData.content[0]) < startDate) {
         collectedData.content.splice(0, 1)
     }
 
     // Remove entries after selected end date
-    while (!$.isEmptyObject(collectedData.content) &&
+    while (collectedData.content.length > 0 &&
      getDateFromLogRowObject(collectedData.content[collectedData.content.length - 1]) > endDate) {
         collectedData.content.splice(collectedData.content.length - 1, 1)
     }
+
+    collectedData.rowCount = collectedData.content.length
 }
 
 function searchAndParseFile(csvFile) {
@@ -132,29 +138,36 @@ function searchAndParseFile(csvFile) {
     }).done(data => {
         // Split text by all forms of new line (carriage return, line feed...)
         const dataRows = data.split(/\r?\n|\r/)
+        const rowCount = dataRows.length
 
         // Get headers by splitting the header row by the delimiter
         // and trimming (getting rid of whitespaces at the start and end of string)
-        let headers = dataRows[headerRowIndex].split(delimiter).map(string => {return string.trim()})
-        console.log(headers)
-        const rowsAmount = dataRows.length
+        collectedData.headers = dataRows[headerRowIndex].split(delimiter).map(string => {return string.trim()})
+        
+        //TODO remover
+        console.log(collectedData.headers)
         
         // Including default column names
-        headers[dateColumnIndex] = dateColumnLabel
-        headers[timeColumnIndex] = timeColumnLabel
+        collectedData.headers[dateColumnIndex] = dateColumnLabel
+        collectedData.headers[timeColumnIndex] = timeColumnLabel
         
-        // Return if dataRows have less than (header row + at least 1 data row)
-        if (rowsAmount < headerRowIndex + 2) return
+        // Return if row count is less than (header row + at least 1 row of content)
+        if (rowCount < headerRowIndex + 2) return
 
-        for (let i = headerRowIndex + 1; i < rowsAmount; i++) {
+        // Starts the loop after the header row
+        for (let row = headerRowIndex + 1; row < rowCount; row++) {
+
             // Skip loop if string is empty
-            if (!dataRows[i]) continue
+            if (!dataRows[row]) continue
 
-            const dataColumns = dataRows[i].split(delimiter)
-            let dataRow = {}
-            for (column in dataColumns) {
-                dataRow[headers[column]] = dataColumns[column].trim()
+            const dataColumns = dataRows[row].split(delimiter)
+
+            let columnCount = dataColumns.length
+            let dataRow = []
+            for (let column = 0; column < columnCount; column++) {
+                dataRow[column] = dataColumns[column].trim()
             }
+
             collectedData.content.push(dataRow)
         }
     })
@@ -165,14 +178,13 @@ function displayTablePage(pageNumber) {
     const table = document.querySelector('[data-table]')
     const maxTableRows = 30
     const maxNavigatorSize = 7 // Must be an odd number
-    console.time('Preenchendo tabela')
     
     clearTable()
 
     table.removeAttribute('hidden')
 
     // Return if no data was found
-    if ($.isEmptyObject(collectedData.content)) {
+    if (collectedData.rowCount == 0) {
         table.innerHTML = '<tr><td>Nenhum registro encontrado</td></tr>'
         return
     }
@@ -185,8 +197,12 @@ function displayTablePage(pageNumber) {
 
     addTableContent(table, pageNumber, maxTableRows)
 
-    console.timeEnd('Preenchendo tabela')
     addReportDate()
+}
+
+function clearContent() {
+    collectedData.content = []
+    collectedData.headers = []
 }
 
 function clearTable() {
@@ -200,8 +216,10 @@ function clearTable() {
 
 function addTableHeaders(table) {
     let headers = document.createElement('tr')
-    for (prop in collectedData.content[0]) {
-        headers.innerHTML += `<th>${prop}</th>`
+    
+    let columnCount = collectedData.headers.length
+    for (let column = 0; column < columnCount; column++) {
+        headers.innerHTML += `<th>${collectedData.headers[column]}</th>`
     }
     table.appendChild(headers)
 }
@@ -214,11 +232,12 @@ function addTableContent(table, pageNumber, maxTableRows) {
         lastItem = collectedData.content.length - 1
     }
     
-    for (let i = firstItem; i <= lastItem; i++) {
+    for (let row = firstItem; row <= lastItem; row++) {
         let tableRow = document.createElement('tr')
 
-        for (prop in collectedData.content[i]) {
-            tableRow.innerHTML += `<td>${collectedData.content[i][prop]}</td>`
+        let columnCount = collectedData.content[row].length
+        for (let column = 0; column < columnCount; column++) {
+            tableRow.innerHTML += `<td>${collectedData.content[row][column]}</td>`
         }
         table.appendChild(tableRow)
     }
@@ -284,7 +303,8 @@ function addNavigationButtons(currentPage, indexes, navigationElement) {
     navigationElement.appendChild(btnPrev)
 
     // creating page number buttons
-    for (i in indexes['pages']) {
+    let indexCount = indexes['pages'].length
+    for (let i = 0; i < indexCount; i++) {
         let btn
         if (indexes['pages'][i] == '...') {
             btn = createTableNavButton(indexes['pages'][i], false)
@@ -349,8 +369,8 @@ function addReportDate() {
 }
 
 function getDateFromLogRowObject(logRowObject) {
-    let date = new Date.parse(logRowObject[dateColumnLabel])
-    let splittedTime = logRowObject[timeColumnLabel].split(':')
+    let date = new Date.parse(logRowObject[dateColumnIndex])
+    let splittedTime = logRowObject[timeColumnIndex].split(':')
     date.setHours(splittedTime[0])
     date.setMinutes(splittedTime[1])
     date.setSeconds(splittedTime[2])
@@ -359,12 +379,12 @@ function getDateFromLogRowObject(logRowObject) {
 }
 
 function formatDateFromLogRowObject(logRowObject) {
-    const splittedDate = logRowObject[dateColumnLabel].split('-')
+    const splittedDate = logRowObject[dateColumnIndex].split('-')
     const dd = splittedDate[2]
     const mm = splittedDate[1]
     const yyyy = splittedDate[0]
 
-    logRowObject[dateColumnLabel] = `${dd}/${mm}/${yyyy}`
+    logRowObject[dateColumnIndex] = `${dd}/${mm}/${yyyy}`
 }
 
 function manageExportButton() {

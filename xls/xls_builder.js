@@ -1,22 +1,20 @@
 class XlsBuilder {
 
     constructor(data) {
-        if (!Array.isArray(data) || data.length == 0) {
+        if (!Array.isArray(data.content) || data.content.length == 0) {
             throw new Error('Nenhum dado para exportar')
         }
 
         this.data = data
-        // TODO We assume all elements have the same number of keys
-        this.headers = Object.keys(this.data[0])
         
         // precisa ter ao menos uma coluna
-        this.totalInputColumns = this.headers.length
-        this.totalInputRows = this.data.length
+        this.totalInputColumns = this.data.headers.length
+
         //TODO weak?
         this.alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
         this.currentRow = 0
 
-        // Document strings
+        // XLS Document strings
         this.stringList = []
         this.totalStringCount = 0
     }
@@ -30,8 +28,8 @@ class XlsBuilder {
     }
     
     buildSheet() {
-        if (this.totalInputRows <= 0) {
-            //TODO
+        if (this.data.rowCount <= 0) {
+            //TODO deal with this
             return false
         }
         
@@ -41,8 +39,8 @@ class XlsBuilder {
 
         sheetData += this.createHeaderCells()
 
-        for (let row in this.data) {
-            sheetData += this.createRow(this.data[row])
+        for (let row = 0; row < this.data.rowCount; row++) {
+            sheetData += this.createRow(this.data.content[row])
         }
         //ver
         let sheet = createSheetHeader(this.currentRow, this.totalInputColumns, this.alphabet)
@@ -244,7 +242,7 @@ class XlsBuilder {
         let stringNumber
 
         for (let i = 0; i < this.totalInputColumns; i++) {
-            stringNumber = this.includeString(this.headers[i])
+            stringNumber = this.includeString(this.data.headers[i])
             code += `<c r="${this.alphabet[i]}${this.currentRow}" s="3" t="s"><v>${stringNumber}</v></c>`
         }
 
@@ -260,9 +258,9 @@ class XlsBuilder {
         
         let stringNumber
         
-        for (let i = 0; i < this.totalInputColumns; i++) {
-            stringNumber = this.includeString(row[this.headers[i]])
-            code += `<c r="${this.alphabet[i]}${this.currentRow}" s="5" t="s"><v>${stringNumber}</v></c>`
+        for (let column = 0; column < this.totalInputColumns; column++) {
+            stringNumber = this.includeString(row[column])
+            code += `<c r="${this.alphabet[column]}${this.currentRow}" s="5" t="s"><v>${stringNumber}</v></c>`
         }
 
         code += `</row>`
