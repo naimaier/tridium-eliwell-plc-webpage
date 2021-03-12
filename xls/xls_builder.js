@@ -1,12 +1,17 @@
 class XlsBuilder {
 
-    constructor() {
+    constructor(data) {
+        if (!Array.isArray(data) || data.length == 0) {
+            throw new Error('Nenhum dado para exportar')
+        }
+
+        this.data = data
         // TODO We assume all elements have the same number of keys
-        this.headers = Object.keys(reportData[1])
+        this.headers = Object.keys(this.data[0])
         
         // precisa ter ao menos uma coluna
         this.totalInputColumns = this.headers.length
-        this.totalInputRows = reportData.length
+        this.totalInputRows = this.data.length
         //TODO weak?
         this.alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
         this.currentRow = 0
@@ -36,8 +41,8 @@ class XlsBuilder {
 
         sheetData += this.createHeaderCells()
 
-        for (let row in reportData) {
-            sheetData += this.createRow(reportData[row])
+        for (let row in this.data) {
+            sheetData += this.createRow(this.data[row])
         }
         //ver
         let sheet = createSheetHeader(this.currentRow, this.totalInputColumns, this.alphabet)

@@ -1,7 +1,14 @@
 function exportXls() {
+    let xls
+    
+    try {
+        xls = new XlsBuilder(reportData)
+    } catch (e) {
+        alert(e.message)
+        return
+    }
+    
     let zip = new JSZip()
-    const xls = new XlsBuilder()
-
     // ROOT
     zip.file("[Content_Types].xml", contentTypes)
     
