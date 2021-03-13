@@ -145,7 +145,6 @@
 	background-color: var(--bg-color-dark);
 	width: 100%;
 	font: normal 14px Arial,sans-serif;
-	margin-top: 10px;
 	margin-bottom: 30px;
 	border-collapse: separate;
 	border: 2px solid black;
@@ -181,6 +180,10 @@
 .collector__input-table td {
 	width: 100%;
 	padding: 2px;
+}
+
+#collector__button-container {
+	margin-bottom: 10px;
 }
 
 .collector__button {
