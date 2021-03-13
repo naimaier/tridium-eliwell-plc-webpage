@@ -7,12 +7,14 @@ class XlsBuilder {
 
         this.data = data
         
-        // precisa ter ao menos uma coluna
-        this.totalInputColumns = this.data.headers.length
-
-        //TODO weak?
-        this.alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+        // Exported columns are limited to the number of items in alphabet
+        this.alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 
+            'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
         this.currentRow = 0
+        
+        // precisa ter ao menos uma coluna
+        this.totalInputColumns = this.data.headers.length < this.alphabet.length ? 
+            this.data.headers.length : this.alphabet.length
 
         // XLS Document strings
         this.stringList = []
