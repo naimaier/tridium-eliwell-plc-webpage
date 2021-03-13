@@ -419,7 +419,7 @@ function disableExportButton(disable) {
 function areArrayEquals(array1, array2) {
     let equals = true
 
-    array1.map((element, index) => {
+    array1.forEach((element, index) => {
         if (element != array2[index]) equals = false
     })
 
