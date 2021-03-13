@@ -47,7 +47,13 @@ function coletar() {
     clearContent()
     clearTable()
 
-    parseLogs(startDate, endDate)
+    try {
+        parseLogs(startDate, endDate)
+    } catch (e) {
+        clearContent()
+        alert(e.message)
+        return
+    }
 
     console.time('Formatando data')
 
@@ -144,14 +150,17 @@ function searchAndParseFile(csvFile) {
 
         // Get headers by splitting the header row by the delimiter
         // and trimming (getting rid of whitespaces at the start and end of string)
-        collectedData.headers = dataRows[headerRowIndex].split(delimiter).map(string => {return string.trim()})
-        
-        //TODO remover
-        console.log(collectedData.headers)
-        
+        let fileHeaders = dataRows[headerRowIndex].split(delimiter).map(string => {return string.trim()})
+
         // Including default column names
-        collectedData.headers[dateColumnIndex] = dateColumnLabel
-        collectedData.headers[timeColumnIndex] = timeColumnLabel
+        fileHeaders[dateColumnIndex] = dateColumnLabel
+        fileHeaders[timeColumnIndex] = timeColumnLabel
+
+        if (collectedData.headers.length == 0) {
+            collectedData.headers = fileHeaders
+        } else if (!areArrayEquals(collectedData.headers, fileHeaders)) {
+            throw new Error('Arquivos de log diferentes')
+        }
         
         // Return if row count is less than (header row + at least 1 row of content)
         if (rowCount < headerRowIndex + 2) return
@@ -205,6 +214,8 @@ function displayTablePage(pageNumber) {
 function clearContent() {
     collectedData.content = []
     collectedData.headers = []
+    clearTable()
+    manageExportButton()
 }
 
 function clearTable() {
@@ -403,4 +414,14 @@ function manageExportButton() {
 function disableExportButton(disable) {
     const exportBtn = document.querySelector('[data-export-button]')
     exportBtn.disabled = disable
+}
+
+function areArrayEquals(array1, array2) {
+    let equals = true
+
+    array1.map((element, index) => {
+        if (element != array2[index]) equals = false
+    })
+
+    return equals
 }
