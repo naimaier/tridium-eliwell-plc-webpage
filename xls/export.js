@@ -52,8 +52,9 @@ function exportXls() {
     zip.generateAsync({type:"blob"})
     .then(function(content) {
         saveAs(content, "example.xlsx")
+        
+        // Enable export button back again (if data is avaliable)
+        manageExportButton()
     })
 
-    // Enable export button back again (if data is avaliable)
-    manageExportButton()
 }
