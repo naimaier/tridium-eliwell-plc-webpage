@@ -3,6 +3,9 @@ collectedData.headers = []
 collectedData.content = []
 collectedData.rowCount = 0
 
+// At least 3 columns so the exported log design doesn't break
+const minimumAmountOfColumns = 3
+
 // Log file configuration
 const delimiter = ';'
 const fileExtension = 'TXT'
@@ -57,9 +60,13 @@ function coletar() {
 
     console.time('Formatando data')
 
+    checkMinimumColumns(collectedData.headers)
+
     for (let row = 0; row < collectedData.rowCount; row++) {
-        collectedData.content[row][dateColumnIndex] = formatDate(collectedData.content[row][dateColumnIndex])
+        formatDate(collectedData.content[row])
+        checkMinimumColumns(collectedData.content[row])
     }
+
     console.timeEnd('Formatando data')
 
     console.time('Preenchendo a tabela')
@@ -397,13 +404,19 @@ function getDateFromLogRowObject(logRowObject) {
     return date
 }
 
-function formatDate(date) {
-    const splittedDate = date.split('-')
+function checkMinimumColumns(array) {
+    for (let i = array.length; i < minimumAmountOfColumns; i++) {
+        array.push('')
+    }
+}
+
+function formatDate(row) {
+    const splittedDate = row[dateColumnIndex].split('-')
     const dd = splittedDate[2]
     const mm = splittedDate[1]
     const yyyy = splittedDate[0]
 
-    return `${dd}/${mm}/${yyyy}`
+    row[dateColumnIndex] = `${dd}/${mm}/${yyyy}`
 }
 
 function manageExportButton() {
