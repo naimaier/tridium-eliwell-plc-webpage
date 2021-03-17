@@ -232,7 +232,9 @@ function displayTablePage(pageNumber) {
 function clearContent() {
     collectedData.content = []
     collectedData.headers = []
+    collectedData.rowCount = 0
     clearTable()
+    clearTableNavigation()
 }
 
 function clearTable() {
@@ -274,8 +276,7 @@ function addTableContent(table, pageNumber, maxTableRows) {
 }
 
 function addTableNavigator(currentPage, totalPages, maxNavigatorSize) {
-    const navigationElement = document.querySelector('[data-table-nav-container]')
-    navigationElement.innerHTML = ''
+    clearTableNavigation()
 
     // If there's only one page no navigation is needed
     if (totalPages == 1) {
@@ -323,10 +324,16 @@ function addTableNavigator(currentPage, totalPages, maxNavigatorSize) {
         indexes['pages'][indexes['pages'].length - 2] = '...'
     }
 
-    addNavigationButtons(currentPage, indexes, navigationElement)
+    addNavigationButtons(currentPage, indexes)
 }
 
-function addNavigationButtons(currentPage, indexes, navigationElement) {
+function clearTableNavigation() {
+    const navigationElement = document.querySelector('[data-table-nav-container]')
+    navigationElement.innerHTML = ''
+}
+
+function addNavigationButtons(currentPage, indexes) {
+    const navigationElement = document.querySelector('[data-table-nav-container]')
 
     // creating previous button
     const btnPrev = createTableNavButton('<', indexes['<'])
