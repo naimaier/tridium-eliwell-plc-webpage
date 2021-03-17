@@ -224,6 +224,31 @@
 	min-height: 40px;
 }
 
+.collector__loading {
+	border: 8px solid #fff;
+	border-radius: 50%;
+	border-top: 8px solid #333;
+	width: 40px;
+	height: 40px;
+	-webkit-animation: spin 1.5s linear infinite; /* Safari */
+	animation: spin 1.5s linear infinite;
+	margin: 60px auto;
+	left: 0;
+	right: 0;
+	position: absolute;
+}
+  
+/* Safari */
+@-webkit-keyframes spin {
+	0% { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+}
+  
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
 /* When the screen is less than (max-width) pixels wide, hide all links, except for the first one: the menu icon. 
 Show the link that should open and close the menu (.icon) */
 @media screen and (max-width: 1000px) {

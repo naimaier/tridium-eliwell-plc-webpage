@@ -44,6 +44,7 @@ function coletar() {
 
     disableCollectButton(true)
     disableExportButton(true)
+    displayLoader(true)
     clearContent()
 
     // Using timeout before continuing execution so
@@ -65,6 +66,7 @@ function collectData(startDate, endDate) {
     } catch (e) {
         alert(e.message)
         disableCollectButton(false)
+        displayLoader(false)
         return
     }
 
@@ -85,6 +87,8 @@ function collectData(startDate, endDate) {
 
     manageExportButton()
     disableCollectButton(false)
+    displayLoader(false)
+
     console.timeEnd('Tempo total de execução')
 }
 
@@ -459,4 +463,17 @@ function areArrayEquals(array1, array2) {
     })
 
     return equals
+}
+
+function displayLoader(display) {
+    const loadElement = document.querySelector('[data-loading')
+    const table = document.querySelector('[data-table')
+
+    if (display) {
+        loadElement.classList.add('collector__loading')
+        table.style.opacity = 0.3
+    } else {
+        loadElement.classList.remove('collector__loading')
+        table.style.opacity = 1
+    }
 }
