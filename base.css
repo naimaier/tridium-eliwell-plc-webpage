@@ -291,16 +291,6 @@ Show the link that should open and close the menu (.icon) */
 		margin-top: 15px;
 		margin-bottom: 20px;
 	}
-
-	/* Fixing input width to the width of the data displayed
-	.content__table td input {
-		width: 100%;
-	} */
-
-	/* Allow table headers to be displayed without wrapping content */
-	.content__table th {
-		white-space: nowrap;
-	}
 	
 	.collector__table-nav-button {
 		display: none;
@@ -347,9 +337,6 @@ Show the link that should open and close the menu (.icon) */
 	}
 	.content__table {
 		background-color: white;
-	}
-	.content__table td {
-		white-space: nowrap;
 	}
 	.collector__button {
 		display: none;
