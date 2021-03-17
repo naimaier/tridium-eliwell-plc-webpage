@@ -41,15 +41,25 @@ function coletar() {
         alert('O início da coleta deve ser antes do fim da coleta!')
         return
     }
-    
+
+    disableCollectButton(true)
+    disableExportButton(true)
+    clearContent()
+
+    // Using timeout before continuing execution so
+    // the button disable is rendered
+    setTimeout(function() {
+        collectData(startDate, endDate)
+    }, 50)
+}
+
+function collectData(startDate, endDate) {
+
     console.log(`Start: ${startDate}`)
     console.log(`End: ${endDate}`)
     
     console.time('Tempo total de execução')
     
-    clearContent()
-    clearTable()
-
     try {
         parseLogs(startDate, endDate)
     } catch (e) {
@@ -74,6 +84,7 @@ function coletar() {
     console.timeEnd('Preenchendo a tabela')
 
     manageExportButton()
+    disableCollectButton(false)
     console.timeEnd('Tempo total de execução')
 }
 
@@ -222,7 +233,6 @@ function clearContent() {
     collectedData.content = []
     collectedData.headers = []
     clearTable()
-    manageExportButton()
 }
 
 function clearTable() {
@@ -427,6 +437,11 @@ function manageExportButton() {
 function disableExportButton(disable) {
     const exportBtn = document.querySelector('[data-export-button]')
     exportBtn.disabled = disable
+}
+
+function disableCollectButton(disable) {
+    const collectBtn = document.querySelector('[data-collect-button]')
+    collectBtn.disabled = disable
 }
 
 function areArrayEquals(array1, array2) {
