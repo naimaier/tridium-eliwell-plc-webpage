@@ -63,8 +63,8 @@ function collectData(startDate, endDate) {
     try {
         parseLogs(startDate, endDate)
     } catch (e) {
-        clearContent()
         alert(e.message)
+        disableCollectButton(false)
         return
     }
 
