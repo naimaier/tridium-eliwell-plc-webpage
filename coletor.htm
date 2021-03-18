@@ -7,6 +7,10 @@
 	<script type='text/javascript' src='evo_h.js'></script>
 	<script type='text/javascript' src='evo.js'></script>
 	<script type='text/javascript' src='base.js'></script>
+	<script src="dependencies/datepicker-pt-BR.js"></script>
+	<script src="dependencies/jquery.timepicker.min.js"></script>
+	<script src="dependencies/moment.min.js"></script>
+	<link rel="stylesheet" href="dependencies/jquery-ui.css">
 	<link rel="stylesheet" href="reset.css">
 	<link rel='stylesheet' type='text/css' href='base.css'>
 	<!-- Font awesome JS -->
@@ -67,13 +71,13 @@
 				<table class="collector__input-table">
 					<tr>
 						<td>Início: </td>
-						<td><input type="date" data-start-date></td>
-						<td><input type="time" data-start-time></td>
+						<td><input type="text" class="collector__date-input" data-start-date></td>
+						<td><input type="text" class="collector__time-input" data-start-time></td>
 					</tr>
 					<tr>
 						<td>Final: </td>
-						<td><input type="date" data-end-date></td>
-						<td><input type="time" data-end-time></td>
+						<td><input type="text" class="collector__date-input" data-end-date></td>
+						<td><input type="text" class="collector__time-input" data-end-time></td>
 					</tr>
 				</table>
 				<div id="collector__button-container">

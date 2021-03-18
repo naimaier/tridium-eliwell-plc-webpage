@@ -18,27 +18,62 @@ const timeColumnIndex = 1
 const timeColumnLabel = 'Hora'
 
 window.onload = () => {
-    resetDateSpanInputs()
+    configureDateSpanInputs()
     manageExportButton()
 }
 
-function resetDateSpanInputs() {
-    let today = new Date()
-    const dd = `0${today.getDate()}`.slice(-2)
-    const mm = `0${today.getMonth() + 1}`.slice(-2)
-    const yyyy = today.getFullYear()
-    today = `${yyyy}-${mm}-${dd}`
+function configureDateSpanInputs() {
+
+    $.datepicker.setDefaults({
+        regional: 'pt-BR',
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true
+    })
     
-    document.querySelector('[data-start-date]').value = today
-    document.querySelector('[data-end-date]').value = today
+    const today = new Date()
+    $('[data-start-date]').datepicker().datepicker('setDate', today)
+    $('[data-end-date]').datepicker().datepicker('setDate', today)
+    $('[data-start-time]').timepicker({
+        timeFormat: 'HH:mm:ss',
+        defaultTime: '00:00:00',
+        dropdown: false
+    })
+    $('[data-end-time]').timepicker({
+        timeFormat: 'HH:mm:ss',
+        defaultTime: '23:59:59',
+        dropdown: false
+    })
+
+    $('[data-start-date]').blur(validateDate)
+    $('[data-end-date]').blur(validateDate)
+}
+
+function validateDate() {
+    let selectedDate = $(this).val();
+    if (!moment(selectedDate, 'DD/MM/YYYY', true).isValid()){
+        $(this).datepicker('setDate', new Date())
+    }
+}
+
+function getDateTimeFromInput(dateElement, timeElement) {
+    let date = $(dateElement).datepicker('getDate')
+    const time = document.querySelector(timeElement).value
+
+    const splittedTime = time.split(':')
+    date.setHours(splittedTime[0])
+    date.setMinutes(splittedTime[1])
+    date.setSeconds(splittedTime[2])
+
+    return date
 }
 
 function coletar() {
-    const startDate = getStartDateFromInput()
-    const endDate = getEndDateFromInput()
+    const startDateTime = getDateTimeFromInput('[data-start-date]', '[data-start-time]')
+    const endDateTime = getDateTimeFromInput('[data-end-date]', '[data-end-time]')
     
-    if (startDate > endDate) {
-        alert('O início da coleta deve ser antes do fim da coleta!')
+    if (startDateTime > endDateTime) {
+        alert('O início deve ser antes do fim da coleta!')
         return
     }
 
@@ -46,23 +81,24 @@ function coletar() {
     disableExportButton(true)
     displayLoader(true)
     clearContent()
-
+    
     // Using timeout before continuing execution so
     // the button disable is rendered
+    // and css loading animation too
     setTimeout(function() {
-        collectData(startDate, endDate)
+        collectData(startDateTime, endDateTime)
     }, 50)
 }
 
-function collectData(startDate, endDate) {
+function collectData(startDateTime, endDateTime) {
 
-    console.log(`Start: ${startDate}`)
-    console.log(`End: ${endDate}`)
+    console.log(`Start: ${startDateTime}`)
+    console.log(`End: ${endDateTime}`)
     
     console.time('Tempo total de execução')
     
     try {
-        parseLogs(startDate, endDate)
+        parseLogs(startDateTime, endDateTime)
     } catch (e) {
         alert(e.message)
         disableCollectButton(false)
@@ -92,40 +128,10 @@ function collectData(startDate, endDate) {
     console.timeEnd('Tempo total de execução')
 }
 
-function getStartDateFromInput() {
-    const startDate = Date.parse(document.querySelector('[data-start-date]').value)
-    let startTime = document.querySelector('[data-start-time]').value
-    
-    if (!startTime) {
-        startTime = '00:00'
-    }
-    
-    const splittedStartTime = startTime.split(':')
-    startDate.setHours(splittedStartTime[0])
-    startDate.setMinutes(splittedStartTime[1])
-
-    return startDate
-}
-
-function getEndDateFromInput() {
-    const endDate = Date.parse(document.querySelector('[data-end-date]').value)
-    let endTime = document.querySelector('[data-end-time]').value
-
-    if (!endTime) {
-        endTime = '23:59'
-    }
-
-    const splittedEndTime = endTime.split(':')
-    endDate.setHours(splittedEndTime[0])
-    endDate.setMinutes(splittedEndTime[1])
-
-    return endDate
-}
-
-function parseLogs(startDate, endDate) {
+function parseLogs(startDateTime, endDateTime) {
     const monthName = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
 
-    for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
+    for (let date = new Date(startDateTime); date <= endDateTime; date.setDate(date.getDate() + 1)) {
 
         // Define file name
         let day = `0${date.getDate()}`.slice(-2)
@@ -139,13 +145,13 @@ function parseLogs(startDate, endDate) {
     console.time('Removing before and after')
     // Remove entries before selected start date
     while (collectedData.content.length > 0 &&
-     getDateFromLogRowObject(collectedData.content[0]) < startDate) {
+     getDateFromLogRowObject(collectedData.content[0]) < startDateTime) {
         collectedData.content.splice(0, 1)
     }
 
     // Remove entries after selected end date
     while (collectedData.content.length > 0 &&
-     getDateFromLogRowObject(collectedData.content[collectedData.content.length - 1]) > endDate) {
+     getDateFromLogRowObject(collectedData.content[collectedData.content.length - 1]) > endDateTime) {
         collectedData.content.splice(collectedData.content.length - 1, 1)
     }
     console.timeEnd('Removing before and after')

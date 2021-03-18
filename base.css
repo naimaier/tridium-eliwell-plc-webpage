@@ -182,6 +182,14 @@
 	padding: 2px;
 }
 
+.collector__date-input {
+	width: 120px;
+}
+
+.collector__time-input {
+	width: 80px;
+}
+
 #collector__button-container {
 	margin-bottom: 10px;
 }
