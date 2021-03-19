@@ -17,13 +17,13 @@ const dateColumnLabel = 'Data'
 const timeColumnIndex = 1
 const timeColumnLabel = 'Hora'
 
+/* Configuring inputs */
 window.onload = () => {
     configureDateSpanInputs()
     manageExportButton()
 }
 
 function configureDateSpanInputs() {
-
     $.datepicker.setDefaults({
         regional: 'pt-BR',
         dateFormat: 'dd/mm/yy',
@@ -68,9 +68,12 @@ function getDateTimeFromInput(dateElement, timeElement) {
     return date
 }
 
+/*  */
 function coletar() {
     const startDateTime = getDateTimeFromInput('[data-start-date]', '[data-start-time]')
     const endDateTime = getDateTimeFromInput('[data-end-date]', '[data-end-time]')
+    console.log(`Start: ${startDateTime}`)
+    console.log(`End: ${endDateTime}`)
     
     if (startDateTime > endDateTime) {
         alert('O início deve ser antes do fim da coleta!')
@@ -91,14 +94,69 @@ function coletar() {
 }
 
 function collectData(startDateTime, endDateTime) {
+    const searchFileList = getSearchFileList(startDateTime, endDateTime)
+    let pendingRequests = searchFileList.length
 
-    console.log(`Start: ${startDateTime}`)
-    console.log(`End: ${endDateTime}`)
+    let foundFiles = {}
+    foundFiles.name = searchFileList.slice() // make a copy of the array
+    foundFiles.data = {}
     
     console.time('Tempo total de execução')
-    
+
+    console.time('Requests')
+    // For each filename, if the file exists collect the data
+    // otherwise remove the filename from the validFileList
+    searchFileList.forEach(fileName => {
+        searchFile(fileName).done(response => {
+            foundFiles.data[fileName] = response
+        }).fail(() => {
+            foundFiles.name.splice(foundFiles.name.indexOf(fileName), 1)
+        }).always(() => {
+            pendingRequests -= 1
+            if (pendingRequests == 0) {
+                manageCollectedData(foundFiles, startDateTime, endDateTime)
+                console.timeEnd('Requests')
+            }
+        })
+    })
+}
+
+function getSearchFileList(startDateTime, endDateTime) {
+    const monthName = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+    let searchFileList = []
+
+    console.time('Making file list')
+    for (let date = new Date(startDateTime); date <= endDateTime; date.setDate(date.getDate() + 1)) {
+        // Define file name
+        let day = `0${date.getDate()}`.slice(-2)
+        let month = date.getMonth()
+        let year = date.getFullYear().toString().slice(-2)
+        let fileName = `${day}${monthName[month]}${year}.${fileExtension}`
+        
+        // add to list
+        searchFileList.push(fileName)    
+    }
+    console.timeEnd('Making file list')
+
+    return searchFileList
+}
+
+function searchFile(csvFile) {
+    return $.ajax({
+        url: csvFile,
+        cache: false,
+        // Getting the right Charset
+        contentType: 'Content-type: text/plain; charset=ISO-8859-1',
+        beforeSend: function(jqXHR) {
+            jqXHR.overrideMimeType('text/html;charset=ISO-8859-1')
+        },
+        dataType: 'text'
+    })
+}
+
+function manageCollectedData(foundFiles, startDateTime, endDateTime) {
     try {
-        parseLogs(startDateTime, endDateTime)
+        parseLogs(foundFiles, startDateTime, endDateTime)
     } catch (e) {
         alert(e.message)
         disableCollectButton(false)
@@ -128,19 +186,10 @@ function collectData(startDateTime, endDateTime) {
     console.timeEnd('Tempo total de execução')
 }
 
-function parseLogs(startDateTime, endDateTime) {
-    const monthName = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
-
-    for (let date = new Date(startDateTime); date <= endDateTime; date.setDate(date.getDate() + 1)) {
-
-        // Define file name
-        let day = `0${date.getDate()}`.slice(-2)
-        let month = date.getMonth()
-        let year = date.getFullYear().toString().slice(-2)
-        let fileName = `${day}${monthName[month]}${year}.${fileExtension}`
-        
-        searchAndParseFile(fileName)
-    }
+function parseLogs(foundFiles, startDateTime, endDateTime) {
+    foundFiles.name.forEach(fileName => {
+        parseData(foundFiles.data[fileName])
+    })
 
     console.time('Removing before and after')
     // Remove entries before selected start date
@@ -159,58 +208,44 @@ function parseLogs(startDateTime, endDateTime) {
     collectedData.rowCount = collectedData.content.length
 }
 
-function searchAndParseFile(csvFile) {
-    console.time('Lendo csv')
-    $.ajax({
-        url: csvFile,
-        async: false,
-        cache: false,
-        // Getting the right Charset
-        contentType: 'Content-type: text/plain; charset=ISO-8859-1',
-        beforeSend: function(jqXHR) {
-            jqXHR.overrideMimeType('text/html;charset=ISO-8859-1')
-        },
-        dataType: 'text'
-    }).done(data => {
-        // Split text by all forms of new line (carriage return, line feed...)
-        const dataRows = data.split(/\r?\n|\r/)
-        const rowCount = dataRows.length
+function parseData(data) {
+    // Split text by all forms of new line (carriage return, line feed...)
+    const dataRows = data.split(/\r?\n|\r/)
+    const rowCount = dataRows.length
 
-        // Get headers by splitting the header row by the delimiter
-        // and trimming (getting rid of whitespaces at the start and end of string)
-        let fileHeaders = dataRows[headerRowIndex].split(delimiter).map(string => {return string.trim()})
+    // Get headers by splitting the header row by the delimiter
+    // and trimming (getting rid of whitespaces at the start and end of string)
+    let fileHeaders = dataRows[headerRowIndex].split(delimiter).map(string => {return string.trim()})
 
-        // Including default column names
-        fileHeaders[dateColumnIndex] = dateColumnLabel
-        fileHeaders[timeColumnIndex] = timeColumnLabel
+    // Including default column names
+    fileHeaders[dateColumnIndex] = dateColumnLabel
+    fileHeaders[timeColumnIndex] = timeColumnLabel
 
-        if (collectedData.headers.length == 0) {
-            collectedData.headers = fileHeaders
-        } else if (!areArrayEquals(collectedData.headers, fileHeaders)) {
-            throw new Error('Arquivos de log diferentes')
+    if (collectedData.headers.length == 0) {
+        collectedData.headers = fileHeaders
+    } else if (!areArrayEquals(collectedData.headers, fileHeaders)) {
+        throw new Error('Arquivos de log diferentes')
+    }
+    
+    // Return if row count is less than (header row + at least 1 row of content)
+    if (rowCount < headerRowIndex + 2) return
+
+    // Starts the loop after the header row
+    for (let row = headerRowIndex + 1; row < rowCount; row++) {
+
+        // Skip loop if string is empty
+        if (!dataRows[row]) continue
+
+        const dataColumns = dataRows[row].split(delimiter)
+
+        let columnCount = dataColumns.length
+        let dataRow = []
+        for (let column = 0; column < columnCount; column++) {
+            dataRow[column] = dataColumns[column].trim()
         }
-        
-        // Return if row count is less than (header row + at least 1 row of content)
-        if (rowCount < headerRowIndex + 2) return
 
-        // Starts the loop after the header row
-        for (let row = headerRowIndex + 1; row < rowCount; row++) {
-
-            // Skip loop if string is empty
-            if (!dataRows[row]) continue
-
-            const dataColumns = dataRows[row].split(delimiter)
-
-            let columnCount = dataColumns.length
-            let dataRow = []
-            for (let column = 0; column < columnCount; column++) {
-                dataRow[column] = dataColumns[column].trim()
-            }
-
-            collectedData.content.push(dataRow)
-        }
-    })
-    console.timeEnd('Lendo csv')
+        collectedData.content.push(dataRow)
+    }
 }
 
 function displayTablePage(pageNumber) {
