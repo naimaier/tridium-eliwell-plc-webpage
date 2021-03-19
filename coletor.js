@@ -114,8 +114,8 @@ function collectData(startDateTime, endDateTime) {
         }).always(() => {
             pendingRequests -= 1
             if (pendingRequests == 0) {
-                manageCollectedData(foundFiles, startDateTime, endDateTime)
                 console.timeEnd('Requests')
+                manageCollectedData(foundFiles, startDateTime, endDateTime)
             }
         })
     })
