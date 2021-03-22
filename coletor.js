@@ -1,7 +1,6 @@
 var collectedData = new Object()
 collectedData.headers = []
 collectedData.content = []
-collectedData.rowCount = 0
 
 // At least 3 columns so the exported log design doesn't break
 const minimumAmountOfColumns = 3
@@ -168,7 +167,8 @@ function manageCollectedData(foundFiles, startDateTime, endDateTime) {
 
     checkMinimumColumns(collectedData.headers)
 
-    for (let row = 0; row < collectedData.rowCount; row++) {
+    const collectedDataRowCount = collectedData.content.length
+    for (let row = 0; row < collectedDataRowCount; row++) {
         formatDate(collectedData.content[row])
         checkMinimumColumns(collectedData.content[row])
     }
@@ -204,8 +204,6 @@ function parseLogs(foundFiles, startDateTime, endDateTime) {
         collectedData.content.splice(collectedData.content.length - 1, 1)
     }
     console.timeEnd('Removing before and after')
-
-    collectedData.rowCount = collectedData.content.length
 }
 
 function parseData(data) {
@@ -258,7 +256,7 @@ function displayTablePage(pageNumber) {
     table.removeAttribute('hidden')
 
     // Return if no data was found
-    if (collectedData.rowCount == 0) {
+    if (collectedData.content.length == 0) {
         table.innerHTML = '<tr><td>Nenhum registro encontrado</td></tr>'
         return
     }
@@ -277,7 +275,6 @@ function displayTablePage(pageNumber) {
 function clearContent() {
     collectedData.content = []
     collectedData.headers = []
-    collectedData.rowCount = 0
     clearTable()
     clearTableNavigation()
 }

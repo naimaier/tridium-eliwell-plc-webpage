@@ -30,18 +30,14 @@ class XlsBuilder {
     }
     
     buildSheet() {
-        if (this.data.rowCount <= 0) {
-            //TODO deal with this
-            return false
-        }
-        
         let sheetData = this.createLogoCells()
 
         sheetData += this.createTitleCells()
 
         sheetData += this.createHeaderCells()
 
-        for (let row = 0; row < this.data.rowCount; row++) {
+        const collectedDataRowCount = this.data.content.length
+        for (let row = 0; row < collectedDataRowCount; row++) {
             sheetData += this.createRow(this.data.content[row])
         }
         //ver
