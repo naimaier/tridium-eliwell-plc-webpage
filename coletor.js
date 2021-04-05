@@ -156,24 +156,16 @@ function searchFile(csvFile) {
 function manageCollectedData(foundFiles, startDateTime, endDateTime) {
     try {
         parseLogs(foundFiles, startDateTime, endDateTime)
+        console.time('Formatando data')
+        formatRows(collectedData)
+        console.timeEnd('Formatando data')
     } catch (e) {
         alert(e.message)
+        clearContent()
         disableCollectButton(false)
         displayLoader(false)
         return
     }
-
-    console.time('Formatando data')
-
-    checkMinimumColumns(collectedData.headers)
-
-    const collectedDataRowCount = collectedData.content.length
-    for (let row = 0; row < collectedDataRowCount; row++) {
-        formatDate(collectedData.content[row])
-        checkMinimumColumns(collectedData.content[row])
-    }
-
-    console.timeEnd('Formatando data')
 
     console.time('Preenchendo a tabela')
     displayTablePage(1)
@@ -184,6 +176,23 @@ function manageCollectedData(foundFiles, startDateTime, endDateTime) {
     displayLoader(false)
 
     console.timeEnd('Tempo total de execução')
+}
+
+function formatRows(collectedData) {
+    // Return if there are no headers (no data was collected)
+    if (collectedData.headers == 0) {
+        return
+    }
+
+    //formatHeadersFromThreeColumns(collectedData.headers)
+    checkMinimumColumns(collectedData.headers)
+
+    const collectedDataRowCount = collectedData.content.length
+    for (let row = 0; row < collectedDataRowCount; row++) {
+        formatDate(collectedData.content[row])
+        //formatTimeFromThreeColumns(collectedData.content[row])
+        checkMinimumColumns(collectedData.content[row])
+    }
 }
 
 function parseLogs(foundFiles, startDateTime, endDateTime) {
@@ -476,6 +485,35 @@ function formatDate(row) {
     const yyyy = splittedDate[0]
 
     row[dateColumnIndex] = `${dd}/${mm}/${yyyy}`
+}
+
+function formatHeadersFromThreeColumns(headers) {
+    mergeColumns(headers, true)
+}
+
+function formatTimeFromThreeColumns(row) {
+    mergeColumns(row, false)
+}
+
+function mergeColumns(row, isHeader) {
+    if (row.length < 5) {
+        throw new Error('Formato de log inválido')
+    }
+
+    if (!isHeader) {
+        row[2] = `${getTwoChars(row[2])}:${getTwoChars(row[3])}:${getTwoChars(row[4])}`
+        
+        if (!moment(row[2], 'HH:mm:ss', true).isValid()) {
+            throw new Error('Formato de log inválido (Horário)')
+        }
+    }
+
+    row.splice(4, 1)
+    row.splice(3, 1)
+}
+
+function getTwoChars(string) {
+    return `0${string}`.slice(-2)
 }
 
 function manageExportButton() {
