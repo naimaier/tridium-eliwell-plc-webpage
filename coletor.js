@@ -451,9 +451,9 @@ function getDateFromLogRowObject(logRowObject) {
     let date = new Date()
     let splittedDate = logRowObject[dateColumnIndex].split('-')
 
-    date.setDate(splittedDate[2])
-    date.setMonth(splittedDate[1] - 1)
     date.setFullYear(splittedDate[0])
+    date.setMonth(splittedDate[1] - 1)
+    date.setDate(splittedDate[2])
 
     let splittedTime = logRowObject[timeColumnIndex].split(':')
     date.setHours(splittedTime[0])
