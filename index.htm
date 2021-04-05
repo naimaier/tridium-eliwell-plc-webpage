@@ -129,10 +129,15 @@
 	</main>
 	<script type='text/javascript'>
 		EVO_CheckPassword('', 1);
-		EVO_PageInit(1000);
+		//EVO_PageInit(5000);
 	</script>
 	<script type="text/javascript">
         $(document).ready(function(){
+			addNowAsReportDate()
+			setInterval(addNowAsReportDate, 5000)
+		})
+
+		function addNowAsReportDate() {
 			const date = new Date()
 			
 			let dd = date.getDate()
@@ -149,7 +154,7 @@
 			time += ':' + `0${date.getMinutes()}`.slice(-2)
 
 			$('p#report-date').text(`Relatório gerado em ${fullDate} às ${time}`)
-		});
+		}
     </script>
 </body>
 </html>
