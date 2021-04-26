@@ -1,0 +1,13 @@
+t <?xml version="1.0"?>
+t <form>
+c t09308<text><id>%s</id><value>%.0f</value></text>
+c t09310<text><id>%s</id><value>%.0f</value></text>
+c t09312<text><id>%s</id><value>%.0f</value></text>
+c t09314<text><id>%s</id><value>%.0f</value></text>
+c t09316<text><id>%s</id><value>%.0f</value></text>
+c t09318<text><id>%s</id><value>%.0f</value></text>
+c t09320<text><id>%s</id><value>%.0f</value></text>
+c t09322<text><id>%s</id><value>%.0f</value></text>
+c t09289<text><id>%s</id><value>%.0f</value></text>
+t </form>
+.
