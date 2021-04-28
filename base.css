@@ -98,22 +98,14 @@
 /* ------------- LOGOS ------------ */
 #logos__big-screen {
 	width: 100%;
-	text-align: center;
 	margin-top: 5px;
+	display: flex;
+	justify-content: space-between;
 }
 
 #logos__small-screen {
 	width: 100%;
 	display: none;
-	text-align: center;
-}
-
-.logos__left-logo {
-	float: left;
-}
-
-.logos__right-logo {
-	float: right;
 }
 
 /* ------------- MAIN ------------ */
@@ -292,7 +284,8 @@ Show the link that should open and close the menu (.icon) */
 		display: none;
 	}
 	#logos__small-screen {
-		display: inline-block;
+		display: flex;
+		justify-content: space-between;
 	}
 
 	.content__title {
