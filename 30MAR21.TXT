@@ -1,3 +1,0 @@
-  240171Date; Time;Hora Início;Min. Início;Seg. Início;C1;C2;Volume Inf.;Volume;Temperatura;Id. Medidor;Total Diario
-2021-03-30;17:20:18 ;17;20;13;8;8;852;0;0.0;1;0
-2021-03-30;17:45:10 ;17;20;13;8;8;852;0;0.0;1;0
