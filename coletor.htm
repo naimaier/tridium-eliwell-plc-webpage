@@ -4,18 +4,17 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
 	<META name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Data Logger</title>
-	<script type='text/javascript' src='evo_h.js'></script>
-	<script type='text/javascript' src='evo.js'></script>
-	<script type='text/javascript' src='base.js'></script>
+	<link rel="stylesheet" type='text/css' href="reset.css">
+	<link rel='stylesheet' type='text/css' href='base.css'>
+	<link rel='shortcut icon' href='base.ico'>
+	
+	<!-- Evo containing Jquery -->
+	<script type='text/javascript' src='dependencies/evo_h.js'></script>
+	
 	<script src="dependencies/datepicker-pt-BR.js"></script>
 	<script src="dependencies/jquery.timepicker.min.js"></script>
 	<script src="dependencies/moment.min.js"></script>
 	<link rel="stylesheet" href="dependencies/jquery-ui.css">
-	<link rel="stylesheet" href="reset.css">
-	<link rel='stylesheet' type='text/css' href='base.css'>
-	<!-- Font awesome JS -->
-	<script defer src="all.min.js"></script>
-	<link rel='shortcut icon' href='base.ico'>
 
 	<!-- JS for xlsx generation -->
 	<script src="xls/dependencies/FileSaver.min.js"></script>
@@ -93,9 +92,11 @@
 				<p data-report-date></p>
 		</section>
 	</main>
-	
+	<script type='text/javascript' src='base.js'></script>
+	<script type='text/javascript' src="all.min.js" defer></script> <!-- Font awesome JS -->
 	<script type='text/javascript'>
 		EVO_CheckPassword('', 1);
+		EVO_PageInit(1000);
 	</script>
 	<script src="coletor.js"></script>
 </body>
