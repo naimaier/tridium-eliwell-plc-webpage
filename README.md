@@ -1,12 +1,14 @@
-# Tridium Eliwell PLC Webpage
-Custom page for the Eliwell PLC Webserver.
+# Tridium Eliwell Webpage
+Página customizada para utilização no webserver do CLP Eliwell Free
 
-## Adding logos
-Pictures are loaded in series to avoid overloading the server with requests.
-For this, the `<img>` tags must have it's `src` attribute blank, and it's `id` and image source must be passed as parameters to the `AddPreCacheImage()` function.
+## Adicionando logos
+As imagens são carregadas em série para evitar sobrecarregar o servidor com requests.
+Para isso, as tags `<img>` devem ter o campo `src` em branco, e usaremos o seu `id` para carregarmos as imagens através da função `AddPreCacheImage()`.
 
-Logos must be aligned to the bottom of the image and have the following dimensions:
+Os logotipos devem estar alinhados abaixo e à esquerda na imagem.
+As imagens devem ter as seguintes dimensões:
+```
+Logotipo grande (visualização padrão): 150x40px.
 
-Big (desktop view): 150x40px.
-
-Small (mobile view): 110x35px.
+Logotipo pequeno (vizualização em dispositivos móveis): 110x35px.
+```
