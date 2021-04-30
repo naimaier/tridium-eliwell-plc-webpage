@@ -11,10 +11,7 @@
 	<META name="apple-mobile-web-app-capable" content="yes">
 	<title>%TITLE%</title>
 	<script type='text/javascript' src='evo.js'></script>
-	<!-- Responsive menu js -->
-	<script type='text/javascript' src='base.js'></script>
-	<!-- Font awesome JS -->
-	<script defer src="all.min.js"></script>
+	<link rel='stylesheet' type='text/css' href='reset.css'>
 	<link rel='stylesheet' type='text/css' href='base.css'>
 	<link rel='shortcut icon' href='BASE.ICO'>
 	%EXTRAHEADER%
@@ -27,20 +24,25 @@
 
 <!-- header of navigation tabs: uses placeholder TITLE, FILENAME, PAGEPATH -->
 <tabheader><![CDATA[
-	<ul class="menu" id="menu">
-		<li class="tabmenu menu_button">
-			<a href="javascript:void(0);" onclick="responsiveMenu()"><i class="fas fa-bars"></i></a>
-		</li> ]]>
+	<header class="header container">
+		<nav data-menu>
+			<ul> 
+				<li class="header__menu-item header__menu-button">
+					<a href="javascript:void(0);" onclick="responsiveMenu()">
+						<i class="fas fa-bars" data-menu-icon></i>
+					</a>
+				</li>
+]]>
 </tabheader>
 
 <!-- tab active: uses placeholder CAPTION, LINK -->
 <tabactive><![CDATA[
-		<li class="tabmenu tabmenu_on"><a href="%LINK%">%CAPTION%</a> ]]>
+				<li class="header__menu-item active"><a href="%LINK%">%CAPTION%</a> ]]>
 </tabactive>
 
 <!-- tab inactive: uses placeholder CAPTION, LINK -->
 <tabinactive><![CDATA[
-		<li class="tabmenu tabmenu_off"><a href="%LINK%">%CAPTION%</a> ]]>
+				<li class="header__menu-item"><a href="%LINK%">%CAPTION%</a> ]]>
 </tabinactive>
 
 <tabclose><![CDATA[ </li> ]]>
@@ -48,13 +50,28 @@
 
 <!-- footer of navigation tabs: uses placeholder TITLE, FILENAME, PAGEPATH -->
 <tabfooter><![CDATA[
-	</ul>
-	<div class="menubottom">%PAGEPATH%</div>
+			</ul>
+		</nav>
+	</header>
+
+	<main>
+		<section class="container">
+			<div id="logos__big-screen">
+				<img id="left-big-logo" src="" width="150" height="40" alt="Logotipo Cliente">
+				<img id="right-big-logo" src="" width="150" height="40" alt="Logotipo Tridium">
+			</div>
 		
-	<p class='title'>%TITLE%</p>
+			<div id="logos__small-screen">
+				<img id="left-small-logo" src="" width="110" height="35" alt="Logotipo Cliente">
+				<img id="right-small-logo" src="" width="110" height="35" alt="Logotipo Tridium">
+			</div>
+		</section>
+		
+		<section class="content container">
+
+			<p class='content__page-title'>%TITLE%</p>
 	
-	<form action='%FILENAME%.htm' method='get' id='form1' name='form1' onsubmit='return false'>
-	<div class='pagebody'>
+			<form action='%FILENAME%.htm' method='get' id='form1' name='form1' onsubmit='return false'>
 ]]>
 </tabfooter>
 
@@ -62,13 +79,13 @@
 
 <!-- drop-down menus -->
 <menuheader><![CDATA[
-		<ul class="submenu">
+		<ul class="header__submenu">
 ]]>
 </menuheader>
 
 <!-- menu item, uses placeholder CAPTION, LINK -->
 <menuitem><![CDATA[
-		<li><a href="%LINK%">%CAPTION%</a> ]]>
+		<li class="header__submenu-item"><a href="%LINK%">%CAPTION%</a> ]]>
 </menuitem>
 
 <menuclose><![CDATA[ </li> ]]>
@@ -83,8 +100,8 @@
 
 <!-- section header: uses placeholder SECTION -->
 <sectionheader><![CDATA[
-		<p class='sectiontitle'>%SECTION%</p>
-		<table class='table'>
+		<p class='content__section-title'>%SECTION%</p>
+		<table class='content__table'>
 			<tr>
 				<th>Name</th>
 				<th>Value</th>
@@ -115,12 +132,14 @@
 
 <!-- page footer: uses placeholder TITLE, FILENAME, REFRESH, PASSWORD -->
 <pagefooter><![CDATA[
-	</div>
-	</form>
+			</form>
+		</section>
+	</main>
 	
+	<script type='text/javascript' src='base.js'></script> <!-- Responsive menu/image loading -->
+	<script type='text/javascript' src='fontawesome.js' defer></script>
 	<script type='text/javascript'>
 	EVO_CheckPassword('%PASSWORD%', 1);
-	EVO_Image('imgLogo', 'BASE.PNG', '', '', '');
 	EVO_PageInit(%REFRESH%);
 	</script>
 </body>
@@ -132,9 +151,14 @@
 
 <!-- supplementary files to be copied as-is -->
 <files>
+	<file>RESET.CSS</file>  <!-- CSS is linked in <pageheader> in tag <link rel='stylesheet' ...>  -->
 	<file>BASE.CSS</file>  <!-- CSS is linked in <pageheader> in tag <link rel='stylesheet' ...>  -->
-	<file>BASE.PNG</file>  <!-- logo image is linked in <pagefooter> as a parameter of AddPreCacheImage() -->
 	<file>BASE.ICO</file>  <!-- favicon is linked in <pageheader> in tag <link rel='shortcut icon' ....> -->
+	<file>BASE.JS</file>  <!-- javascript is linked in <pagefooter> in tag <script type='text/javascript'... -->
+	<file>FONTAWESOME.JS</file>  <!-- fontawesome is linked in <pagefooter> in tag <script type='text/javascript'... -->
+	<file>TRIDIUMSMALL.PNG</file>  <!-- logo image is linked in base.js as a parameter of AddPreCacheImage() -->
+	<file>TRIDIUMBIG.PNG</file>  <!-- logo image is linked in base.js as a parameter of AddPreCacheImage() -->
+	<file>CLIENTE.PNG</file>  <!-- logo image is linked in base.js as a parameter of AddPreCacheImage() -->
 </files>
 
 </sitetemplate>

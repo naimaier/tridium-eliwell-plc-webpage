@@ -1,177 +1,346 @@
-html, body {
-	background-color: #d8dae0;
-	padding: 0px;
-	margin: 0px;
+/* ------------- GENERAL ------------ */
+:root {
+	/* Color scheme
+	https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=2b353f */
+	--bg-color-main: white; 
+	--bg-color-light: #F5F5F6;
+	--bg-color-dark: #E1E2E1;
+	--color-main: #2b353f; /* Tridium color */
+	--color-light: #545f6a;
+	--color-dark: #010f19;
+	--menu-font: 17px Arial,sans-serif;
 }
 
-.title {
-	font: bold 30px Arial,sans-serif;
-	text-align: center;
-	color: #71787f;
-}
-
-.table {
-	width: 100%;
-	font: normal 14px Arial,sans-serif;
-	margin-bottom: 30px;
-	border-collapse: collapse;
-	border: 1px solid #b4b7bb;
-}
-
-.table th {
-	color: #4c536c;
-	text-align: left;
-}
-
-.table tr {
-	height: 40px;
-}
-
-.table td {
-	border-top: 1px solid #b4b7bb;
-	border-bottom: 1px solid #b4b7bb;
+.container {
 	background-color: white;
-	padding: 5px;
+
+	max-width: 1920px;
+	margin: auto;
 }
 
-.sectiontitle {
-	font: bold 20px Arial,sans-serif;
-	margin-bottom: 15px;
+/* ------------- HEADER ------------ */
+.header {
+	background-color: #2b353f;
+	height: 60px;
 }
 
-.pagebody {
+.header__menu-item {
+	display: block;
+	float: left;
+	position: relative;
+}
+
+.header__menu-item > a {
+	display: block;
+	width: 120px;
+	height: 40px;
+	font: 17px Arial,sans-serif;
+	background-color: #2b353f;
+	color: white;
+	padding-top: 20px;
+	text-decoration: none;
+	text-align: center;
+}
+
+.header__menu-item > a[href="#"] {
+	cursor: default;
+}
+
+.header__menu-item.active > a {
+	background-color: #545f6a;
+}
+
+/* Menu button doesn't show on standard view (big displays) */
+.header__menu-button {
+	display: none;
+}
+
+.header__menu-button > a {
+	text-align: left;
+	padding-left: 20px;
+	padding-right: 20px;
+	width: 15px;
+}
+
+.header__submenu {
+	display: none;
+	background-color: #F5F5F6;
+	box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.2);
+	z-index: 15; /* so it stays on top of the AI trends (z-index: 10) */
+}
+
+/* Activate the submenu when hover (when not in responsive mode) */
+.header nav:not(.responsive) .header__menu-item:hover > .header__submenu {
+	display: block;
+	position: absolute;
+	width: 140px;
+}
+
+.header__submenu-item > a {
+	display: block;
+	height: 40px;
+	padding-top: 20px;
+	color: #2b353f;
+	font: 17px Arial,sans-serif;
+	text-decoration: none;
+	text-align: center;
+}
+
+.header__submenu-item > a[href="#"] {
+	cursor: default;
+}
+
+.header__submenu-item:hover > a {
+	background-color: #E1E2E1;
+	color: #2b353f;
+}
+
+/* ------------- LOGOS ------------ */
+#logos__big-screen {
+	width: 100%;
+	margin-top: 5px;
+	display: flex;
+	justify-content: space-between;
+}
+
+#logos__small-screen {
+	width: 100%;
+	display: none;
+}
+
+/* ------------- MAIN ------------ */
+.content {
+	margin-top: 20px;
 	padding-left: 20px;
 	padding-right: 20px;
 }
 
-
-
-/* ----------------- gestione menu con tab ----------------- */
-li.tabmenu {
-	float: left;
-	display: block;
-	position: relative;
+.content__page-title {
+	font: bold 30px Arial,sans-serif;
+	color: #545f6a;
+	margin-bottom: 15px;
+	text-align: center;
 }
 
-li.tabmenu > a {
-	display: block;
-	width: 140px;
-	height: 28px;
-	font: bold 13px Arial,sans-serif;
-	color: #002157;
-	padding-left: 15px;
-	padding-top: 5px;
-	margin-right: 5px;
-	border-top-left-radius: 10px 15px;
-	border-top-right-radius: 60px 40px;
-	text-decoration: none;
+.content__section-title {
+	font: bold 20px Arial,sans-serif;
+	color: #2b353f;
+	margin-bottom: 15px;
 }
 
-li.tabmenu > a[href="#"] {
-	cursor: default;
-}
-
-li.tabmenu_on > a {
-	background-color: #f8c8a0;
-}
-
-li.tabmenu_on:hover > a { 
-	color: white;
-}
-
-li.tabmenu_off > a {
-	background-color: #98999b;
-}
-
-li.tabmenu_off:hover > a { 
-	background-color: #bcbcbc; 
-	color: white;
-}
-
-ul.menu {
-	margin: 0px;
-	background-color: #01124a; /* colore di sfondo del tab */
-	border-bottom: 1px solid #f8c8a0;
-	padding-left: 10px;
-	padding-top: 7px;
-	height: 33px;
-}
-
-#imgLogo {
-	position: absolute;
-	top: 0px; 
-	right: 0px;
-}
-
-.menubottom {
-	background-color: #f8c8a0;
-	height: 27px;
-	border-bottom: 2px solid #eb9a59;
-	color: #9c4704;
-	font: bold 12px Verdana,sans-serif;
-	padding-left: 20px;
-	padding-top: 10px;
-}
-
-
-
-/* ----------------- gestione sottomenu a tendina ----------------- */
-ul.submenu {
+/* Br element will only break title in small screens */
+.content__mobile-title-break {
 	display: none;
-	padding: 0px;
-	margin: 0px;
-	border: 1px solid #eb9a59;
-	background-color: #f8c8a0;
 }
 
-li.tabmenu:hover > ul.submenu {
-	display: block;
-	position: absolute;
-	width: 155px;
-	left: 0px;
-	border-top: 0;
-}
-
-ul.submenu  > li {
-	display: block;
-	position: relative;
-}
-
-ul.submenu > li > a {
-	display: block;
-	height: 20px;
+.content__table {
+	background-color: #E1E2E1;
+	width: 100%;
+	font: normal 14px Arial,sans-serif;
+	margin-bottom: 30px;
+	border-collapse: separate;
+	border: 2px solid black;
+	border-radius: 6px;
 	padding: 5px;
-	color: #002157;
-	font: bold 13px Arial,sans-serif;
-	text-decoration: none;
 }
 
-ul.submenu > li > a[href="#"] {
-	cursor: default;
+.content__table th {
+	color: #545f6a;
+	text-align: left;
+	padding: 5px;
+	font-weight: bold;
+	white-space: nowrap;
 }
 
-ul.submenu > li:hover > a {
-	background-color: #ebb68b;
+.content__table tr {
+	height: 40px;
+}
+
+.content__table td {
+	padding: 5px;
+}
+
+.content__table input[readonly] {
+	width: 100%;
+	background-color: #E1E2E1;
+	border: none;
+}
+
+.collector__input-table {
+	width: 330px;
+}
+
+.collector__input-table td {
+	width: 100%;
+	padding: 2px;
+}
+
+.collector__date-input {
+	width: 120px;
+}
+
+.collector__time-input {
+	width: 80px;
+}
+
+#collector__button-container {
+	margin-bottom: 10px;
+}
+
+.collector__button {
+	width: calc((330px / 2) - 3px);
+	height: 40px;
 	color: white;
+	background-color: #545f6a;
+	margin-top: 8px;
 }
 
-ul.submenu > li > ul.submenu {
-/*	display: none; */
-	display: block;
-	position: absolute;
-	left: 149px;
-	top: 15px;
-	width: 5px;
-	height: 5px;
-	overflow: hidden;
+.collector__button:disabled {
+	background-color: lightgray;
+	color: gray;
+	border-color: gray;
 }
 
-ul.submenu > li:hover > ul.submenu {
-	display: block;
+.collector__table-nav-button {
+	margin-bottom: 5px;
+	min-width: 40px;
+	height: 40px;
+	background-color: inherit;
+	border: none;
+	outline: none;
+}
+
+.collector__table-nav-button[disabled]:hover {
+	background-color: inherit;
+}
+
+.collector__table-nav-button:hover {
+	background-color: #F5F5F6;
+}
+
+.collector__table-nav-button--mobile {
+	display: none;
+	font-size: 1.25em;
+	min-width: 40px;
+	min-height: 40px;
+}
+
+.collector__loading {
+	border: 8px solid #fff;
+	border-radius: 50%;
+	border-top: 8px solid #333;
+	width: 40px;
+	height: 40px;
+	-webkit-animation: spin 1.5s linear infinite; /* Safari */
+	animation: spin 1.5s linear infinite;
+	margin: 60px auto;
+	left: 0;
+	right: 0;
 	position: absolute;
-	width: 155px;
-	left: 155px;
-	top: 0px;
-	height: auto;
-	overflow: visible;
+}
+  
+/* Safari */
+@-webkit-keyframes spin {
+	0% { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+}
+  
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+/* When the screen is less than (max-width) pixels wide, hide all links, except for the first one: the menu icon. 
+Show the link that should open and close the menu (.icon) */
+@media screen and (max-width: 1000px) {
+	.header__menu-item {
+		display: none;
+	}
+
+	.header__menu-button {
+	  	display: block;
+	}
+
+	/* The "responsive" class is added to the menu with JavaScript when the user clicks on the icon. 
+	This class makes the menu look good on small screens (display the links vertically instead of horizontally) */
+	.responsive .header__menu-item {
+		float: none;
+		display: block;
+		z-index: 15; /* When menu is open it must cover the logo */
+		/* increased z-index to 15 so it stays on top of the AI trends (z-index: 10) */
+	}
+
+	/* Except menu_button, that is padded and will break the layout */
+	.responsive .header__menu-item:not(.header__menu-button) > a {
+		width: 100%;
+	}
+
+	/* Always display submenu when on responsive mode */
+	.responsive .header__submenu {
+		display: block;
+	}
+
+	#logos__big-screen {
+		display: none;
+	}
+	#logos__small-screen {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.content__title {
+		font-size: 20px;
+		margin-top: 15px;
+		margin-bottom: 20px;
+	}
+	
+	.collector__table-nav-button {
+		display: none;
+	}
+
+	.collector__table-nav-button--mobile {
+		display: inline;
+		height: 60px;
+		width: 60px;
+	}
+
+	/* Allow overflown content to be scrolled horizontally in responsive mode */
+	.hscroll {
+		overflow-x: auto;
+	}
+}
+
+/* Change point of input table */
+@media screen and (max-width: 450px) {
+	.collector__button {
+		width: 100%;
+	}
+	
+	.collector__input-table {
+		width: 100%;
+	}
+	
+	.collector__input-table td {
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	/* Br element will only break title in small screens */
+	.content__mobile-title-break {
+		display: inherit;
+	}
+}
+
+/* Format page for printing */
+@media print {
+	.header {
+		display: none;
+	}
+	.content__table {
+		background-color: white;
+	}
+	.collector__button {
+		display: none;
+	}
 }
