@@ -11,7 +11,7 @@ function responsiveMenu() {
 }
 
 AddPreCacheImage('left-big-logo', 'CLIENTE.PNG')
-AddPreCacheImage('right-big-logo', 'TRIDIUMBIG.PNG')
+AddPreCacheImage('right-big-logo', 'TRIBIG.PNG')
 
 AddPreCacheImage('left-small-logo', 'CLIENTE.PNG')
-AddPreCacheImage('right-small-logo', 'TRIDIUMSMALL.PNG')
+AddPreCacheImage('right-small-logo', 'TRISMALL.PNG')

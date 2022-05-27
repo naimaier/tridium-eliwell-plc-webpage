@@ -156,8 +156,8 @@
 	<file>BASE.ICO</file>  <!-- favicon is linked in <pageheader> in tag <link rel='shortcut icon' ....> -->
 	<file>BASE.JS</file>  <!-- javascript is linked in <pagefooter> in tag <script type='text/javascript'... -->
 	<file>FONTAWESOME.JS</file>  <!-- fontawesome is linked in <pagefooter> in tag <script type='text/javascript'... -->
-	<file>TRIDIUMSMALL.PNG</file>  <!-- logo image is linked in base.js as a parameter of AddPreCacheImage() -->
-	<file>TRIDIUMBIG.PNG</file>  <!-- logo image is linked in base.js as a parameter of AddPreCacheImage() -->
+	<file>TRISMALL.PNG</file>  <!-- logo image is linked in base.js as a parameter of AddPreCacheImage() -->
+	<file>TRIBIG.PNG</file>  <!-- logo image is linked in base.js as a parameter of AddPreCacheImage() -->
 	<file>CLIENTE.PNG</file>  <!-- logo image is linked in base.js as a parameter of AddPreCacheImage() -->
 </files>
 
