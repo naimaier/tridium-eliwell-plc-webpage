@@ -166,90 +166,6 @@
 	border: none;
 }
 
-.collector__input-table {
-	width: 330px;
-}
-
-.collector__input-table td {
-	width: 100%;
-	padding: 2px;
-}
-
-.collector__date-input {
-	width: 120px;
-}
-
-.collector__time-input {
-	width: 80px;
-}
-
-#collector__button-container {
-	margin-bottom: 10px;
-}
-
-.collector__button {
-	width: calc((330px / 2) - 3px);
-	height: 40px;
-	color: white;
-	background-color: #545f6a;
-	margin-top: 8px;
-}
-
-.collector__button:disabled {
-	background-color: lightgray;
-	color: gray;
-	border-color: gray;
-}
-
-.collector__table-nav-button {
-	margin-bottom: 5px;
-	min-width: 40px;
-	height: 40px;
-	background-color: inherit;
-	border: none;
-	outline: none;
-}
-
-.collector__table-nav-button[disabled]:hover {
-	background-color: inherit;
-}
-
-.collector__table-nav-button:hover {
-	background-color: #F5F5F6;
-}
-
-.collector__table-nav-button--mobile {
-	display: none;
-	font-size: 1.25em;
-	min-width: 40px;
-	min-height: 40px;
-}
-
-.collector__loading {
-	border: 8px solid #fff;
-	border-radius: 50%;
-	border-top: 8px solid #333;
-	width: 40px;
-	height: 40px;
-	-webkit-animation: spin 1.5s linear infinite; /* Safari */
-	animation: spin 1.5s linear infinite;
-	margin: 60px auto;
-	left: 0;
-	right: 0;
-	position: absolute;
-}
-  
-/* Safari */
-@-webkit-keyframes spin {
-	0% { -webkit-transform: rotate(0deg); }
-	100% { -webkit-transform: rotate(360deg); }
-}
-  
-@keyframes spin {
-	0% { transform: rotate(0deg); }
-	100% { transform: rotate(360deg); }
-}
-
 /* When the screen is less than (max-width) pixels wide, hide all links, except for the first one: the menu icon. 
 Show the link that should open and close the menu (.icon) */
 @media screen and (max-width: 1000px) {
@@ -288,40 +204,9 @@ Show the link that should open and close the menu (.icon) */
 		justify-content: space-between;
 	}
 
-	.content__title {
-		font-size: 20px;
-		margin-top: 15px;
-		margin-bottom: 20px;
-	}
-	
-	.collector__table-nav-button {
-		display: none;
-	}
-
-	.collector__table-nav-button--mobile {
-		display: inline;
-		height: 60px;
-		width: 60px;
-	}
-
 	/* Allow overflown content to be scrolled horizontally in responsive mode */
 	.hscroll {
 		overflow-x: auto;
-	}
-}
-
-/* Change point of input table */
-@media screen and (max-width: 450px) {
-	.collector__button {
-		width: 100%;
-	}
-	
-	.collector__input-table {
-		width: 100%;
-	}
-	
-	.collector__input-table td {
-		width: 100%;
 	}
 }
 
@@ -339,8 +224,5 @@ Show the link that should open and close the menu (.icon) */
 	}
 	.content__table {
 		background-color: white;
-	}
-	.collector__button {
-		display: none;
 	}
 }
