@@ -60,6 +60,8 @@
 
 .header__submenu {
 	display: none;
+	position: absolute;
+	width: 100px;
 	background-color: white;
 	box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.2);
 	z-index: 15; /* so it stays on top of the AI trends (z-index: 10) */
@@ -68,8 +70,6 @@
 /* Activate the submenu when hover (when not in responsive mode) */
 .header__menu-item:hover > .header__submenu {
 	display: block;
-	position: absolute;
-	width: 100px;
 }
 
 .header__submenu-item > a {
@@ -234,9 +234,6 @@ Show the link that should open and close the menu (.icon) */
 	.header__submenu {
 		display: block;
 		box-shadow: none;
-	}
-
-	.header__menu-item:hover > .header__submenu {
 		position: inherit;
 		width: 100%;
 	}
