@@ -11,18 +11,29 @@
 </head>
 <body>
 	<header class="header container">
-		<nav data-menu></nav>
-		<div id="logos__big-screen">
-			<img id="left-big-logo" src="" width="150" height="40" alt="Logotipo Engeultra">
-			<img id="center-big-logo" src="" width="150" height="40" alt="Logotipo Vibra">
-			<img id="right-big-logo" src="" width="150" height="40" alt="Logotipo Tridium">
+		<div class="header__logos-stripe">
+			<div id="logos__big-screen">
+				<img id="left-big-logo" src="" width="150" height="40" alt="Logotipo Engeultra">
+				<img id="center-big-logo" src="" width="150" height="40" alt="Logotipo Vibra">
+				<img id="right-big-logo" src="" width="150" height="40" alt="Logotipo Tridium">
+			</div>
+		
+			<div id="logos__small-screen">
+				<img id="left-small-logo" src="" width="110" height="35" alt="Logotipo Engeultra">
+				<img id="center-small-logo" src="" width="110" height="35" alt="Logotipo Vibra">
+				<img id="right-small-logo" src="" width="110" height="35" alt="Logotipo Tridium">
+			</div>
 		</div>
-	
-		<div id="logos__small-screen">
-			<img id="left-small-logo" src="" width="110" height="35" alt="Logotipo Engeultra">
-			<img id="center-small-logo" src="" width="110" height="35" alt="Logotipo Vibra">
-			<img id="right-small-logo" src="" width="110" height="35" alt="Logotipo Tridium">
-		</div>
+		<nav data-menu>
+			<input type="checkbox" id="header__menu-button"/>
+			<div id="header__menu-icon">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<ul id="header__menu">
+			</ul>
+		</nav>
 	</header>
 
 	<main>
@@ -124,6 +135,13 @@
 			
 			document.querySelector('#report-date').textContent = `Relatório gerado em ${fullDate} às ${time}`
 		}
+
+		AddPreCacheImage('left-big-logo', 'EUBIG.PNG')
+		AddPreCacheImage('center-big-logo', 'VIBIG.PNG')
+		AddPreCacheImage('right-big-logo', 'TRIBIG.PNG')
+		AddPreCacheImage('left-small-logo', 'EUSMALL.PNG')
+		AddPreCacheImage('center-small-logo', 'VISMALL.PNG')
+		AddPreCacheImage('right-small-logo', 'TRISMALL.PNG')
 
 		addNowAsReportDate()
 		setInterval(addNowAsReportDate, 1000)

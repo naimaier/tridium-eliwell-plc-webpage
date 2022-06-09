@@ -50,19 +50,12 @@
 
 .header__menu-item.active > a {
 	border-left: none;
-	border-bottom: 2px solid #2b353f;
+	border-bottom: 3px solid #2b353f;
 }
 
 /* Menu button doesn't show on standard view (big displays) */
-.header__menu-button {
+#header__menu-button, #header__menu-icon {
 	display: none;
-	float: left;
-	height: 40px;
-	padding-top: 20px;
-	text-align: left;
-	padding-left: 20px;
-	padding-right: 20px;
-	width: 15px;
 }
 
 .header__submenu {
@@ -73,7 +66,7 @@
 }
 
 /* Activate the submenu when hover (when not in responsive mode) */
-.header nav:not(.responsive) .header__menu-item:hover > .header__submenu {
+.header__menu-item:hover > .header__submenu {
 	display: block;
 	position: absolute;
 	width: 100px;
@@ -176,11 +169,51 @@ Show the link that should open and close the menu (.icon) */
 		display: none;
 	}
 
-	.header__menu-button {
-	  	display: block;
+	#header__menu-button {
+		height: 60px;
+		width: 55px;
+		top: 60px;
+		left: 0;
+		margin: 0;
+		position: absolute;
+		display: flex;
+		opacity: 0;
+		z-index: 2;
 	}
 
-	.responsive #header__menu {
+	#header__menu-icon {
+		display: flex;
+		flex-direction: column;
+		margin-left: 15px;
+		margin-right: 15px;
+		margin-top: 20px;
+		margin-bottom: 20px;
+		z-index: 1;
+	}
+
+	#header__menu-icon span{
+		display: flex;
+		position: relative;
+		width: 25px;
+		height: 3px;
+		margin-bottom: 5px;
+		border-radius: 3px;
+		background-color: #2b353f;
+	}
+
+	#header__menu-button:checked ~ #header__menu-icon span:nth-child(1) {
+		transform: translateY(8px) rotate(45deg);
+	}
+
+	#header__menu-button:checked ~ #header__menu-icon span:nth-child(2) {
+		display: none;
+	}
+
+	#header__menu-button:checked ~ #header__menu-icon span:nth-child(3) {
+		transform: rotate(-45deg);
+	}
+
+	#header__menu-button:checked ~ #header__menu {
 		position: absolute;
 		background-color: white;
 		width: 100%;
@@ -189,7 +222,7 @@ Show the link that should open and close the menu (.icon) */
 
 	/* The "responsive" class is added to the menu with JavaScript when the user clicks on the icon. 
 	This class makes the menu look good on small screens (display the links vertically instead of horizontally) */
-	.responsive .header__menu-item {
+	#header__menu-button:checked ~ #header__menu .header__menu-item {
 		clear: both;
 		float: none;
 		display: block;
@@ -197,19 +230,20 @@ Show the link that should open and close the menu (.icon) */
 		/* increased z-index to 15 so it stays on top of the AI trends (z-index: 10) */
 	}
 
-	/* Except menu_button, that is padded and will break the layout */
-	.responsive .header__menu-item:not(.header__menu-button) > a {
-		width: 100%;
-	}
-
 	/* Always display submenu when on responsive mode */
-	.responsive .header__submenu {
+	.header__submenu {
 		display: block;
 		box-shadow: none;
 	}
 
+	.header__menu-item:hover > .header__submenu {
+		position: inherit;
+		width: 100%;
+	}
+
 	.header__menu-item > a {
 		height: 45px;
+		width: 100%;
 		padding-top: 15px;
 		font-size: 24px;
 	}
