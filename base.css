@@ -21,11 +21,16 @@
 /* ------------- HEADER ------------ */
 /* Using z-index bigger than 10 so the menu elements
 stay on top of the AI trends (z-index: 10) */
-
 .header__logos-stripe {
 	background-color: #2b353f;
 	height: 55px;
 	padding-top: 5px;
+}
+
+/* ------------- MENU ------------ */
+/* Hide menu button */
+#header__menu-button, #header__menu-icon {
+	display: none;
 }
 
 .header__menu-item {
@@ -43,10 +48,6 @@ stay on top of the AI trends (z-index: 10) */
 	text-align: center;
 }
 
-.header__menu-item:not(.active) > a:hover {
-	opacity: 0.5;
-}
-
 .header__menu-item > a[href="#"] {
 	cursor: default;
 }
@@ -56,11 +57,11 @@ stay on top of the AI trends (z-index: 10) */
 	border-bottom: 3px solid #2b353f;
 }
 
-/* Menu button doesn't show on standard view (big displays) */
-#header__menu-button, #header__menu-icon {
-	display: none;
+.header__menu-item:not(.active) > a:hover {
+	opacity: 0.5;
 }
 
+/* ------------- SUBMENU ------------ */
 .header__submenu {
 	display: none;
 	position: absolute;
@@ -79,7 +80,7 @@ stay on top of the AI trends (z-index: 10) */
 	display: block;
 	height: 40px;
 	padding-top: 20px;
-	color: #888;
+	color: #2b353f;
 	font: 16px Arial,sans-serif;
 	text-decoration: none;
 	text-align: center;
@@ -90,23 +91,20 @@ stay on top of the AI trends (z-index: 10) */
 }
 
 .header__submenu-item:hover > a {
-	background-color: #E1E2E1;
-	color: #2b353f;
+	opacity: 0.5;
 }
 
 /* ------------- LOGOS ------------ */
 #logos__big-screen {
-	width: 100%;
 	display: flex;
 	justify-content: space-between;
 }
 
 #logos__small-screen {
-	width: 100%;
 	display: none;
 }
 
-/* ------------- MAIN ------------ */
+/* ------------- CONTENT ------------ */
 .content {
 	clear: both;
 	margin-top: 30px;
@@ -132,6 +130,7 @@ stay on top of the AI trends (z-index: 10) */
 	display: none;
 }
 
+/* ------------- CONTENT TABLE ------------ */
 .content__table {
 	background-color: #E1E2E1;
 	width: 100%;
@@ -169,12 +168,10 @@ stay on top of the AI trends (z-index: 10) */
 Show the link that should open and close the menu (.icon) */
 @media screen and (max-width: 1000px) {
 
-	/* ----------- BUTTON AND ICON ----------- */
+	/* ----------- MENU BUTTON AND ICON ----------- */
 	#header__menu-button {
 		height: 60px;
-		width: 55px;
-		top: 60px;
-		left: 0;
+		width: 60px;
 		margin: 0;
 		position: absolute;
 		display: flex;
@@ -185,26 +182,36 @@ Show the link that should open and close the menu (.icon) */
 	#header__menu-icon {
 		display: flex;
 		flex-direction: column;
-		margin-left: 15px;
-		margin-right: 15px;
-		margin-top: 20px;
-		margin-bottom: 20px;
-		z-index: 11;
+		position: relative;
+		height: 60px;
 	}
 
-	#header__menu-icon span{
+	#header__menu-icon span {
 		display: flex;
-		position: relative;
+		position: absolute;
+		left: 16px;
 		width: 25px;
 		height: 3px;
-		margin-bottom: 5px;
 		border-radius: 3px;
 		background-color: #2b353f;
 		z-index: 12;
 	}
 
+	#header__menu-icon span:nth-child(1) {
+		top: 20px;
+	}
+
+	#header__menu-icon span:nth-child(2) {
+		top: 28px;
+	}
+
+	#header__menu-icon span:nth-child(3) {
+		top: 36px;
+	}
+
 	#header__menu-button:checked ~ #header__menu-icon span:nth-child(1) {
-		transform: translateY(8px) rotate(45deg);
+		top: 28px;
+		transform: rotate(45deg);
 	}
 
 	#header__menu-button:checked ~ #header__menu-icon span:nth-child(2) {
@@ -212,6 +219,7 @@ Show the link that should open and close the menu (.icon) */
 	}
 
 	#header__menu-button:checked ~ #header__menu-icon span:nth-child(3) {
+		top: 28px;
 		transform: rotate(-45deg);
 	}
 
@@ -219,12 +227,12 @@ Show the link that should open and close the menu (.icon) */
 	#header__menu {
 		display: none;
 		position: absolute;
-		margin-top: -55px;
+		margin-top: -60px;
 		padding-top: 60px;
 		background-color: white;
 		box-shadow: 0 0 10px #85888C;
-		width: 90%;
-		height: calc(100% - 120px);
+		width: 80%;
+		min-height: calc(100% - 120px);
 		z-index: 11;
 	}
 
@@ -246,6 +254,7 @@ Show the link that should open and close the menu (.icon) */
 		padding-left: 60px;
 	}
 
+	/* ----------- SUBMENU ----------- */
 	/* Always display submenu when on responsive mode */
 	.header__submenu {
 		display: block;
@@ -264,12 +273,18 @@ Show the link that should open and close the menu (.icon) */
 		border-bottom: none;
 	}
 
+	/* ----------- LOGOS ----------- */
 	#logos__big-screen {
 		display: none;
 	}
+
 	#logos__small-screen {
 		display: flex;
 		justify-content: space-between;
+	}
+
+	.content {
+		margin-top: 0;
 	}
 
 	/* Allow overflown content to be scrolled horizontally in responsive mode */
