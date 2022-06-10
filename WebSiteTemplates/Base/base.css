@@ -19,25 +19,31 @@
 }
 
 /* ------------- HEADER ------------ */
-.header {
+/* Using z-index bigger than 10 so the menu elements
+stay on top of the AI trends (z-index: 10) */
+.header__logos-stripe {
 	background-color: #2b353f;
-	height: 60px;
+	height: 55px;
+	padding-top: 5px;
+}
+
+/* ------------- MENU ------------ */
+/* Hide menu button */
+#header__menu-button, #header__menu-icon {
+	display: none;
 }
 
 .header__menu-item {
-	display: block;
 	float: left;
-	position: relative;
 }
 
 .header__menu-item > a {
 	display: block;
-	width: 120px;
-	height: 40px;
+	width: 100px;
+	height: 30px;
+	padding-top: 12px;
 	font: 17px Arial,sans-serif;
-	background-color: #2b353f;
-	color: white;
-	padding-top: 20px;
+	color: #2b353f;
 	text-decoration: none;
 	text-align: center;
 }
@@ -47,33 +53,27 @@
 }
 
 .header__menu-item.active > a {
-	background-color: #545f6a;
+	border-left: none;
+	border-bottom: 3px solid #2b353f;
 }
 
-/* Menu button doesn't show on standard view (big displays) */
-.header__menu-button {
-	display: none;
+.header__menu-item:not(.active) > a:hover {
+	opacity: 0.5;
 }
 
-.header__menu-button > a {
-	text-align: left;
-	padding-left: 20px;
-	padding-right: 20px;
-	width: 15px;
-}
-
+/* ------------- SUBMENU ------------ */
 .header__submenu {
 	display: none;
-	background-color: #F5F5F6;
+	position: absolute;
+	width: 100px;
+	background-color: white;
 	box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.2);
-	z-index: 15; /* so it stays on top of the AI trends (z-index: 10) */
+	z-index: 12;
 }
 
-/* Activate the submenu when hover (when not in responsive mode) */
-.header nav:not(.responsive) .header__menu-item:hover > .header__submenu {
+/* Activate the submenu when hover */
+.header__menu-item:hover > .header__submenu {
 	display: block;
-	position: absolute;
-	width: 140px;
 }
 
 .header__submenu-item > a {
@@ -81,7 +81,7 @@
 	height: 40px;
 	padding-top: 20px;
 	color: #2b353f;
-	font: 17px Arial,sans-serif;
+	font: 16px Arial,sans-serif;
 	text-decoration: none;
 	text-align: center;
 }
@@ -91,26 +91,23 @@
 }
 
 .header__submenu-item:hover > a {
-	background-color: #E1E2E1;
-	color: #2b353f;
+	opacity: 0.5;
 }
 
 /* ------------- LOGOS ------------ */
 #logos__big-screen {
-	width: 100%;
-	margin-top: 5px;
 	display: flex;
 	justify-content: space-between;
 }
 
 #logos__small-screen {
-	width: 100%;
 	display: none;
 }
 
-/* ------------- MAIN ------------ */
+/* ------------- CONTENT ------------ */
 .content {
-	margin-top: 20px;
+	clear: both;
+	margin-top: 30px;
 	padding-left: 20px;
 	padding-right: 20px;
 }
@@ -133,6 +130,7 @@
 	display: none;
 }
 
+/* ------------- CONTENT TABLE ------------ */
 .content__table {
 	background-color: #E1E2E1;
 	width: 100%;
@@ -166,162 +164,132 @@
 	border: none;
 }
 
-.collector__input-table {
-	width: 330px;
-}
-
-.collector__input-table td {
-	width: 100%;
-	padding: 2px;
-}
-
-.collector__date-input {
-	width: 120px;
-}
-
-.collector__time-input {
-	width: 80px;
-}
-
-#collector__button-container {
-	margin-bottom: 10px;
-}
-
-.collector__button {
-	width: calc((330px / 2) - 3px);
-	height: 40px;
-	color: white;
-	background-color: #545f6a;
-	margin-top: 8px;
-}
-
-.collector__button:disabled {
-	background-color: lightgray;
-	color: gray;
-	border-color: gray;
-}
-
-.collector__table-nav-button {
-	margin-bottom: 5px;
-	min-width: 40px;
-	height: 40px;
-	background-color: inherit;
-	border: none;
-	outline: none;
-}
-
-.collector__table-nav-button[disabled]:hover {
-	background-color: inherit;
-}
-
-.collector__table-nav-button:hover {
-	background-color: #F5F5F6;
-}
-
-.collector__table-nav-button--mobile {
-	display: none;
-	font-size: 1.25em;
-	min-width: 40px;
-	min-height: 40px;
-}
-
-.collector__loading {
-	border: 8px solid #fff;
-	border-radius: 50%;
-	border-top: 8px solid #333;
-	width: 40px;
-	height: 40px;
-	-webkit-animation: spin 1.5s linear infinite; /* Safari */
-	animation: spin 1.5s linear infinite;
-	margin: 60px auto;
-	left: 0;
-	right: 0;
-	position: absolute;
-}
-  
-/* Safari */
-@-webkit-keyframes spin {
-	0% { -webkit-transform: rotate(0deg); }
-	100% { -webkit-transform: rotate(360deg); }
-}
-  
-@keyframes spin {
-	0% { transform: rotate(0deg); }
-	100% { transform: rotate(360deg); }
-}
-
 /* When the screen is less than (max-width) pixels wide, hide all links, except for the first one: the menu icon. 
 Show the link that should open and close the menu (.icon) */
 @media screen and (max-width: 1000px) {
-	.header__menu-item {
+
+	/* ----------- MENU BUTTON AND ICON ----------- */
+	#header__menu-button {
+		height: 60px;
+		width: 60px;
+		margin: 0;
+		position: absolute;
+		display: flex;
+		opacity: 0;
+		z-index: 13;
+	}
+
+	#header__menu-icon {
+		display: flex;
+		flex-direction: column;
+		position: relative;
+		height: 60px;
+	}
+
+	#header__menu-icon span {
+		display: flex;
+		position: absolute;
+		left: 16px;
+		width: 25px;
+		height: 3px;
+		border-radius: 3px;
+		background-color: #2b353f;
+		z-index: 12;
+	}
+
+	#header__menu-icon span:nth-child(1) {
+		top: 20px;
+	}
+
+	#header__menu-icon span:nth-child(2) {
+		top: 28px;
+	}
+
+	#header__menu-icon span:nth-child(3) {
+		top: 36px;
+	}
+
+	#header__menu-button:checked ~ #header__menu-icon span:nth-child(1) {
+		top: 28px;
+		transform: rotate(45deg);
+	}
+
+	#header__menu-button:checked ~ #header__menu-icon span:nth-child(2) {
 		display: none;
 	}
 
-	.header__menu-button {
-	  	display: block;
+	#header__menu-button:checked ~ #header__menu-icon span:nth-child(3) {
+		top: 28px;
+		transform: rotate(-45deg);
 	}
 
-	/* The "responsive" class is added to the menu with JavaScript when the user clicks on the icon. 
-	This class makes the menu look good on small screens (display the links vertically instead of horizontally) */
-	.responsive .header__menu-item {
-		float: none;
+	/* ----------- MENU ----------- */
+	#header__menu {
+		display: none;
+		position: absolute;
+		margin-top: -60px;
+		padding-top: 60px;
+		background-color: white;
+		box-shadow: 0 0 10px #85888C;
+		width: 80%;
+		min-height: calc(100% - 120px);
+		z-index: 11;
+	}
+
+	#header__menu-button:checked ~ #header__menu {
 		display: block;
-		z-index: 15; /* When menu is open it must cover the logo */
-		/* increased z-index to 15 so it stays on top of the AI trends (z-index: 10) */
 	}
 
-	/* Except menu_button, that is padded and will break the layout */
-	.responsive .header__menu-item:not(.header__menu-button) > a {
+	.header__menu-item {
+		float: none;
+		z-index: 12;
+	}
+
+	.header__menu-item > a {
+		height: 45px;
+		width: inherit;
+		padding-top: 15px;
+		font-size: 24px;
+		text-align: left;
+		padding-left: 60px;
+	}
+
+	/* ----------- SUBMENU ----------- */
+	/* Always display submenu when on responsive mode */
+	.header__submenu {
+		display: block;
+		box-shadow: none;
+		position: inherit;
 		width: 100%;
 	}
 
-	/* Always display submenu when on responsive mode */
-	.responsive .header__submenu {
-		display: block;
+	.header__submenu a {
+		text-align: left;
+		padding-left: 80px;
 	}
 
+	.header__menu-item.active > a {
+		border-left: 3px solid #2b353f;
+		border-bottom: none;
+	}
+
+	/* ----------- LOGOS ----------- */
 	#logos__big-screen {
 		display: none;
 	}
+
 	#logos__small-screen {
 		display: flex;
 		justify-content: space-between;
 	}
 
-	.content__title {
-		font-size: 20px;
-		margin-top: 15px;
-		margin-bottom: 20px;
-	}
-	
-	.collector__table-nav-button {
-		display: none;
-	}
-
-	.collector__table-nav-button--mobile {
-		display: inline;
-		height: 60px;
-		width: 60px;
+	.content {
+		margin-top: 0;
 	}
 
 	/* Allow overflown content to be scrolled horizontally in responsive mode */
 	.hscroll {
 		overflow-x: auto;
-	}
-}
-
-/* Change point of input table */
-@media screen and (max-width: 450px) {
-	.collector__button {
-		width: 100%;
-	}
-	
-	.collector__input-table {
-		width: 100%;
-	}
-	
-	.collector__input-table td {
-		width: 100%;
 	}
 }
 
@@ -339,8 +307,5 @@ Show the link that should open and close the menu (.icon) */
 	}
 	.content__table {
 		background-color: white;
-	}
-	.collector__button {
-		display: none;
 	}
 }

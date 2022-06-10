@@ -25,13 +25,26 @@
 <!-- header of navigation tabs: uses placeholder TITLE, FILENAME, PAGEPATH -->
 <tabheader><![CDATA[
 	<header class="header container">
-		<nav data-menu>
-			<ul> 
-				<li class="header__menu-item header__menu-button">
-					<a href="javascript:void(0);" onclick="responsiveMenu()">
-						<i class="fas fa-bars" data-menu-icon></i>
-					</a>
-				</li>
+		<div class="header__logos-stripe">
+			<div id="logos__big-screen">
+				<img id="left-big-logo" src="" width="150" height="40" alt="Logotipo Cliente">
+				<img id="right-big-logo" src="" width="150" height="40" alt="Logotipo Tridium">
+			</div>
+		
+			<div id="logos__small-screen">
+				<img id="left-small-logo" src="" width="110" height="35" alt="Logotipo Cliente">
+				<img id="right-small-logo" src="" width="110" height="35" alt="Logotipo Tridium">
+			</div>
+		</div>
+
+		<nav>
+			<input type="checkbox" id="header__menu-button"/>
+			<div id="header__menu-icon">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<ul id="header__menu">
 ]]>
 </tabheader>
 
@@ -55,18 +68,6 @@
 	</header>
 
 	<main>
-		<section class="container">
-			<div id="logos__big-screen">
-				<img id="left-big-logo" src="" width="150" height="40" alt="Logotipo Cliente">
-				<img id="right-big-logo" src="" width="150" height="40" alt="Logotipo Tridium">
-			</div>
-		
-			<div id="logos__small-screen">
-				<img id="left-small-logo" src="" width="110" height="35" alt="Logotipo Cliente">
-				<img id="right-small-logo" src="" width="110" height="35" alt="Logotipo Tridium">
-			</div>
-		</section>
-		
 		<section class="content container">
 
 			<p class='content__page-title'>%TITLE%</p>
@@ -136,9 +137,12 @@
 		</section>
 	</main>
 	
-	<script type='text/javascript' src='base.js'></script> <!-- Responsive menu/image loading -->
-	<script type='text/javascript' src='fontawesome.js' defer></script>
 	<script type='text/javascript'>
+	AddPreCacheImage('left-big-logo', 'CLIENTE.PNG')
+	AddPreCacheImage('right-big-logo', 'TRIBIG.PNG')
+	AddPreCacheImage('left-small-logo', 'CLIENTE.PNG')
+	AddPreCacheImage('right-small-logo', 'TRISMALL.PNG')
+
 	EVO_CheckPassword('%PASSWORD%', 1);
 	EVO_PageInit(%REFRESH%);
 	</script>
@@ -154,8 +158,6 @@
 	<file>RESET.CSS</file>  <!-- CSS is linked in <pageheader> in tag <link rel='stylesheet' ...>  -->
 	<file>BASE.CSS</file>  <!-- CSS is linked in <pageheader> in tag <link rel='stylesheet' ...>  -->
 	<file>BASE.ICO</file>  <!-- favicon is linked in <pageheader> in tag <link rel='shortcut icon' ....> -->
-	<file>BASE.JS</file>  <!-- javascript is linked in <pagefooter> in tag <script type='text/javascript'... -->
-	<file>FONTAWESOME.JS</file>  <!-- fontawesome is linked in <pagefooter> in tag <script type='text/javascript'... -->
 	<file>TRISMALL.PNG</file>  <!-- logo image is linked in base.js as a parameter of AddPreCacheImage() -->
 	<file>TRIBIG.PNG</file>  <!-- logo image is linked in base.js as a parameter of AddPreCacheImage() -->
 	<file>CLIENTE.PNG</file>  <!-- logo image is linked in base.js as a parameter of AddPreCacheImage() -->
