@@ -19,6 +19,9 @@
 }
 
 /* ------------- HEADER ------------ */
+/* Using z-index bigger than 10 so the menu elements
+stay on top of the AI trends (z-index: 10) */
+
 .header__logos-stripe {
 	background-color: #2b353f;
 	height: 55px;
@@ -64,10 +67,10 @@
 	width: 100px;
 	background-color: white;
 	box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.2);
-	z-index: 15; /* so it stays on top of the AI trends (z-index: 10) */
+	z-index: 12;
 }
 
-/* Activate the submenu when hover (when not in responsive mode) */
+/* Activate the submenu when hover */
 .header__menu-item:hover > .header__submenu {
 	display: block;
 }
@@ -165,10 +168,8 @@
 /* When the screen is less than (max-width) pixels wide, hide all links, except for the first one: the menu icon. 
 Show the link that should open and close the menu (.icon) */
 @media screen and (max-width: 1000px) {
-	.header__menu-item {
-		display: none;
-	}
 
+	/* ----------- BUTTON AND ICON ----------- */
 	#header__menu-button {
 		height: 60px;
 		width: 55px;
@@ -178,7 +179,7 @@ Show the link that should open and close the menu (.icon) */
 		position: absolute;
 		display: flex;
 		opacity: 0;
-		z-index: 2;
+		z-index: 13;
 	}
 
 	#header__menu-icon {
@@ -188,7 +189,7 @@ Show the link that should open and close the menu (.icon) */
 		margin-right: 15px;
 		margin-top: 20px;
 		margin-bottom: 20px;
-		z-index: 1;
+		z-index: 11;
 	}
 
 	#header__menu-icon span{
@@ -199,6 +200,7 @@ Show the link that should open and close the menu (.icon) */
 		margin-bottom: 5px;
 		border-radius: 3px;
 		background-color: #2b353f;
+		z-index: 12;
 	}
 
 	#header__menu-button:checked ~ #header__menu-icon span:nth-child(1) {
@@ -213,21 +215,35 @@ Show the link that should open and close the menu (.icon) */
 		transform: rotate(-45deg);
 	}
 
-	#header__menu-button:checked ~ #header__menu {
+	/* ----------- MENU ----------- */
+	#header__menu {
+		display: none;
 		position: absolute;
+		margin-top: -55px;
+		padding-top: 60px;
 		background-color: white;
-		width: 100%;
-		height: calc(100% - 60px);
+		box-shadow: 0 0 10px #85888C;
+		width: 90%;
+		height: calc(100% - 120px);
+		z-index: 11;
 	}
 
-	/* The "responsive" class is added to the menu with JavaScript when the user clicks on the icon. 
-	This class makes the menu look good on small screens (display the links vertically instead of horizontally) */
-	#header__menu-button:checked ~ #header__menu .header__menu-item {
-		clear: both;
-		float: none;
+	#header__menu-button:checked ~ #header__menu {
 		display: block;
-		z-index: 15; /* When menu is open it must cover the logo */
-		/* increased z-index to 15 so it stays on top of the AI trends (z-index: 10) */
+	}
+
+	.header__menu-item {
+		float: none;
+		z-index: 12;
+	}
+
+	.header__menu-item > a {
+		height: 45px;
+		width: inherit;
+		padding-top: 15px;
+		font-size: 24px;
+		text-align: left;
+		padding-left: 60px;
 	}
 
 	/* Always display submenu when on responsive mode */
@@ -238,11 +254,9 @@ Show the link that should open and close the menu (.icon) */
 		width: 100%;
 	}
 
-	.header__menu-item > a {
-		height: 45px;
-		width: 100%;
-		padding-top: 15px;
-		font-size: 24px;
+	.header__submenu a {
+		text-align: left;
+		padding-left: 80px;
 	}
 
 	.header__menu-item.active > a {
