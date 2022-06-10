@@ -24,14 +24,15 @@
 				<img id="right-small-logo" src="" width="110" height="35" alt="Logotipo Tridium">
 			</div>
 		</div>
-		<nav data-menu>
-			<input type="checkbox" id="header__menu-button"/>
-			<div id="header__menu-icon">
+		<!-- the following styles hide the menu -->
+		<nav style="margin-bottom: 30px;">
+			<input type="checkbox" id="header__menu-button" style="display: none;"/>
+			<div id="header__menu-icon" style="display: none;">
 				<span></span>
 				<span></span>
 				<span></span>
 			</div>
-			<ul id="header__menu">
+			<ul id="header__menu"> 
 			</ul>
 		</nav>
 	</header>
@@ -114,8 +115,6 @@
 			</form>
 		</section>
 	</main>
-	<script type='text/javascript' src='base.js'></script>
-	<script type='text/javascript' src="fontawesome.js" defer></script>
 	<script type='text/javascript'>
 		function addNowAsReportDate() {
 			const date = new Date()
