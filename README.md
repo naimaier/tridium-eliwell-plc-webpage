@@ -12,3 +12,9 @@ Logotipo grande (visualização padrão): 150x40px.
 
 Logotipo pequeno (vizualização em dispositivos móveis): 110x35px.
 ```
+
+## Histórico de versões
+### v1.1 - 10/07/2022
+- Incluído o novo logotipo da Tridium
+- Mudança da localização dos logotipos
+- Mudança da aparência do menu
